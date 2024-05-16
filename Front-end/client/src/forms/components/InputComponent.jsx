@@ -1,0 +1,67 @@
+import Grid from "@mui/material/Grid";
+import TextField from "@mui/material/TextField";
+import { bool, func, object, string } from "prop-types";
+import { makeFirstLetterCapital } from "../utils/upperCaseMethod";
+import { useTheme } from "../../providers/DarkThemeProvider";
+
+const InputComponent = ({
+  variant,
+  type,
+  name,
+  data,
+  label,
+  required,
+  error,
+  handleChange,
+  labelColor,
+  ...rest
+}) => {
+  const { isDark } = useTheme();
+
+  const decreasedOpacityColor = "rgba(209, 106, 255, 0.55)";
+
+  return (
+    <Grid item xs={12} {...rest}>
+      <TextField
+        variant={variant}
+        label={makeFirstLetterCapital(label)}
+        type={type}
+        id={name}
+        name={name}
+        value={data[name] ? data[name] : ""}
+        required={required}
+        helperText={error}
+        error={Boolean(error)}
+        onChange={handleChange}
+        fullWidth
+        autoComplete="off"
+        sx={{
+          backgroundColor: isDark ? "#31004" : decreasedOpacityColor,
+          "& .MuiInputLabel-root": {
+            color: labelColor,
+          },
+        }}
+      />
+    </Grid>
+  );
+};
+
+InputComponent.propTypes = {
+  name: string.isRequired,
+  required: bool.isRequired,
+  type: string.isRequired,
+  error: string,
+  handleChange: func.isRequired,
+  variant: string,
+  data: object.isRequired,
+  labelColor: string,
+};
+
+InputComponent.defaultProps = {
+  variant: "outlined",
+  type: "text",
+  required: true,
+  labelColor: "text.primary",
+};
+
+export default InputComponent;

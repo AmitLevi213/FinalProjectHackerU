@@ -1,0 +1,70 @@
+.music-player {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  background: linear-gradient(to right, #f2f2f2, #e0e0e0);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin: 10px auto;
+}
+
+.music-player .song-info {
+  flex: 1;
+  text-align: left;
+}
+
+.music-player .song-info h3 {
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+.music-player .song-info p {
+  font-size: 14px;
+  color: #888;
+}
+
+.music-player .controls {
+  display: flex;
+}
+
+.music-player button {
+  border: none;
+  background: none;
+  padding: 5px;
+  cursor: pointer;
+  color: #333;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.music-player button:hover {
+  color: #000;
+}
+
+.music-player .volume-slider {
+  width: 80px;
+}
+
+.music-player .volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #333;
+  cursor: pointer;
+}
+
+.music-player .volume-slider::-webkit-slider-track {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 2px;
+  background: #ddd;
+}
+
+.music-player .volume-slider::-webkit-slider-thumb:hover {
+  background: #000;
+}

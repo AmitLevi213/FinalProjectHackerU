@@ -1,0 +1,10 @@
+{
+  "JWT_KEY": "my_private_key",
+  "NODE_ENV": "production",
+  "PORT": 9191,
+  "TOKEN_GENERATOR": "jwt",
+  "DB_NAME": "amit",
+  "DB_PASSWORD": "hze2Al51p1lhoE9h",
+  "LOGGER": "morgan",
+  "DB": "mongodb"
+}
