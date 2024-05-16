@@ -2,9 +2,13 @@ const Joi = require("joi");
 
 const userUpdateValidation = (user) => {
   const schema = Joi.object({
-    first: Joi.string().min(2).max(256).required(),
-    middle: Joi.string().min(2).max(256).allow(""),
-    last: Joi.string().min(2).max(256).required(),
+    name: Joi.object()
+      .keys({
+        first: Joi.string().min(2).max(256).required(),
+        middle: Joi.string().min(2).max(256).allow(""),
+        last: Joi.string().min(2).max(256).required(),
+      })
+      .required(),
     phone: Joi.string()
       .ruleset.pattern(/0[0-9]{1,2}-?\s?[0-9]{3}\s?[0-9]{4}/)
       .rule({

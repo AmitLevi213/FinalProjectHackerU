@@ -1,4 +1,4 @@
-import "./MusicPlayer.css";
+import "./musicPlayer.css";
 
 const MusicPlayer = ({ card }) => {
   const { songTitle, artist, audio } = card;
