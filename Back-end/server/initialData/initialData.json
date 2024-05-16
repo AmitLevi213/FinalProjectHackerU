@@ -81,7 +81,8 @@
       ],
       "user_id": "65f5597d5aabf0bc85194dce",
       "createdAt": "2024-03-25T15:11:18.853Z",
-      "__v": 626
+      "__v": 626,
+      "audio": "/assets/audio/Linkin Park - In The End (Audio).mp3"
     },
     {
       "_id": "6601941691640a0b5122cdd6",
@@ -109,8 +110,7 @@
       ],
       "user_id": "65f5597d5aabf0bc85194dce",
       "createdAt": "2024-05-06T10:30:00.000Z",
-      "__v": 1,
-      "audio": "Front-end/client/public/assets/audio/Linkin Park - In The End (Audio).mp3"
+      "__v": 1
     }
   ]
 }

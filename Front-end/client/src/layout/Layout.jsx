@@ -7,7 +7,7 @@ import { node } from "prop-types";
 
 const Layout = ({ children }) => {
   return (
-    <Box sx={{ minHeight: "100vh", backgroundColor: "#ffa345" }}>
+    <Box sx={{ minHeight: "100vh", backgroundColor: "#e3f2fd" }}>
       <Header />
       <Main>{children}</Main>
       <Footer />

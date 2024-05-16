@@ -13,7 +13,7 @@ import AlbumIcon from "@mui/icons-material/Album";
 import NavBarLink from "../../routes/NavBarLink";
 import { useTheme } from "../../providers/DarkThemeProvider";
 import MusicPlayer from "../musicPlayer/MusicPlayer";
-
+import "../../index.css";
 const MusicDetailsPage = () => {
   const { id } = useParams();
   const {
@@ -78,7 +78,7 @@ const MusicDetailsPage = () => {
                 {card.releaseYear}
               </Typography>
             </Grid>
-            <Box class="card-container">
+            <Box className="bandPageLink ">
               <ComputerIcon fontSize="large" color="secondary" />
               <NavBarLink color={isDark ? "lightgray" : "black"} to={card.web}>
                 Band Page
