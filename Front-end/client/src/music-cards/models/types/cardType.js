@@ -1,11 +1,4 @@
-import {
-  shape,
-  string,
-  number,
-  arrayOf,
-  oneOfType,
-  instanceOf,
-} from "prop-types";
+import { shape, string, number, arrayOf, oneOfType } from "prop-types";
 import imageType from "./imageType";
 
 const cardType = shape({
@@ -16,11 +9,11 @@ const cardType = shape({
   image: imageType.isRequired,
   trackNumber: number.isRequired,
   duration: string.isRequired,
-  releaseYear: instanceOf(Date()).isRequired,
-  lyrics: number.isRequired,
+  releaseYear: string.isRequired,
+  lyrics: arrayOf(string).isRequired,
   likes: arrayOf(string).isRequired,
   web: oneOfType([string]).isRequired,
-  genre: string.isRequired,
+  genre: arrayOf(string).isRequired,
   user_id: string.isRequired,
   createdAt: string.isRequired,
 });

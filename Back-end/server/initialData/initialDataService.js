@@ -26,7 +26,7 @@ const generateInitialDataUsers = async () => {
     try {
       if (!user.password) {
         // Generate password only if not provided
-        user.password = generateUserPassword("defaultPassword");
+        user.password = generateUserPassword("Aa1234!");
       }
       await registerUser(user);
     } catch (error) {

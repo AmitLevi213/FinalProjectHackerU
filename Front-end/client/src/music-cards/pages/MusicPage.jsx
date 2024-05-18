@@ -7,10 +7,17 @@ const MusicPage = () => {
   const {
     value: { error, isPending, filteredCards },
     handleGetCardsFromApi,
+    ...rest
   } = useMusic();
   useEffect(() => {
     handleGetCardsFromApi();
   }, [handleGetCardsFromApi]);
+  const { handleDeleteCard } = rest;
+
+  const onDeleteCard = async (cardId) => {
+    await handleDeleteCard(cardId);
+    await handleGetCardsFromApi();
+  };
 
   return (
     <Container>
@@ -22,6 +29,7 @@ const MusicPage = () => {
         isPending={isPending}
         error={error}
         cards={filteredCards}
+        onDeleteCard={onDeleteCard}
       />
     </Container>
   );

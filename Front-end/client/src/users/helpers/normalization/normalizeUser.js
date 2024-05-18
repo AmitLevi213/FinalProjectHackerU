@@ -1,19 +1,19 @@
 const normalizeUser = (user) => ({
   name: {
     first: user.first,
-    last: user.last,
     middle: user.middle,
+    last: user.last,
   },
+  password: user.password,
   phone: user.phone,
   email: user.email,
-  password: user.password,
   address: {
     state: user.state,
     country: user.country,
     city: user.city,
     street: user.street,
-    zip: user.zip,
     houseNumber: user.houseNumber,
+    zip: user.zip,
   },
   image: {
     url: user.url,
@@ -22,4 +22,4 @@ const normalizeUser = (user) => ({
   isBusiness: user.isBusiness,
 });
 
-export  default normalizeUser;
+export default normalizeUser;

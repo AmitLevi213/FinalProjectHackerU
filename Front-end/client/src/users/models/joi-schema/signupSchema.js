@@ -2,8 +2,8 @@ import Joi from "joi";
 
 const SignupSchema = {
   first: Joi.string().min(2).max(250).required(),
-  last: Joi.string().min(2).max(250).required(),
   middle: Joi.string().min(2).max(250).allow(""),
+  last: Joi.string().min(2).max(250).required(),
   phone: Joi.string()
     .ruleset.pattern(/0[0-9]{1,2}-?\s?[0-9]{3}\s?[0-9]{4}/)
     .rule({
@@ -50,7 +50,6 @@ export const updateUserSchema = {
   first: Joi.string().min(2).max(256).required(),
   middle: Joi.string().min(2).max(256).allow(""),
   last: Joi.string().min(2).max(256).required(),
-
   phone: Joi.string()
     .ruleset.pattern(/0[0-9]{1,2}-?\s?[0-9]{3}\s?[0-9]{4}/)
     .rule({

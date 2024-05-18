@@ -18,7 +18,7 @@ const FormComponent = ({
   children,
 }) => {
   const navigate = useNavigate();
-
+  console.log(onChange());
   return (
     <Box
       component="form"
@@ -28,7 +28,12 @@ const FormComponent = ({
       autoComplete="off"
       noValidate
     >
-      <Typography variant="h5" align="center" component="h1" color="text.primary">
+      <Typography
+        variant="h5"
+        align="center"
+        component="h1"
+        color="text.primary"
+      >
         {title.toUpperCase()}
       </Typography>
       <Grid container spacing={spacing}>

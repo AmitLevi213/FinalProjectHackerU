@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import initialCardForm from "../helpers/initialForms/initialCardForm";
+import { initialEditCardForm } from "../helpers/initialForms/initialCardForm";
 import { useNavigate, useParams } from "react-router-dom";
 import useMusic from "../hooks/useMusic";
 import cardSchema from "../models/joi-schema/cardSchema";
@@ -12,7 +12,7 @@ import { Container } from "@mui/material";
 import EditCardForm from "../components/EditCardForm";
 
 const EditUserMusicPage = () => {
-  const [initialForm, setInitForm] = useState(initialCardForm);
+  const [initialForm, setInitForm] = useState(initialEditCardForm);
   const navigate = useNavigate();
   const { id: cardID } = useParams();
   const {
@@ -22,7 +22,7 @@ const EditUserMusicPage = () => {
   } = useMusic();
 
   const { value, ...rest } = useFormsValidate(
-    initialCardForm,
+    initialEditCardForm,
     cardSchema,
     () => {
       handleEditCard(cardID, {

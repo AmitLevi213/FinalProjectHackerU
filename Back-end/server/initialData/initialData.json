@@ -84,6 +84,7 @@
       "__v": 626,
       "audio": "/assets/audio/Linkin Park - In The End (Audio).mp3"
     },
+
     {
       "_id": "6601941691640a0b5122cdd6",
       "songTitle": "Numb",
@@ -120,28 +121,28 @@
     {
       "_id": "65a823a10f61e1c5f9f000fd",
       "name": {
-        "first": "yonatan",
-        "middle": "ertrt",
-        "last": "blabla",
+        "first": "admin",
+        "middle": "admin",
+        "last": "admin",
         "_id": "65e75d0a5aabf0bc8515a1f5"
       },
-      "phone": "055964575",
-      "email": "lilalolilalo@email.com",
+      "phone": "050000000",
+      "email": "admin@gmail.com",
       "image": {
         "url": "https://cdn.pixabay.com/photo/2016/04/01/10/11/avatar-1299805_960_720.png",
-        "alt": "business card image",
+        "alt": "music card image",
         "_id": "65e75d0a5aabf0bc8515a1f6"
       },
       "address": {
         "state": "not defined",
         "country": "israel",
-        "city": "ramla",
-        "street": "ramlali",
-        "houseNumber": 12,
-        "zip": 0,
+        "city": "israel",
+        "street": "israel",
+        "houseNumber": 1,
+        "zip": 1,
         "_id": "65e75d0a5aabf0bc8515a1f7"
       },
-      "isAdmin": false,
+      "isAdmin": true,
       "isBusiness": true,
       "createdAt": "2024-01-17T18:59:45.074Z"
     }

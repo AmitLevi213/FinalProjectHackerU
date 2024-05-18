@@ -13,7 +13,6 @@ const CardsFeedback = ({ isPending, error, cards, onDeleteCard, onLike }) => {
         Oops... it seems there are no business cards to display
       </Typography>
     );
-
   if (cards && !!cards.length)
     return <Cards cards={cards} onDeleteCard={onDeleteCard} onLike={onLike} />;
 };

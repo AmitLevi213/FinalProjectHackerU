@@ -26,7 +26,6 @@ router.post("/", async (req, res) => {
     const { error } = validateRegistration(user);
     if (error)
       return handleError(res, 400, `Joi Error: ${error.details[0].message}`);
-
     user = normalizeUser(user);
     user.password = generateUserPassword(user.password);
     user = await registerUser(user);
@@ -83,19 +82,18 @@ router.put("/:id", auth, async (req, res) => {
   try {
     const userId = req.params.id;
     const user = req.user;
-
     if (userId !== user._id && !user.isAdmin)
       return handleError(
         res,
         403,
         "Authorization Error: You must be the registered user to update its  details"
       );
-
-    const { error } = validateUserUpdate(req.body);
+    const userPayload = req.body.user;
+    const { error } = validateUserUpdate(userPayload);
     if (error)
       return handleError(res, 400, `Joi Error: ${error.details[0].message}`);
 
-    const normalizedUser = normalizeUser(req.body);
+    const normalizedUser = normalizeUser(userPayload);
     const newUser = await updateUser(userId, normalizedUser);
 
     return res.send(newUser);

@@ -50,7 +50,11 @@ const CardActionBar = ({ card, onDeleteCard, onLike }) => {
       >
         <Box>
           {user && (user._id === card.user_id || user.isAdmin) && (
-            <IconButton onClick={() => handleDialog("open")}>
+            <IconButton
+              onClick={() => {
+                return handleDialog("open");
+              }}
+            >
               <DeleteIcon />
             </IconButton>
           )}

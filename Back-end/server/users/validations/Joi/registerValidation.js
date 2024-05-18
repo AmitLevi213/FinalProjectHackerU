@@ -1,6 +1,6 @@
 const Joi = require("joi");
 
-const registerValidation = user => {
+const registerValidation = (user) => {
   const schema = Joi.object({
     name: Joi.object()
       .keys({

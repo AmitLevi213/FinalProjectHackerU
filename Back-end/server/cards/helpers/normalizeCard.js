@@ -18,7 +18,7 @@ const normalizeCard = async (rawCard, userId) => {
     album: rawCard.album,
     lyrics: rawCard.lyrics,
     description: rawCard.description,
-
+    trackNumber: rawCard.trackNumber,
     bizNumber: rawCard.bizNumber || (await generateBizNumber()),
     user_id: rawCard.user_id || userId,
   };

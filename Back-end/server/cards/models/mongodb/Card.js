@@ -24,12 +24,19 @@ const cardSchema = new mongoose.Schema({
     trim: true,
   },
   genre: {
-    type: String,
+    type: [String],
     required: true,
     minLength: 2,
     maxLength: 256,
     trim: true,
     lowercase: true,
+  },
+  trackNumber: {
+    type: Number,
+    min: 1,
+    max: 4,
+    required: true,
+    trim: true,
   },
   lyrics: {
     type: [String],

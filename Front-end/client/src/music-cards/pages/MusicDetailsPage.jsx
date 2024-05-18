@@ -78,12 +78,12 @@ const MusicDetailsPage = () => {
                 {card.releaseYear}
               </Typography>
             </Grid>
-            <Box className="bandPageLink ">
+            <Grid item xs={12} sm={6} md={3} align="center">
               <ComputerIcon fontSize="large" color="secondary" />
               <NavBarLink color={isDark ? "lightgray" : "black"} to={card.web}>
                 Band Page
               </NavBarLink>
-            </Box>
+            </Grid>
           </Grid>
         </>
       )}

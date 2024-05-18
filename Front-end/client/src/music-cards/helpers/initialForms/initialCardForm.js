@@ -12,5 +12,12 @@ const initialCardForm = {
   imageUrl: "",
   imageAlt: "",
 };
-
+export const initialEditCardForm = {
+  songTitle: "",
+  artist: "",
+  description: "",
+  webUrl: "",
+  imageUrl: "",
+  imageAlt: "",
+};
 export default initialCardForm;
