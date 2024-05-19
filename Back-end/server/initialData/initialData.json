@@ -145,6 +145,62 @@
       "isAdmin": true,
       "isBusiness": true,
       "createdAt": "2024-01-17T18:59:45.074Z"
+    },
+    {
+      "_id": "65a823a10f61e1c5f9f000fc",
+      "name": {
+        "first": "business",
+        "middle": "business",
+        "last": "business",
+        "_id": "65e75d0a5aabf0bc8515a1f4"
+      },
+      "phone": "050000000",
+      "email": "business@gmail.com",
+      "image": {
+        "url": "https://cdn.pixabay.com/photo/2016/04/01/10/11/avatar-1299805_960_720.png",
+        "alt": "music card image",
+        "_id": "65e75d0a5aabf0bc8515a1f6"
+      },
+      "address": {
+        "state": "not defined",
+        "country": "israel",
+        "city": "israel",
+        "street": "israel",
+        "houseNumber": 1,
+        "zip": 1,
+        "_id": "65e75d0a5aabf0bc8515a1f8"
+      },
+      "isAdmin": false,
+      "isBusiness": true,
+      "createdAt": "2024-01-17T18:00:00.074Z"
+    },
+    {
+      "_id": "65a823a10f61e1c5f9f000ff",
+      "name": {
+        "first": "regular",
+        "middle": "regular",
+        "last": "regular",
+        "_id": "65e75d0a5aabf0bc8515a1f1"
+      },
+      "phone": "050000000",
+      "email": "regular@gmail.com",
+      "image": {
+        "url": "https://cdn.pixabay.com/photo/2016/04/01/10/11/avatar-1299805_960_720.png",
+        "alt": "music card image",
+        "_id": "65e75d0a5aabf0bc8515a1f3"
+      },
+      "address": {
+        "state": "not defined",
+        "country": "israel",
+        "city": "israel",
+        "street": "israel",
+        "houseNumber": 1,
+        "zip": 1,
+        "_id": "65e75d0a5aabf0bc8515a1f0"
+      },
+      "isAdmin": false,
+      "isBusiness": false,
+      "createdAt": "2024-01-17T18:00:00.074Z"
     }
   ]
 }
