@@ -26,7 +26,7 @@ const UserFavoriteMusicPage = () => {
     <Container>
       <PageHeader
         title="Favorite Cards Page"
-        subtitle="Here you can find all the business cards you have liked"
+        subtitle="Here you can find all the music cards you have liked"
       />
       <CardsFeedback
         isPending={isPending}

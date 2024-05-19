@@ -10,7 +10,7 @@ const CardsFeedback = ({ isPending, error, cards, onDeleteCard, onLike }) => {
   if (cards && !cards.length)
     return (
       <Typography color="text.primary">
-        Oops... it seems there are no business cards to display
+        Oops... it seems there are no music cards to display
       </Typography>
     );
   if (cards && !!cards.length)

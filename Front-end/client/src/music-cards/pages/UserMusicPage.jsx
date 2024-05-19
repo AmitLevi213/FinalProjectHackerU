@@ -29,10 +29,7 @@ const UserMusicPage = () => {
 
   return (
     <Container sx={{ position: "relative", minHeight: "92vh" }}>
-      <PageHeader
-        title="Cards"
-        subtitle="Here you can find your business cards"
-      />{" "}
+      <PageHeader title="Cards" subtitle="Here you can find your music cards" />{" "}
       {cards && (
         <Fab
           color=""
