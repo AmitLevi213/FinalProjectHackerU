@@ -123,7 +123,7 @@ const CardForm = ({
         sm={6}
       />
       {/* <InputComponent
-        name="song"
+        name="audio"
         label="song file"
         error={errors.song}
         type="file"

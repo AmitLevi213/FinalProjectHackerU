@@ -14,6 +14,7 @@ const cardType = shape({
   likes: arrayOf(string).isRequired,
   web: oneOfType([string]).isRequired,
   genre: arrayOf(string).isRequired,
+  audio: string,
   user_id: string.isRequired,
   createdAt: string.isRequired,
 });

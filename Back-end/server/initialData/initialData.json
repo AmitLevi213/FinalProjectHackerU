@@ -82,7 +82,7 @@
       "user_id": "65f5597d5aabf0bc85194dce",
       "createdAt": "2024-03-25T15:11:18.853Z",
       "__v": 626,
-      "audio": "/assets/audio/Linkin Park - In The End (Audio).mp3"
+      "audio": "https://firebasestorage.googleapis.com/v0/b/mp3-storage-58830.appspot.com/o/Linkin%20Park%20-%20In%20The%20End%20(Audio).mp3?alt=media&token=b794cc0c-d53f-4682-9468-fd4286c465d0"
     },
 
     {
@@ -114,7 +114,8 @@
       ],
       "user_id": "65f5597d5aabf0bc85194dce",
       "createdAt": "2024-05-06T10:30:00.000Z",
-      "__v": 1
+      "__v": 1,
+      "audio": "https://firebasestorage.googleapis.com/v0/b/mp3-storage-58830.appspot.com/o/Numb.mp3?alt=media&token=421f39d5-635c-494a-9ddb-6b6bcf418550"
     }
   ],
   "users": [
