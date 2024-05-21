@@ -7,7 +7,6 @@ import cardSchema from "../models/joi-schema/cardSchema";
 import ROUTES from "../../routes/routesModel";
 import { Container } from "@mui/material";
 import CardForm from "../components/CardForm";
-
 const CreateMusicPage = () => {
   const { handleCreateCard } = useMusic();
   const { user } = useUser();
@@ -15,7 +14,15 @@ const CreateMusicPage = () => {
   const { value, ...rest } = useFormsValidate(
     initialCardForm,
     cardSchema,
-    handleCreateCard
+    async (formDataWithAudioURL) => {
+      try {
+        const response = await handleCreateCard(formDataWithAudioURL);
+
+        console.log("Card created successfully:", response);
+      } catch (error) {
+        console.error("Error creating card:", error);
+      }
+    }
   );
 
   if (!user || !user.isBusiness) return <Navigate to={ROUTES.MUSIC} />;
