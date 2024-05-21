@@ -3,6 +3,17 @@ import ROUTES from "../../routes/routesModel";
 import InputComponent from "../../forms/components/InputComponent";
 import FormComponent from "../../forms/components/FormComponent";
 
+export const formatDate = (date) => {
+  const d = new Date(date);
+  let month = "" + (d.getMonth() + 1);
+  let day = "" + d.getDate();
+  const year = d.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
+};
 const CardForm = ({
   onSubmit,
   onReset,
@@ -12,6 +23,10 @@ const CardForm = ({
   onInputChange,
   title,
 }) => {
+  const formattedData = {
+    ...data,
+    releaseYear: data.releaseYear ? formatDate(data.releaseYear) : "",
+  };
   return (
     <FormComponent
       onSubmit={onSubmit}
@@ -43,7 +58,7 @@ const CardForm = ({
         error={errors.releaseYear}
         handleChange={onInputChange}
         type="date"
-        data={data}
+        data={formattedData}
         sm={6}
       />
       <InputComponent
@@ -122,15 +137,16 @@ const CardForm = ({
         data={data}
         sm={6}
       />
-      {/* <InputComponent
+      <InputComponent
         name="audio"
-        label="song file"
-        error={errors.song}
+        label="Song File"
+        error={errors.audio}
         type="file"
         handleChange={onInputChange}
         data={data}
         sm={6}
-      /> */}
+        required={true}
+      />
     </FormComponent>
   );
 };

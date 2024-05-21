@@ -5,6 +5,7 @@ import {
   Divider,
   Typography,
 } from "@mui/material";
+import { formatDate } from "../CardForm";
 
 const CardBody = ({ card }) => {
   const { songTitle, artist, genre, releaseYear, duration, album } = card;
@@ -25,7 +26,7 @@ const CardBody = ({ card }) => {
           <Typography variant="subtitle2" component="strong">
             Release Year:{" "}
           </Typography>
-          {releaseYear}
+          {formatDate(releaseYear)}
         </Typography>
 
         <Typography variant="body2" color="text.secondary">

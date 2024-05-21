@@ -59,7 +59,11 @@ const cardSchema = new mongoose.Schema({
   user_id: {
     type: mongoose.Schema.Types.ObjectId,
   },
-  audio: { type: String },
+  audio: {
+    type: String,
+    required: true,
+    trim: true,
+  },
 });
 
 const Card = mongoose.model("card", cardSchema);

@@ -14,6 +14,7 @@ import NavBarLink from "../../routes/NavBarLink";
 import { useTheme } from "../../providers/DarkThemeProvider";
 import MusicPlayer from "../musicPlayer/MusicPlayer";
 import "../../index.css";
+import { formatDate } from "../components/CardForm";
 const MusicDetailsPage = () => {
   const { id } = useParams();
   const {
@@ -75,7 +76,7 @@ const MusicDetailsPage = () => {
                 variant="h5"
                 color={isDark ? "lightgray" : "textScondary"}
               >
-                {card.releaseYear}
+                {formatDate(card.releaseYear)}
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={3} align="center">

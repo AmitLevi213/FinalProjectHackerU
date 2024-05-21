@@ -11,13 +11,15 @@ const initialCardForm = {
   webUrl: "",
   imageUrl: "",
   imageAlt: "",
+  audio: "",
 };
 export const initialEditCardForm = {
   songTitle: "",
-  artist: "",
   description: "",
   webUrl: "",
   imageUrl: "",
   imageAlt: "",
+  artist: "",
+  album: "",
 };
 export default initialCardForm;

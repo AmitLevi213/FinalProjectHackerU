@@ -28,6 +28,7 @@ const validateCardWithJoi = (card) => {
       .required(),
     bizNumber: Joi.number().allow(""),
     user_id: Joi.string().allow(""),
+    audio: Joi.string().required(),
   });
   return schema.validate(card);
 };

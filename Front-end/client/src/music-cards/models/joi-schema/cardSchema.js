@@ -21,6 +21,7 @@ const cardSchema = {
     .ruleset.regex(urlRegex)
     .rule({ message: 'card.image "url" mast be a valid url' }),
   imageAlt: Joi.string().min(2).max(250).allow(""),
+  audio: Joi.string().required(),
 };
 
 export default cardSchema;
