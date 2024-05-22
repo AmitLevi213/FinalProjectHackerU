@@ -7,19 +7,19 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 export async function uploadAudioToFirebase(audio) {
   const fileName = audio;
 
-  const storageRef = ref(storage, `Mp3Storage/${fileName}`);
-  const metadata = { contentType: audio.type };
-
+  const storageRef = ref(storage, `Mp3-Storage/${fileName}`);
+  const metadata = { contentType: "audio/mpeg" };
   try {
     await uploadBytes(storageRef, audio, metadata);
     const downloadURL = await getDownloadURL(storageRef);
-    console.log("firebase url:", downloadURL);
-
+    console.log("Firebase URL:", downloadURL);
     return downloadURL;
   } catch (error) {
+    console.error("Failed to upload file to Firebase:", error);
     throw new Error("Failed to upload file to Firebase");
   }
 }
+
 const useFormsValidate = (initialForm, schema, handleSubmit) => {
   const [formData, setFormData] = useState(initialForm);
   const [formErrors, setFormErrors] = useState({});
