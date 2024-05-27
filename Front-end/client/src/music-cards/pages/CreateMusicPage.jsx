@@ -1,5 +1,4 @@
 import { Navigate } from "react-router-dom";
-import useMusic from "../hooks/useMusic";
 import { useUser } from "../../users/providers/UserProvider";
 import useFormsValidate from "../../forms/hooks/useFormsValidate";
 import initialCardForm from "../helpers/initialForms/initialCardForm";
@@ -7,25 +6,19 @@ import cardSchema from "../models/joi-schema/cardSchema";
 import ROUTES from "../../routes/routesModel";
 import { Container } from "@mui/material";
 import CardForm from "../components/CardForm";
-const CreateMusicPage = () => {
+import useMusic from "../hooks/useMusic";
+
+const CreateCardPage = () => {
   const { handleCreateCard } = useMusic();
   const { user } = useUser();
 
   const { value, ...rest } = useFormsValidate(
     initialCardForm,
     cardSchema,
-    async (formDataWithAudioURL) => {
-      try {
-        const response = await handleCreateCard(formDataWithAudioURL);
-
-        console.log("Card created successfully:", response);
-      } catch (error) {
-        console.error("Error creating card:", error);
-      }
-    }
+    handleCreateCard
   );
 
-  if (!user || !user.isBusiness) return <Navigate to={ROUTES.MUSIC} />;
+  if (!user || !user.isBusiness) return <Navigate to={ROUTES.CARDS} />;
 
   return (
     <Container
@@ -37,7 +30,7 @@ const CreateMusicPage = () => {
       }}
     >
       <CardForm
-        title="Create Music Card"
+        title="Create Business Card"
         data={value.formData}
         onSubmit={rest.onSubmit}
         onReset={rest.handleFormReset}
@@ -49,4 +42,4 @@ const CreateMusicPage = () => {
   );
 };
 
-export default CreateMusicPage;
+export default CreateCardPage;
