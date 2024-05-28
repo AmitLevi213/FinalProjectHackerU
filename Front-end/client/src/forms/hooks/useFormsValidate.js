@@ -3,12 +3,11 @@ import { func, object } from "prop-types";
 import { useCallback, useMemo, useState } from "react";
 import { storage } from "../../firebase/firebaseStore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
 export async function uploadAudioToFirebase(audio) {
   const fileName = audio;
 
-  const storageRef = ref(storage, `${fileName}`);
-  const metadata = { contentType: "audio/mpeg" };
+  const storageRef = ref(storage, fileName);
+  const metadata = { contentType: audio.type || "audio/mpeg" };
   try {
     await uploadBytes(storageRef, audio, metadata);
     const downloadedURL = await getDownloadURL(storageRef);
@@ -19,7 +18,6 @@ export async function uploadAudioToFirebase(audio) {
     throw new Error("Failed to upload file to Firebase");
   }
 }
-
 const useFormsValidate = (initialForm, schema, handleSubmit) => {
   const [formData, setFormData] = useState(initialForm);
   const [formErrors, setFormErrors] = useState({});
@@ -38,7 +36,6 @@ const useFormsValidate = (initialForm, schema, handleSubmit) => {
     },
     [schema]
   );
-
   const handleChange = useCallback(
     (e) => {
       const target = e.target;
@@ -91,7 +88,7 @@ const useFormsValidate = (initialForm, schema, handleSubmit) => {
           }));
         }
       } else {
-        handleSubmit(formData); // Submit without audio if no file selected
+        handleSubmit(formData);
       }
     },
     [formData, handleSubmit, validateForm]

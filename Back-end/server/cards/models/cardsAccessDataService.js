@@ -50,7 +50,7 @@ const getCard = async (cardId) => {
 const createCard = async (normalizedCard, downloadedURL) => {
   if (DB === "MONGODB") {
     try {
-      let card = new Card({ normalizedCard, audio: downloadedURL });
+      let card = new Card({ ...normalizedCard, audio: downloadedURL });
       card = await card.save();
       return Promise.resolve(card);
     } catch (error) {
