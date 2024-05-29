@@ -77,6 +77,7 @@ const CardForm = ({
         data={data}
         sm={6}
       />
+
       <InputComponent
         name="duration"
         label="duration"

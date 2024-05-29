@@ -6,22 +6,50 @@ import ROUTES from "../../../routes/routesModel";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../../users/providers/UserProvider";
 import useMusic from "../../hooks/useMusic";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardDeleteDialog from "../card/CardDeleteDialog";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 const CardActionBar = ({ card, onDeleteCard, onLike }) => {
+  const { audio } = card;
   const { handleLikeCard } = useMusic();
   const [isDialogOpen, setIsDialog] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [audioInstance, setAudioInstance] = useState(null);
+
+  const playOrPauseMusic = () => {
+    const audioEl = new Audio(audio);
+    setAudioInstance(audioEl);
+
+    return () => {
+      audioEl.pause();
+      audioEl.currentTime = 0;
+    };
+  };
+
+  useEffect(() => {
+    const cleanup = playOrPauseMusic();
+
+    // Clean up the audio instance when the component unmounts
+    return () => cleanup();
+  }, [audio]);
 
   const navigate = useNavigate();
   const { user } = useUser();
 
   const handleToggle = () => {
-    setIsPlaying((prevState) => !prevState);
+    setIsPlaying((prevState) => {
+      const newState = !prevState;
+      if (audioInstance) {
+        if (newState) {
+          audioInstance.play();
+        } else {
+          audioInstance.pause();
+        }
+      }
+      return newState;
+    });
   };
-
   const handleDialog = (term) => {
     if (term === "open") setIsDialog(true);
     else setIsDialog(false);
