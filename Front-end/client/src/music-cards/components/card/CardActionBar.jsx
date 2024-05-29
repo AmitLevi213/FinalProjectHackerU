@@ -30,7 +30,6 @@ const CardActionBar = ({ card, onDeleteCard, onLike }) => {
   useEffect(() => {
     const cleanup = playOrPauseMusic();
 
-    // Clean up the audio instance when the component unmounts
     return () => cleanup();
   }, [audio]);
 
