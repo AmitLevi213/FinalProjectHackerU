@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 import { bool, func, object, string } from "prop-types";
 import { makeFirstLetterCapital } from "../utils/upperCaseMethod";
 import { useTheme } from "../../providers/DarkThemeProvider";
+import { Input } from "@mui/material";
 
 const InputComponent = ({
   variant,
@@ -19,7 +20,19 @@ const InputComponent = ({
   const { isDark } = useTheme();
 
   const decreasedOpacityColor = "rgba(209, 106, 255, 0.55)";
-
+  if (type === "file")
+    return (
+      <Input
+        name="audio"
+        label="Song File"
+        error={!!error}
+        type="file"
+        onChange={handleChange}
+        data={data}
+        sm={6}
+        required={true}
+      />
+    );
   return (
     <Grid item xs={12} {...rest}>
       <TextField

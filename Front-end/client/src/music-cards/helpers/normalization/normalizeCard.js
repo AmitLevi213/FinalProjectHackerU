@@ -13,4 +13,5 @@ export const normalizeCard = (card) => ({
     url: card.imageUrl,
     alt: card.imageAlt,
   },
+  audio: card.audio,
 });

@@ -4,14 +4,13 @@ import { useCallback, useMemo, useState } from "react";
 import { storage } from "../../firebase/firebaseStore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 export async function uploadAudioToFirebase(audio) {
-  const fileName = audio;
+  const fileName = audio.name;
 
   const storageRef = ref(storage, fileName);
-  const metadata = { contentType: audio.type || "audio/mpeg" };
+  const metadata = { contentType: "audio/mpeg" };
   try {
     await uploadBytes(storageRef, audio, metadata);
     const downloadedURL = await getDownloadURL(storageRef);
-    console.log("Firebase URL:", downloadedURL);
     return downloadedURL;
   } catch (error) {
     console.error("Failed to upload file to Firebase:", error);
@@ -39,17 +38,22 @@ const useFormsValidate = (initialForm, schema, handleSubmit) => {
   const handleChange = useCallback(
     (e) => {
       const target = e.target;
-      const { name, value } = target;
-      const errorMessage = validateFormProperty({ name, value });
-      if (errorMessage)
+      const { name, value, files } = target;
+
+      const newValue = files ? files[0] : value; // Check if it's a file input and get the first file
+
+      const errorMessage = validateFormProperty({ name, value: newValue });
+      if (errorMessage) {
         setFormErrors((prev) => ({ ...prev, [name]: errorMessage }));
-      else
+      } else {
         setFormErrors((prev) => {
-          const pbj = { ...prev };
-          delete pbj[name];
-          return pbj;
+          const updatedErrors = { ...prev };
+          delete updatedErrors[name];
+          return updatedErrors;
         });
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      }
+
+      setFormData((prev) => ({ ...prev, [name]: newValue }));
     },
     [validateFormProperty]
   );
@@ -75,11 +79,13 @@ const useFormsValidate = (initialForm, schema, handleSubmit) => {
         return;
       }
 
-      const file = formData.audio;
-      if (file) {
+      const { audio } = formData;
+      if (audio) {
         try {
-          const downloadURL = await uploadAudioToFirebase(file);
+          const downloadURL = await uploadAudioToFirebase(audio);
+          console.log(downloadURL);
           const formDataWithAudioURL = { ...formData, audio: downloadURL };
+          console.log(formDataWithAudioURL);
           handleSubmit(formDataWithAudioURL);
         } catch (error) {
           setFormErrors((prev) => ({
@@ -88,7 +94,7 @@ const useFormsValidate = (initialForm, schema, handleSubmit) => {
           }));
         }
       } else {
-        handleSubmit(formData);
+        console.log(formData);
       }
     },
     [formData, handleSubmit, validateForm]

@@ -47,10 +47,10 @@ const getCard = async (cardId) => {
     return Promise.resolve([]);
   }
 };
-const createCard = async (normalizedCard, downloadedURL) => {
+const createCard = async (normalizedCard) => {
   if (DB === "MONGODB") {
     try {
-      let card = new Card({ ...normalizedCard, audio: downloadedURL });
+      let card = new Card(normalizedCard);
       card = await card.save();
       return Promise.resolve(card);
     } catch (error) {
@@ -60,15 +60,6 @@ const createCard = async (normalizedCard, downloadedURL) => {
   }
   return Promise.resolve("createCard card not in mongodb");
 };
-// const createCard = async (card, firebaseUrl) => {
-//   try {
-//     // Create a new document with the provided card data and Firebase URL
-//     const newCard = await Card.create({ ...card, audio: firebaseUrl });
-//     return newCard;
-//   } catch (error) {
-//     throw new Error(error.message);
-//   }
-// };
 
 const updateCard = async (cardId, normalizedCard) => {
   if (DB === "MONGODB") {
