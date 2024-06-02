@@ -10,7 +10,7 @@ import PeopleIcon from "@mui/icons-material/People";
 import ComputerIcon from "@mui/icons-material/Computer";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import AlbumIcon from "@mui/icons-material/Album";
-import NavBarLink from "../../routes/NavBarLink";
+import { Link } from "react-router-dom";
 import { useTheme } from "../../providers/DarkThemeProvider";
 import MusicPlayer from "../musicPlayer/MusicPlayer";
 import "../../index.css";
@@ -29,7 +29,7 @@ const MusicDetailsPage = () => {
   return (
     <Container maxWidth="lg">
       <PageHeader
-        title="Business Details"
+        title="Music Details"
         subtitle="Here you can find all the information about the music you are looking for."
       />
       {isLoading && <Spinner />}
@@ -43,6 +43,12 @@ const MusicDetailsPage = () => {
               <CardHead image={card.image} />
             </Box>
             <MusicPlayer card={card} />
+            <Typography
+              variant="body1"
+              color={isDark ? "lightgray" : "textScondary"}
+            >
+              {card.description}
+            </Typography>
           </Box>
           <Grid
             container
@@ -79,11 +85,27 @@ const MusicDetailsPage = () => {
                 {formatDate(card.releaseYear)}
               </Typography>
             </Grid>
-            <Grid item xs={12} sm={6} md={3} align="center">
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={3}
+              container
+              direction="column"
+              alignItems="center"
+            >
               <ComputerIcon fontSize="large" color="secondary" />
-              <NavBarLink color={isDark ? "lightgray" : "black"} to={card.web}>
+              <Typography
+                component={Link}
+                to={card.web}
+                style={{
+                  color: isDark ? "lightgray" : "black",
+                  textDecoration: "none",
+                }}
+                variant="h6"
+              >
                 Band Page
-              </NavBarLink>
+              </Typography>
             </Grid>
           </Grid>
         </>
