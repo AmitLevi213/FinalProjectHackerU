@@ -37,7 +37,10 @@ const useMusic = () => {
     if (cards) {
       const filtered = cards.filter(
         (c) =>
-          c.songTitle.includes(query) || String(c.bizNumber).includes(query)
+          c.songTitle.includes(query) ||
+          String(c.bizNumber).includes(query) ||
+          c.artist.includes(query) ||
+          c.releaseYear.includes(query)
       );
       setFilteredCards(filtered);
     }
