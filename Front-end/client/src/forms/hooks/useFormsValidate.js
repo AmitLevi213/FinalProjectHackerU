@@ -68,8 +68,6 @@ const useFormsValidate = (initialForm, schema, handleSubmit) => {
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
-      console.log("Audio file:", formData.audio);
-
       const validationError = validateForm();
       if (validationError) {
         setFormErrors((prev) => ({
@@ -78,14 +76,11 @@ const useFormsValidate = (initialForm, schema, handleSubmit) => {
         }));
         return;
       }
-
       const { audio } = formData;
       if (audio) {
         try {
           const downloadURL = await uploadAudioToFirebase(audio);
-          console.log(downloadURL);
           const formDataWithAudioURL = { ...formData, audio: downloadURL };
-          console.log(formDataWithAudioURL);
           handleSubmit(formDataWithAudioURL);
         } catch (error) {
           setFormErrors((prev) => ({
@@ -93,8 +88,6 @@ const useFormsValidate = (initialForm, schema, handleSubmit) => {
             audio: "Failed to upload file",
           }));
         }
-      } else {
-        console.log(formData);
       }
     },
     [formData, handleSubmit, validateForm]
