@@ -76,11 +76,16 @@ const useFormsValidate = (initialForm, schema, handleSubmit) => {
         }));
         return;
       }
-      const { audio } = formData;
+
+      const { audio, ...formDataWithoutAudio } = formData;
+
       if (audio) {
         try {
           const downloadURL = await uploadAudioToFirebase(audio);
-          const formDataWithAudioURL = { ...formData, audio: downloadURL };
+          const formDataWithAudioURL = {
+            ...formDataWithoutAudio,
+            audio: downloadURL,
+          };
           handleSubmit(formDataWithAudioURL);
         } catch (error) {
           setFormErrors((prev) => ({
@@ -88,6 +93,9 @@ const useFormsValidate = (initialForm, schema, handleSubmit) => {
             audio: "Failed to upload file",
           }));
         }
+      } else {
+        // If there's no audio, directly submit the form data without uploading
+        handleSubmit(formDataWithoutAudio);
       }
     },
     [formData, handleSubmit, validateForm]
