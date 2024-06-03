@@ -1,3 +1,4 @@
+import React from "react";
 import { func, object } from "prop-types";
 import ROUTES from "../../routes/routesModel";
 import InputComponent from "../../forms/components/InputComponent";
@@ -14,6 +15,7 @@ export const formatDate = (date) => {
 
   return [year, month, day].join("-");
 };
+
 const CardForm = ({
   onSubmit,
   onReset,
@@ -26,7 +28,30 @@ const CardForm = ({
   const formattedData = {
     ...data,
     releaseYear: data.releaseYear ? formatDate(data.releaseYear) : "",
+    genre: Array.isArray(data.genre) ? data.genre.join(", ") : "",
+    lyrics: Array.isArray(data.lyrics) ? data.lyrics.join("\n") : "",
   };
+
+  const handleGenreChange = (event) => {
+    const { value } = event.target;
+    onInputChange({
+      target: {
+        name: "genre",
+        value: value.split(",").map((genre) => genre.trim()),
+      },
+    });
+  };
+  const handleLyricsChange = (event) => {
+    const { value } = event.target;
+    const lyricsArray = value.split(",").map((line) => line.trim());
+    onInputChange({
+      target: {
+        name: "lyrics",
+        value: lyricsArray,
+      },
+    });
+  };
+
   return (
     <FormComponent
       onSubmit={onSubmit}
@@ -46,7 +71,7 @@ const CardForm = ({
       />
       <InputComponent
         name="artist"
-        label="artist"
+        label="Artist"
         error={errors.artist}
         handleChange={onInputChange}
         data={data}
@@ -54,7 +79,7 @@ const CardForm = ({
       />
       <InputComponent
         name="releaseYear"
-        label="release Year"
+        label="Release Year"
         error={errors.releaseYear}
         handleChange={onInputChange}
         type="date"
@@ -63,24 +88,25 @@ const CardForm = ({
       />
       <InputComponent
         name="album"
-        label="album"
+        label="Album"
         error={errors.album}
-        handleChange={onInputChange}
-        data={data}
-        sm={6}
-      />
-      <InputComponent
-        name="genre"
-        label="genre"
-        error={errors.genre}
         handleChange={onInputChange}
         data={data}
         sm={6}
       />
 
       <InputComponent
+        name="genre"
+        label="Genre"
+        error={errors.genre}
+        handleChange={handleGenreChange}
+        data={formattedData}
+        sm={6}
+      />
+
+      <InputComponent
         name="duration"
-        label="duration"
+        label="Duration"
         error={errors.duration}
         handleChange={onInputChange}
         data={data}
@@ -96,26 +122,24 @@ const CardForm = ({
       />
       <InputComponent
         name="description"
-        label="description"
+        label="Description"
         error={errors.description}
         handleChange={onInputChange}
         data={data}
         required={false}
         sm={6}
       />
-
       <InputComponent
         name="webUrl"
-        label="web"
+        label="Web URL"
         error={errors.webUrl}
         handleChange={onInputChange}
         data={data}
         sm={6}
       />
-
       <InputComponent
         name="imageUrl"
-        label="image url"
+        label="Image URL"
         error={errors.imageUrl}
         handleChange={onInputChange}
         data={data}
@@ -123,21 +147,23 @@ const CardForm = ({
       />
       <InputComponent
         name="imageAlt"
-        label="image alt"
+        label="Image Alt"
         error={errors.imageAlt}
         handleChange={onInputChange}
         data={data}
         sm={6}
         required={false}
       />
+
       <InputComponent
         name="lyrics"
         label="lyrics"
         error={errors.lyrics}
-        handleChange={onInputChange}
+        handleChange={handleLyricsChange}
         data={data}
         sm={6}
       />
+
       <InputComponent
         name="audio"
         label="Song File"
@@ -148,14 +174,6 @@ const CardForm = ({
         sm={6}
         required={true}
       />
-      {/* <label htmlFor="audio">audio</label>
-      <input
-        type="file"
-        accept="audio/*"
-        onChange={onInputChange}
-        name="audio"
-        required
-      /> */}
     </FormComponent>
   );
 };
@@ -164,8 +182,8 @@ CardForm.propTypes = {
   onSubmit: func.isRequired,
   onReset: func.isRequired,
   errors: object.isRequired,
-  onFormChange: func.isRequired,
   data: object.isRequired,
+  onFormChange: func.isRequired,
   onInputChange: func.isRequired,
 };
 

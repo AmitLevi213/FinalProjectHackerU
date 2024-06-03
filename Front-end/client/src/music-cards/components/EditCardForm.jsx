@@ -2,6 +2,7 @@ import { func, object } from "prop-types";
 import ROUTES from "../../routes/routesModel";
 import InputComponent from "../../forms/components/InputComponent";
 import FormComponent from "../../forms/components/FormComponent";
+import { formatDate } from "./CardForm";
 
 const EditCardForm = ({
   onSubmit,
@@ -12,6 +13,11 @@ const EditCardForm = ({
   onInputChange,
   title,
 }) => {
+  const formattedData = {
+    ...data,
+    releaseYear: data.releaseYear ? formatDate(data.releaseYear) : "",
+  };
+
   return (
     <FormComponent
       onSubmit={onSubmit}
@@ -29,7 +35,6 @@ const EditCardForm = ({
         data={data}
         sm={6}
       />
-
       <InputComponent
         name="description"
         label="description"
@@ -39,7 +44,6 @@ const EditCardForm = ({
         required={false}
         sm={6}
       />
-
       <InputComponent
         name="webUrl"
         label="web"
@@ -48,7 +52,6 @@ const EditCardForm = ({
         data={data}
         sm={6}
       />
-
       <InputComponent
         name="imageUrl"
         label="image url"
@@ -75,15 +78,58 @@ const EditCardForm = ({
         sm={6}
         required={false}
       />
-      {/* <InputComponent
-        name="songFile"
-        label="song file"
-        error={errors.song}
-        type="file"
+      <InputComponent
+        name="album"
+        label="album"
+        error={errors.album}
         handleChange={onInputChange}
         data={data}
         sm={6}
-      /> */}
+        required={false}
+      />
+      <InputComponent
+        name="genre"
+        label="genre"
+        error={errors.genre}
+        handleChange={onInputChange}
+        data={data}
+        sm={6}
+        required={false}
+      />
+      <InputComponent
+        name="duration"
+        label="duration"
+        error={errors.duration}
+        handleChange={onInputChange}
+        data={data}
+        sm={6}
+        required={true}
+      />{" "}
+      <InputComponent
+        name="releaseYear"
+        label="release Year"
+        error={errors.releaseYear}
+        handleChange={onInputChange}
+        type="date"
+        data={formattedData}
+        sm={6}
+      />
+      <InputComponent
+        name="lyrics"
+        label="lyrics"
+        error={errors.lyrics}
+        handleChange={onInputChange}
+        data={data}
+        sm={6}
+      />
+      <InputComponent
+        name="trackNumber"
+        label="Track Number"
+        error={errors.trackNumber}
+        handleChange={onInputChange}
+        data={data}
+        sm={6}
+      />
     </FormComponent>
   );
 };

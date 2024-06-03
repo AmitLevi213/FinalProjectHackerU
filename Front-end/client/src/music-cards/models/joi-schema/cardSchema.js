@@ -8,10 +8,10 @@ const cardSchema = {
   artist: Joi.string().min(2).max(250).required(),
   album: Joi.string().min(2).max(250).required(),
   description: Joi.string().min(2).max(250).allow(),
-  genre: Joi.string().min(2).max(250).required(),
+  genre: Joi.array().items(Joi.string()).required(),
   duration: Joi.string().min(2).max(50).required(),
   releaseYear: Joi.date().required(),
-  lyrics: Joi.string().min(2).max(1024).required(),
+  lyrics: Joi.array().items(Joi.string()).required(),
   trackNumber: Joi.number().required(),
   webUrl: Joi.string()
     .ruleset.regex(urlRegex)

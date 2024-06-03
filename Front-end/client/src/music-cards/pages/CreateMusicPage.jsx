@@ -30,7 +30,7 @@ const CreateCardPage = () => {
       }}
     >
       <CardForm
-        title="Create Business Card"
+        title="Create Music Card"
         data={value.formData}
         onSubmit={rest.onSubmit}
         onReset={rest.handleFormReset}

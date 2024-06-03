@@ -41,6 +41,8 @@ const cardSchema = new mongoose.Schema({
   lyrics: {
     type: [String],
     maxLength: 1024,
+    trim: true,
+    lowercase: true,
   },
   web: URL,
   image: Image,
