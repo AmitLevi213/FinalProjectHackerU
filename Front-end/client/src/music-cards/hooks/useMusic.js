@@ -113,11 +113,16 @@ const useMusic = () => {
     }
   }, []);
 
-  const handleLikeCard = useCallback(async (cardId) => {
+  const handleLikeCard = useCallback(async (cardId, isLiked) => {
     try {
       setPending(true);
       const card = await changeLikeStatus(cardId);
-      snackbar("success", "The business card has been successfully liked");
+      snackbar(
+        "success",
+        `The business card has been successfully ${
+          isLiked ? "unliked" : "liked"
+        }`
+      );
       requestStatus(card, cards, false, null);
     } catch (error) {
       requestStatus(null, null, false, error);

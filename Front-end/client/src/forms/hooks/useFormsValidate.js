@@ -40,7 +40,7 @@ const useFormsValidate = (initialForm, schema, handleSubmit) => {
       const target = e.target;
       const { name, value, files } = target;
 
-      const newValue = files ? files[0] : value; // Check if it's a file input and get the first file
+      const newValue = files ? files[0] : value;
 
       const errorMessage = validateFormProperty({ name, value: newValue });
       if (errorMessage) {
@@ -94,7 +94,6 @@ const useFormsValidate = (initialForm, schema, handleSubmit) => {
           }));
         }
       } else {
-        // If there's no audio, directly submit the form data without uploading
         handleSubmit(formDataWithoutAudio);
       }
     },

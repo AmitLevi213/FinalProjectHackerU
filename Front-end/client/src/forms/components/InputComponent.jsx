@@ -24,6 +24,7 @@ const InputComponent = ({
     return (
       <Input
         name="audio"
+        color="success"
         label="Song File"
         error={!!error}
         type="file"

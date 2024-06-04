@@ -60,8 +60,9 @@ const CardActionBar = ({ card, onDeleteCard, onLike }) => {
   };
 
   const handleLike = async () => {
+    const currentLikedState = isLiked;
     setLiked((prev) => !prev);
-    await handleLikeCard(card._id);
+    await handleLikeCard(card._id, currentLikedState);
     await onLike();
   };
 

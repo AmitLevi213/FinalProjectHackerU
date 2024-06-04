@@ -1,7 +1,7 @@
 const ROUTES = {
   ROOT: "/",
   ABOUT: "/about",
-  MUSIC: "/music",
+  MUSIC: "/",
   MY_MUSIC: "/my-music",
   FAV_MUSIC: "/fav-music",
   MUSIC_DETAILS: "/music-info",

@@ -18,9 +18,7 @@ const Footer = () => {
       sx={{ position: "sticky", bottom: 0, left: 0, right: 0 }}
       elevation={3}
     >
-      <BottomNavigation
-        sx={{ backgroundColor: isDark ? "#310047" : "#d16aff" }}
-      >
+      <BottomNavigation sx={{ backgroundColor: isDark ? "dark" : "#d16aff" }}>
         <BottomNavigationAction
           onClick={() => navigateTo(ROUTES.ABOUT)}
           label="About Us"

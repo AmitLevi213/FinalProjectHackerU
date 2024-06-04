@@ -15,7 +15,7 @@ const NavBar = () => {
         <Toolbar
           sx={{
             justifyContent: "space-between",
-            backgroundColor: isDark ? "#310047" : "#d16aff",
+            backgroundColor: isDark ? "dark" : "#d16aff",
           }}
         >
           <LeftNavBar />

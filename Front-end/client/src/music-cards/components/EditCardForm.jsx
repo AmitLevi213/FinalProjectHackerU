@@ -95,7 +95,7 @@ const EditCardForm = ({
         data={data}
         sm={6}
         required={true}
-      />{" "}
+      />
       <InputComponent
         name="releaseYear"
         label="release Year"

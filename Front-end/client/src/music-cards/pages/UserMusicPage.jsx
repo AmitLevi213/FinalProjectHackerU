@@ -32,7 +32,7 @@ const UserMusicPage = () => {
       <PageHeader title="Cards" subtitle="Here you can find your music cards" />{" "}
       {cards && (
         <Fab
-          color=""
+          color="secondary"
           aria-label=""
           onClick={() => navigate(ROUTES.CREATE_MUSIC)}
           sx={{ position: "absolute", bottom: 75, right: 16 }}
