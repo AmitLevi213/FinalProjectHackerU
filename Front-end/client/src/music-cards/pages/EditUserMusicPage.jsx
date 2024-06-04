@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { initialEditCardForm } from "../helpers/initialForms/initialCardForm";
 import { useNavigate, useParams } from "react-router-dom";
 import useMusic from "../hooks/useMusic";
-import cardSchema from "../models/joi-schema/cardSchema";
+import { editCardSchema } from "../models/joi-schema/cardSchema";
 import { normalizeCard } from "../helpers/normalization/normalizeCard";
 import useFormsValidate from "../../forms/hooks/useFormsValidate";
 import { useUser } from "../../users/providers/UserProvider";
@@ -23,7 +23,7 @@ const EditUserMusicPage = () => {
 
   const { value, ...rest } = useFormsValidate(
     initialEditCardForm,
-    cardSchema,
+    editCardSchema,
     () => {
       handleEditCard(cardID, {
         ...normalizeCard(value.formData),

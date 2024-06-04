@@ -5,7 +5,7 @@ const cardType = shape({
   _id: string,
   songTitle: string.isRequired,
   artist: string.isRequired,
-  description: string.isRequired,
+  description: string,
   image: imageType.isRequired,
   trackNumber: number.isRequired,
   duration: string.isRequired,

@@ -17,8 +17,6 @@ export const initialEditCardForm = {
   songTitle: "",
   description: "",
   webUrl: "",
-  lyrics: [],
-  genre: [],
   trackNumber: "",
   imageUrl: "",
   imageAlt: "",

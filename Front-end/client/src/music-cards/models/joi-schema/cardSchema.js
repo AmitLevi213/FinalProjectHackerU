@@ -7,11 +7,31 @@ const cardSchema = {
   songTitle: Joi.string().min(2).max(250).required(),
   artist: Joi.string().min(2).max(250).required(),
   album: Joi.string().min(2).max(250).required(),
-  description: Joi.string().min(2).max(250).allow(),
-  genre: Joi.array().items(Joi.string()).required(),
+  description: Joi.string().min(2).max(250).required(),
+  genre: Joi.array().items(Joi.string()).allow(),
   duration: Joi.string().min(2).max(50).required(),
   releaseYear: Joi.date().required(),
   lyrics: Joi.array().items(Joi.string()).required(),
+  trackNumber: Joi.number().required(),
+  webUrl: Joi.string()
+    .ruleset.regex(urlRegex)
+    .rule({ message: 'card "web" mast be a valid url' })
+    .required(),
+  imageUrl: Joi.string()
+    .ruleset.regex(urlRegex)
+    .rule({ message: 'card.image "url" mast be a valid url' }),
+  imageAlt: Joi.string().min(2).max(250).allow(""),
+  audio: Joi.object().unknown(true).allow(),
+};
+export const editCardSchema = {
+  songTitle: Joi.string().min(2).max(250).required(),
+  artist: Joi.string().min(2).max(250).required(),
+  album: Joi.string().min(2).max(250).required(),
+  description: Joi.string().min(2).max(250).required(),
+  genre: Joi.array().items(Joi.string()).allow(),
+  duration: Joi.string().min(2).max(50).required(),
+  releaseYear: Joi.date().required(),
+  lyrics: Joi.array().items(Joi.string()).allow(),
   trackNumber: Joi.number().required(),
   webUrl: Joi.string()
     .ruleset.regex(urlRegex)

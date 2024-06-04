@@ -9,9 +9,9 @@ const validateCardWithJoi = (card) => {
     artist: Joi.string().min(2).max(256).required(),
     description: Joi.string().min(2).max(1024).required(),
     album: Joi.string().min(2).max(250).required(),
-    genre: Joi.array().items(Joi.string()).required(),
+    genre: Joi.array().items(Joi.string()).allow(),
     releaseYear: Joi.date().required(),
-    lyrics: Joi.array().items(Joi.string()).required(),
+    lyrics: Joi.array().items(Joi.string()).allow(),
     trackNumber: Joi.number().required(),
     duration: Joi.string().min(2).max(50).required(),
     web: Joi.string()

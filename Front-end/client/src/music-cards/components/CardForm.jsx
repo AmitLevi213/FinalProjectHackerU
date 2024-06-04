@@ -34,16 +34,20 @@ const CardForm = ({
 
   const handleGenreChange = (event) => {
     const { value } = event.target;
+    const genres = value ? value.split(",").map((genre) => genre.trim()) : [];
     onInputChange({
       target: {
         name: "genre",
-        value: value.split(",").map((genre) => genre.trim()),
+        value: genres,
       },
     });
   };
+
   const handleLyricsChange = (event) => {
     const { value } = event.target;
-    const lyricsArray = value.split(",").map((line) => line.trim());
+    const lyricsArray = value
+      ? value.split(",").map((line) => line.trim())
+      : [];
     onInputChange({
       target: {
         name: "lyrics",
@@ -122,11 +126,10 @@ const CardForm = ({
       />
       <InputComponent
         name="description"
-        label="Description"
+        label="description"
         error={errors.description}
         handleChange={onInputChange}
         data={data}
-        required={false}
         sm={6}
       />
       <InputComponent

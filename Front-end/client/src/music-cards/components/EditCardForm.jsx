@@ -88,15 +88,6 @@ const EditCardForm = ({
         required={false}
       />
       <InputComponent
-        name="genre"
-        label="genre"
-        error={errors.genre}
-        handleChange={onInputChange}
-        data={data}
-        sm={6}
-        required={false}
-      />
-      <InputComponent
         name="duration"
         label="duration"
         error={errors.duration}
@@ -112,14 +103,6 @@ const EditCardForm = ({
         handleChange={onInputChange}
         type="date"
         data={formattedData}
-        sm={6}
-      />
-      <InputComponent
-        name="lyrics"
-        label="lyrics"
-        error={errors.lyrics}
-        handleChange={onInputChange}
-        data={data}
         sm={6}
       />
       <InputComponent
