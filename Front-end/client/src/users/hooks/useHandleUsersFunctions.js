@@ -34,17 +34,37 @@ const useHandleUsersFunctions = () => {
     });
   }, [searchParams]);
 
+  // useEffect(() => {
+  //   if (users) {
+  //     const filtered = users.filter(
+  //       (u) =>
+  //         u.name.first.includes(query.q) ||
+  //     || u.phone.includes(query.q)
+  //         u.name.last.includes(query.q) ||
+  //         (u.name.middle.includes(query.q) &&
+  //           (!query.isBusiness || u.isBusiness === String(u.isBusiness)))
+  //     );
+  //     setFilteredUsers(filtered);
+  //   }
+  // }, [query, users]);
+
   useEffect(() => {
     if (users) {
-      const filtered = users.filter(
-        (u) =>
-          (u.name.first.includes(query.q) || u.name.last.includes(query.q)) &&
-          (!query.isBusiness || u.isBusiness === String(u.isBusiness))
-      );
+      const filtered = users.filter((u) => {
+        const matchesQuery =
+          u.name.first.includes(query.q) ||
+          u.name.last.includes(query.q) ||
+          u.phone.includes(query.q) ||
+          u.name.middle.includes(query.q);
+
+        const matchesBusinessFilter =
+          !query.isBusiness || u.isBusiness === String(u.isBusiness);
+
+        return matchesQuery && matchesBusinessFilter;
+      });
       setFilteredUsers(filtered);
     }
   }, [query, users]);
-
   const requestStatus = useCallback(
     (loading, errorMessage, users, user = null) => {
       setLoading(loading);
