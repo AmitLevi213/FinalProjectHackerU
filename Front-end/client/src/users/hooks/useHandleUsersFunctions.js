@@ -34,20 +34,6 @@ const useHandleUsersFunctions = () => {
     });
   }, [searchParams]);
 
-  // useEffect(() => {
-  //   if (users) {
-  //     const filtered = users.filter(
-  //       (u) =>
-  //         u.name.first.includes(query.q) ||
-  //     || u.phone.includes(query.q)
-  //         u.name.last.includes(query.q) ||
-  //         (u.name.middle.includes(query.q) &&
-  //           (!query.isBusiness || u.isBusiness === String(u.isBusiness)))
-  //     );
-  //     setFilteredUsers(filtered);
-  //   }
-  // }, [query, users]);
-
   useEffect(() => {
     if (users) {
       const filtered = users.filter((u) => {
