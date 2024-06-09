@@ -1,7 +1,7 @@
 {
-  "name": "server",
+  "name": "SoundScape Central",
   "version": "1.0.0",
-  "description": "Scape Central",
+  "description": "SoundScape Central",
   "main": "server.js",
   "scripts": {
     "start": "set NODE_ENV=production&& node .",
