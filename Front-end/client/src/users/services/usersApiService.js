@@ -35,3 +35,29 @@ export const getUser = async (id) => {
     return Promise.reject(error.message);
   }
 };
+export const getUsers = async () => {
+  try {
+    const { data } = await axios.get(`${apiUrl}`);
+    return data;
+  } catch (error) {
+    return Promise.reject(error.message);
+  }
+};
+
+export const deleteUser = async (id) => {
+  try {
+    const { data } = await axios.delete(`${apiUrl}/${id}`);
+    return data;
+  } catch (error) {
+    return Promise.reject(error.message);
+  }
+};
+
+export const changeBusinessStatus = async (id, normalaizedUser) => {
+  try {
+    const { data } = await axios.patch(`${apiUrl}/${id}`, normalaizedUser);
+    return data;
+  } catch (error) {
+    return Promise.reject(error.message);
+  }
+};

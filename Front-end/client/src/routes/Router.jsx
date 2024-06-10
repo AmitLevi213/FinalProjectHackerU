@@ -12,6 +12,7 @@ import MusicDetailsPage from "../music-cards/pages/MusicDetailsPage";
 import EditUserInfo from "../users/pages/EditUserInfo";
 import UserProfile from "../users/pages/UserProfile";
 import EditUserMusicPage from "../music-cards/pages/EditUserMusicPage";
+import CrmPage from "../users/pages/CrmPage";
 
 const Router = () => {
   return (
@@ -37,6 +38,7 @@ const Router = () => {
         path={`${ROUTES.EDIT_MUSIC}/:id`}
         element={<EditUserMusicPage />}
       ></Route>
+      <Route path={ROUTES.CRM} element={<CrmPage />} />
 
       <Route path="*" element={<ErrorPage />}></Route>
     </Routes>

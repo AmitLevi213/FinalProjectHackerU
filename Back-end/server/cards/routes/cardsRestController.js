@@ -68,7 +68,6 @@ router.put("/:id", auth, async (req, res) => {
     const cardId = req.params.id;
     const userId = req.user._id;
     const isAdmin = req.user.isAdmin;
-    //return res.json({card: card.user_id, userId: userId})
     const { error } = validateCard(card);
     if (error)
       return handleError(res, 400, `Joi Error: ${error.details[0].message}`);

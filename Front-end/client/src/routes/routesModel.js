@@ -12,6 +12,7 @@ const ROUTES = {
   EDIT_USER: "/edit-user",
   CREATE_MUSIC: "/post-music",
   EDIT_MUSIC: "/edit-music",
+  CRM: "/crm-page",
 };
 
 export default ROUTES;

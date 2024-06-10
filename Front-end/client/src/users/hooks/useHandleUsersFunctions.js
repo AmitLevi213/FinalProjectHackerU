@@ -7,7 +7,14 @@ import {
   removeToken,
   setTokenInLocalStorage,
 } from "../services/localStorageService";
-import { editUser, login, signup } from "../services/usersApiService";
+import {
+  changeBusinessStatus,
+  deleteUser,
+  editUser,
+  getUsers,
+  login,
+  signup,
+} from "../services/usersApiService";
 import ROUTES from "../../routes/routesModel";
 import normalizeUser from "../helpers/normalization/normalizeUser";
 import { useSnackbar } from "../../providers/SnackbarProvider";
@@ -16,7 +23,6 @@ const useHandleUsersFunctions = () => {
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
   const [query, setQuery] = useState("");
   const [filteredUsers, setFilteredUsers] = useState(null);
   const [searchParams] = useSearchParams();
@@ -51,6 +57,7 @@ const useHandleUsersFunctions = () => {
       setFilteredUsers(filtered);
     }
   }, [query, users]);
+
   const requestStatus = useCallback(
     (loading, errorMessage, users, user = null) => {
       setLoading(loading);
@@ -80,6 +87,7 @@ const useHandleUsersFunctions = () => {
     },
     [navigate, requestStatus, setToken, snackbar]
   );
+
   const userLogoutFunction = useCallback(() => {
     removeToken();
     setToken(null);
@@ -112,6 +120,59 @@ const useHandleUsersFunctions = () => {
     },
     [requestStatus]
   );
+
+  const handleGetUser = useCallback(
+    async (userId) => {
+      try {
+        setLoading(true);
+        const user = await getUser(userId);
+        requestStatus(false, null, null, user);
+        return user;
+      } catch (error) {
+        requestStatus(false, error.message, null);
+      }
+    },
+    [requestStatus]
+  );
+
+  const handleGetUsers = useCallback(async () => {
+    try {
+      setLoading(true);
+      const users = await getUsers();
+      requestStatus(false, null, users, user);
+      return users;
+    } catch (error) {
+      requestStatus(false, error.message, null);
+    }
+  }, [requestStatus, user]);
+
+  const handleDeleteUser = useCallback(
+    async (userId) => {
+      try {
+        setLoading(true);
+        await deleteUser(userId);
+        snackbar("success", "The business card has been successfully deleted");
+      } catch (error) {
+        requestStatus(false, error.message, null);
+      }
+    },
+    [snackbar, requestStatus]
+  );
+
+  const handleChangeBusinessStatus = useCallback(
+    async (userId, userFromClient) => {
+      try {
+        setLoading(true);
+        const user = await changeBusinessStatus(userId, userFromClient);
+        requestStatus(false, null, users, user);
+        snackbar("success", "The business user has been successfully updated");
+      } catch (error) {
+        requestStatus(false, error.message, null);
+      }
+    },
+    [requestStatus, snackbar, users]
+  );
+
   const value = useMemo(
     () => ({
       users,
@@ -122,12 +183,17 @@ const useHandleUsersFunctions = () => {
     }),
     [users, user, loading, error, filteredUsers]
   );
+
   return {
     ...value,
     userLoginFunction,
     userLogoutFunction,
     signupFunction,
     editUserFunction,
+    handleGetUser,
+    handleDeleteUser,
+    handleGetUsers,
+    handleChangeBusinessStatus,
   };
 };
 

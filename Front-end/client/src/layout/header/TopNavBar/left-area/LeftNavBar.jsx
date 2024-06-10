@@ -21,6 +21,7 @@ const LeftNavBar = () => {
             <NavItem label="My Music" to={ROUTES.MY_MUSIC}></NavItem>
           </>
         )}
+        {user && user.isAdmin && <NavItem to={ROUTES.CRM} label="CRM" />}
       </Box>
     </Box>
   );

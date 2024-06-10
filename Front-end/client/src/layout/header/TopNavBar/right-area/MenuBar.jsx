@@ -30,7 +30,7 @@ const MenuBar = ({ isMenuOpen, anchorEl, onCloseMenu }) => {
         horizontal: "right",
       }}
     >
-      {user && (
+      {user && user.isAdmin && (
         <Box>
           <NavBarLink to={ROUTES.USER_PROFILE}>
             <MenuItem onClick={onCloseMenu}>Profile</MenuItem>
@@ -43,6 +43,9 @@ const MenuBar = ({ isMenuOpen, anchorEl, onCloseMenu }) => {
           </NavBarLink>
           <NavBarLink to={ROUTES.ABOUT}>
             <MenuItem>About</MenuItem>
+          </NavBarLink>
+          <NavBarLink to={ROUTES.CRM}>
+            <MenuItem onClick={onCloseMenu}>CRM</MenuItem>
           </NavBarLink>
           <IconButton sx={{ marginLeft: 1 }} onClick={toggleDarkMode}>
             {isDark ? <LightModeIcon /> : <DarkModeIcon />}
