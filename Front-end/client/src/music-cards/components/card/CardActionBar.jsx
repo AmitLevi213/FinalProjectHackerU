@@ -76,31 +76,27 @@ const CardActionBar = ({ card, onDeleteCard, onLike }) => {
         disableSpacing
         sx={{ paddingTop: 0, justifyContent: "space-between" }}
       >
-        <Box>
+        <Box display="flex" alignItems="center">
           {user && (user._id === card.user_id || user.isAdmin) && (
-            <IconButton
-              onClick={() => {
-                return handleDialog("open");
-              }}
-            >
+            <IconButton onClick={() => handleDialog("open")} size="large">
               <DeleteIcon />
             </IconButton>
           )}
-
           {user && user._id === card.user_id && (
             <IconButton
               onClick={() => navigate(`${ROUTES.EDIT_MUSIC}/${card._id}`)}
+              size="large"
             >
               <EditModeIcon />
             </IconButton>
           )}
         </Box>
-        <Box>
-          <IconButton onClick={handleToggle}>
+        <Box display="flex" alignItems="center">
+          <IconButton onClick={handleToggle} size="large">
             {isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
           </IconButton>
           {user && (
-            <IconButton onClick={handleLike}>
+            <IconButton onClick={handleLike} size="large">
               <FavoriteIcon color={isLiked ? "error" : "inherit"} />
             </IconButton>
           )}

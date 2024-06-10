@@ -89,7 +89,7 @@
       "_id": "6601941691640a0b5122cdd6",
       "songTitle": "Numb",
       "album": "Meteora",
-      "releaseYear": "2003",
+      "releaseYear": "2003/9/8",
       "artist": "Linkin Park",
       "duration": "3:07",
       "description": "Numb is one of Linkin Park's most iconic songs, known for its emotional lyrics and powerful melody.",
@@ -101,7 +101,7 @@
       "web": "https://www.linkinpark.com/",
       "trackNumber": 3,
       "image": {
-        "url": " https://firebasestorage.googleapis.com/v0/b/mp3-storage-58830.appspot.com/o/photos%2Fnumb.jpg?alt=media&token=b10dcff9-5011-46ae-8ca2-89a5bdef5bcb",
+        "url": "https://firebasestorage.googleapis.com/v0/b/mp3-storage-58830.appspot.com/o/photos%2Fnumb.jpg?alt=media&token=b10dcff9-5011-46ae-8ca2-89a5bdef5bcb",
         "alt": "Numb",
         "_id": "660d2a74f9d3ea58f6d547bd"
       },
@@ -116,6 +116,64 @@
       "createdAt": "2024-05-06T10:30:00.000Z",
       "__v": 1,
       "audio": "https://firebasestorage.googleapis.com/v0/b/mp3-storage-58830.appspot.com/o/Numb.mp3?alt=media&token=db494d91-bc35-4fe3-8b1c-ebc3db3534c8"
+    },
+    {
+      "_id": "6601941691640a0b5122cdd9",
+      "songTitle": "יש בינינו בית",
+      "album": "סחרחורת",
+      "releaseYear": "2012/02/13",
+      "artist": "דודו טסה",
+      "duration": "3:34",
+      "description": "השיר יש בינינו בית של דודו טסה, שנכתב בשיתוף עם אלי אליהו, מתאר מערכת יחסים בין שני אנשים שחיים יחד תחת קורת גג משותפת. השיר משקף את הפערים בין הציפיות והמציאות במערכת היחסים.",
+      "lyrics": [
+        "ויש את מה שרצית שאהיה",
+        "ויש מה שרציתי שתהיי",
+        "ויש בינינו בית",
+        "ולא נכנס מספיק אור",
+
+        "על הדלת כתבנו כאן גרים",
+        "חיכינו לאושר",
+        "קנינו כמה דברים",
+        "שהרווחנו ביושר",
+
+        "והבטחנו בלילות הקרים",
+        "שכחנו בבוקר",
+        "אין הנחות בחיים",
+        "שילמנו ביוקר",
+
+        "ויש את מה שרצית שאהיה",
+        "ויש מה שרציתי שתהי",
+        "ויש בינינו בית",
+        "ולא נכנס מספיק אור",
+
+        "רצינו לשכב כמו זרים",
+        "ולברוח בחושך",
+        "בחלון עמדו שיכורים",
+        "ששרו על חופש",
+
+        "ויש מה שרציתי שתהי",
+        "ויש בינינו בית",
+        "ולא נכנס מספיק אור"
+      ],
+      "genre": ["רוק אלטרנטיבי", "ים-תיכוני"],
+      "web": "https://www.linkinpark.com/",
+      "trackNumber": 3,
+      "image": {
+        "url": "https://firebasestorage.googleapis.com/v0/b/mp3-storage-58830.appspot.com/o/photos%2F%D7%A1%D7%97%D7%A8%D7%97%D7%95%D7%A8%D7%AA_%D7%93%D7%95%D7%93_%D7%98%D7%A1%D7%94_%D7%A2%D7%98%D7%99%D7%A4%D7%94.jpeg?alt=media&token=4d8f90cb-c340-49a8-b361-7140447d997c",
+        "alt": "יש בינינו בית",
+        "_id": "660d2a74f9d3ea58f6d547be"
+      },
+      "bizNumber": 6616320,
+      "likes": [
+        "65fc06e7cb7aa60febcced58",
+        "65a697870f61e1c5f9effac5",
+        "66046fcdf9d3ea58f6d4cdec",
+        "65e87e2ddc809e75acddfc21"
+      ],
+      "user_id": "65f5597d5aabf0bc85194dcf",
+      "createdAt": "2024-05-06T10:30:00.000Z",
+      "__v": 1,
+      "audio": "https://firebasestorage.googleapis.com/v0/b/mp3-storage-58830.appspot.com/o/%D7%93%D7%95%D7%93%D7%95%20%D7%98%D7%A1%D7%94%20-%20%D7%99%D7%A9%20%D7%91%D7%99%D7%A0%D7%99%D7%A0%D7%95%20%D7%91%D7%99%D7%AA.mp3?alt=media&token=9248d008-c5f7-44c9-9375-d57f631874ec"
     }
   ],
   "users": [
