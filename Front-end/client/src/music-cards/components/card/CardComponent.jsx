@@ -6,7 +6,6 @@ import CardBody from "./CardBody";
 import ROUTES from "../../../routes/routesModel";
 import CardActionBar from "./CardActionBar";
 import { useTheme } from "../../../providers/DarkThemeProvider";
-
 const CardComponent = ({ card, onDeleteCard, onLike }) => {
   const navigate = useNavigate();
   const { isDark } = useTheme();
@@ -17,7 +16,7 @@ const CardComponent = ({ card, onDeleteCard, onLike }) => {
         width: 260,
         background: isDark
           ? "linear-gradient(135deg, #4B0082 30%, #7F00FF 70%)"
-          : "linear-gradient(135deg, #e3f2fd 30%, #bbdefb 80%)",
+          : "linear-gradient(135deg, #9c27b0 30%, #7b1fa2 80%)",
         boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.5)",
         overflow: "hidden",
         m: 2,

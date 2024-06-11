@@ -4,6 +4,7 @@ import {
   useContext,
   useMemo,
   useState,
+  useEffect,
 } from "react";
 import {
   createTheme,
@@ -14,17 +15,29 @@ import { node } from "prop-types";
 const ThemeContext = createContext(null);
 
 export const DarkThemeProvider = ({ children }) => {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    const storedTheme = localStorage.getItem("isDark");
+    return storedTheme ? JSON.parse(storedTheme) : false;
+  });
 
   const toggleDarkMode = useCallback(() => {
-    setIsDark((prev) => !prev);
+    setIsDark((prev) => {
+      localStorage.setItem("isDark", JSON.stringify(!prev));
+      return !prev;
+    });
   }, [setIsDark]);
 
-  const theme = createTheme({
-    palette: {
-      mode: isDark ? "dark" : "light",
-    },
-  });
+  useEffect(() => {
+    localStorage.setItem("isDark", JSON.stringify(isDark));
+  }, [isDark]);
+
+  const theme = useMemo(() => {
+    return createTheme({
+      palette: {
+        mode: isDark ? "dark" : "light",
+      },
+    });
+  }, [isDark]);
 
   const value = useMemo(() => {
     return {
