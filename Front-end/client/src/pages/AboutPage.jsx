@@ -35,7 +35,7 @@ const AboutPage = () => {
           alignSelf="center"
           sx={{ display: { md: "flex", xs: "flex" }, justifyContent: "center" }}
         >
-          <img src="/assets/images/card.jpg" alt="card" width="100%" />
+          <img src="/assets/images/demoCard.jpg" alt="card" width="100%" />
         </Grid>
       </Grid>
     </Container>
