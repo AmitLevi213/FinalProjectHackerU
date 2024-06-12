@@ -30,28 +30,34 @@ const MenuBar = ({ isMenuOpen, anchorEl, onCloseMenu }) => {
         horizontal: "right",
       }}
     >
-      {user && user.isAdmin && (
-        <Box>
-          <NavBarLink to={ROUTES.USER_PROFILE}>
-            <MenuItem onClick={onCloseMenu}>Profile</MenuItem>
-          </NavBarLink>
-          <NavBarLink to={ROUTES.EDIT_USER}>
-            <MenuItem onClick={onCloseMenu}>Edit account</MenuItem>
-          </NavBarLink>
-          <NavBarLink to={ROUTES.ROOT}>
-            <MenuItem onClick={userLogoutFunction}>Logout</MenuItem>
-          </NavBarLink>
-          <NavBarLink to={ROUTES.ABOUT}>
-            <MenuItem>About</MenuItem>
-          </NavBarLink>
-          <NavBarLink to={ROUTES.CRM}>
-            <MenuItem onClick={onCloseMenu}>CRM</MenuItem>
-          </NavBarLink>
-          <IconButton sx={{ marginLeft: 1 }} onClick={toggleDarkMode}>
-            {isDark ? <LightModeIcon /> : <DarkModeIcon />}
-          </IconButton>
-        </Box>
-      )}
+      <Box>
+        {user && (
+          <>
+            <NavBarLink to={ROUTES.USER_PROFILE}>
+              <MenuItem onClick={onCloseMenu}>Profile</MenuItem>
+            </NavBarLink>
+            <NavBarLink to={ROUTES.EDIT_USER}>
+              <MenuItem onClick={onCloseMenu}>Edit account</MenuItem>
+            </NavBarLink>
+            <NavBarLink to={ROUTES.ROOT}>
+              <MenuItem onClick={userLogoutFunction}>Logout</MenuItem>
+            </NavBarLink>
+            <NavBarLink to={ROUTES.ABOUT}>
+              <MenuItem>About</MenuItem>
+            </NavBarLink>
+            {user.isAdmin && (
+              <>
+                <NavBarLink to={ROUTES.CRM}>
+                  <MenuItem onClick={onCloseMenu}>CRM</MenuItem>
+                </NavBarLink>
+              </>
+            )}
+            <IconButton sx={{ marginLeft: 1 }} onClick={toggleDarkMode}>
+              {isDark ? <LightModeIcon /> : <DarkModeIcon />}
+            </IconButton>
+          </>
+        )}
+      </Box>
 
       {!user && (
         <Box>
