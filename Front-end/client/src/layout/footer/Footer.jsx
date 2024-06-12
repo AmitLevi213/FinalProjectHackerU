@@ -2,15 +2,11 @@ import { useNavigate } from "react-router-dom";
 import InfoIcon from "@mui/icons-material/Info";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Paper,
-  Box,
-} from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import ROUTES from "../../routes/routesModel";
 import { useUser } from "../../users/providers/UserProvider";
 import { useTheme } from "../../providers/DarkThemeProvider";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -56,6 +52,16 @@ const Footer = () => {
             icon={<LibraryMusicIcon />}
           />
         )}
+        <BottomNavigationAction
+          onClick={() =>
+            window.open(
+              "https://www.linkedin.com/in/amit-levi-8752092ba/",
+              "_blank"
+            )
+          }
+          label="Linkedin Profile"
+          icon={<LinkedInIcon />}
+        />
       </BottomNavigation>
     </Paper>
   );
