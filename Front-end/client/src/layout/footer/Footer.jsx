@@ -26,6 +26,7 @@ const Footer = () => {
       elevation={3}
     >
       <BottomNavigation
+        showLabels
         sx={{
           background: isDark
             ? "linear-gradient(135deg, #4B0082 30%, #7F00FF 70%)"
@@ -40,7 +41,7 @@ const Footer = () => {
         {user && (
           <BottomNavigationAction
             onClick={() => navigateTo(ROUTES.FAV_MUSIC)}
-            label="Favorites Music"
+            label="Favorites "
             icon={<FavoriteIcon />}
           />
         )}
@@ -59,7 +60,7 @@ const Footer = () => {
               "_blank"
             )
           }
-          label="Linkedin Profile"
+          label="Linkedin"
           icon={<LinkedInIcon />}
         />
       </BottomNavigation>
