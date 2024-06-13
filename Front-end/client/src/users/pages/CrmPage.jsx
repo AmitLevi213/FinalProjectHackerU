@@ -43,7 +43,6 @@ const CrmPage = () => {
   };
 
   const onChangeStatus = async (userId, updatedUser) => {
-    console.log(updatedUser);
     try {
       await changeBusinessStatus(userId, updatedUser);
       await fetchUsers();

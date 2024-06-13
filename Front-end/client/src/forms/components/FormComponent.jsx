@@ -18,7 +18,6 @@ const FormComponent = ({
   children,
 }) => {
   const navigate = useNavigate();
-  console.log(onChange());
   return (
     <Box
       component="form"
