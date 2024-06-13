@@ -84,22 +84,26 @@ const updateUser = async (userId, normalizeUser) => {
   return Promise.resolve("card update not in mongodb");
 };
 
-const changeUserBusinessStatus = async (userId) => {
+const changeUserBusinessStatus = async (id) => {
   if (DB === "MONGODB") {
     try {
-      const pipeline = [{ $set: { isBusiness: { $not: "isBusiness" } } }];
-      let user = await User.findByIdAndUpdate(userId, pipeline, { new: true });
+      const pipeline = [{ $set: { isBusiness: { $not: "$isBusiness" } } }];
+      const user = await User.findByIdAndUpdate(id, pipeline, {
+        new: true,
+      }).select(["-password", "-__v", "-isAdmin"]);
+
       if (!user)
         throw new Error(
-          "could not change user business status, because user not found"
+          "Could not update this user isBusiness status because a user with this ID cannot be found in the database"
         );
-      return Promise.resolve(`user no. ${userId} change his business status!`);
+      return Promise.resolve(user);
     } catch (error) {
-      error.status = 400;
-      return Promise.reject(error);
+      error.status = 404;
+      return handleBadRequest("Mongoose", error);
     }
   }
-  return Promise.resolve("card liked not in mongodb");
+
+  return Promise.resolve("Card Updated!");
 };
 
 const deleteUser = async (userId) => {

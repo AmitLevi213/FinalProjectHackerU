@@ -3,18 +3,14 @@ import userType from "../types/userType";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CachedIcon from "@mui/icons-material/Cached";
-import { useNavigate } from "react-router-dom";
-import ROUTES from "../../routes/routesModel";
 
-const Users = ({ users, onDelete, onChangeBusinessType }) => {
-  const navigate = useNavigate();
+const Users = ({ users, onDelete, onChangeStatus }) => {
   const columns = [
     { field: "idNumber", headerName: "Number", width: 90 },
     { field: "firstName", headerName: "First name", width: 130 },
     { field: "lastName", headerName: "Last name", width: 130 },
     { field: "email", headerName: "Email", width: 130 },
     { field: "phone", headerName: "Phone", width: 130 },
-
     {
       field: "isBusiness",
       headerName: "Business",
@@ -45,7 +41,7 @@ const Users = ({ users, onDelete, onChangeBusinessType }) => {
     },
     {
       field: "change",
-      headerName: "change Business",
+      headerName: "Change Business",
       type: "actions",
       width: 130,
       getActions: (params) => [
@@ -53,7 +49,7 @@ const Users = ({ users, onDelete, onChangeBusinessType }) => {
           icon={<CachedIcon />}
           label="Change"
           onClick={() =>
-            onChangeBusinessType(params.row.id, {
+            onChangeStatus(params.row.id, {
               isBusiness: !params.row.isBusiness,
             })
           }
@@ -61,6 +57,7 @@ const Users = ({ users, onDelete, onChangeBusinessType }) => {
       ],
     },
   ];
+
   const rows = users.map((user, i) => ({
     id: user._id,
     idNumber: i + 1,
@@ -71,14 +68,15 @@ const Users = ({ users, onDelete, onChangeBusinessType }) => {
     isAdmin: user.isAdmin,
     isBusiness: user.isBusiness,
   }));
+
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
         pageSize={5}
+        getRowId={(row) => row.id}
         rowsPerPageOptions={[5]}
-        onRowClick={(params) => navigate(`${ROUTES.USER_PROFILE}`)}
       />
     </div>
   );
@@ -87,7 +85,7 @@ const Users = ({ users, onDelete, onChangeBusinessType }) => {
 Users.propTypes = {
   users: arrayOf(userType),
   onDelete: func.isRequired,
-  onChangeBusinessType: func.isRequired,
+  onChangeStatus: func.isRequired,
 };
 
 export default Users;

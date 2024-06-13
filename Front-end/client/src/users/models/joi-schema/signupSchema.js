@@ -24,7 +24,7 @@ const SignupSchema = {
     )
     .rule({
       message:
-        "password: 7<=<20 chars, >=1 uppercase, >=1 lowercase, >=1 number, >=1 from !@#$%^&*-",
+        "7 to 20 characters At least 1 uppercase letter At least 1 lowercase letter At least 1 number At least 1 special character from !@#$%^&*-",
     })
     .required(),
 

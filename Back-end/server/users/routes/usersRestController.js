@@ -104,18 +104,16 @@ router.put("/:id", auth, async (req, res) => {
 
 router.patch("/:id", auth, async (req, res) => {
   try {
+    const { _id } = req.user;
     const { id } = req.params;
-    const user = req.user;
-
-    if (id !== user._id && !user.isAdmin)
+    if (_id !== id && !req.user.isAdmin)
       return handleError(
         res,
         403,
-        "Authorization Error: You must bean an admin type user or the registered user to update its business status"
+        "Authorization Error: You must the registered user or admin to change this user status"
       );
-
-    const changedStatusUser = await changeUserBusinessStatus(id);
-    return res.send(changedStatusUser);
+    const user = await changeUserBusinessStatus(id);
+    return res.send(user);
   } catch (error) {
     return handleError(res, error.status || 500, error.message);
   }

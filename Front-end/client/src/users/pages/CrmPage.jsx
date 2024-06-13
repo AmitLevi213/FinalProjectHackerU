@@ -9,44 +9,46 @@ import Spinner from "../../components/Spinner";
 import { Container } from "@mui/material";
 import PageHeader from "../../components/PageHeader";
 import Users from "../components/Users";
+import ROUTES from "../../routes/routesModel";
+import { useNavigate } from "react-router-dom";
 
 const CrmPage = () => {
   const { user } = useUser();
   const [users, setUsers] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const usersData = await getUsers();
-        setUsers(usersData);
-      } catch (error) {
-        console.error("Error fetching users data:", error);
-      }
-    };
-
+    if (!user || !user.isAdmin) return navigate(ROUTES.MUSIC);
     if (user && user.isAdmin) {
       fetchUsers();
     }
-  }, [user]);
+  }, [user, navigate]);
+
+  const fetchUsers = async () => {
+    try {
+      const usersData = await getUsers();
+      setUsers(usersData);
+    } catch (error) {
+      console.error("Error fetching users data:", error);
+    }
+  };
 
   const onDeleteUser = async (userId) => {
     try {
       await deleteUser(userId);
-      setUsers(users.filter((user) => user._id !== userId));
+      await fetchUsers();
     } catch (error) {
       console.error("Error deleting user:", error);
     }
   };
 
-  const onChangeBusinessType = async (userId, updatedUser) => {
+  const onChangeStatus = async (userId, updatedUser) => {
+    console.log(updatedUser);
     try {
-      const updatedUserData = await changeBusinessStatus(userId, updatedUser);
-      const updatedUsers = users.map((user) =>
-        user._id === userId ? updatedUserData : user
-      );
-      setUsers(updatedUsers);
+      await changeBusinessStatus(userId, updatedUser);
+      await fetchUsers();
     } catch (error) {
-      console.error("Error changing business type:", error);
+      console.error("Error changing business status:", error);
     }
   };
 
@@ -63,7 +65,7 @@ const CrmPage = () => {
       <Users
         users={users}
         onDelete={onDeleteUser}
-        onChangeBusinessType={onChangeBusinessType}
+        onChangeStatus={onChangeStatus}
       />
     </Container>
   );
