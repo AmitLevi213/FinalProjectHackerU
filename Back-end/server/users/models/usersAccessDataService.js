@@ -90,7 +90,7 @@ const changeUserBusinessStatus = async (id) => {
       const pipeline = [{ $set: { isBusiness: { $not: "$isBusiness" } } }];
       const user = await User.findByIdAndUpdate(id, pipeline, {
         new: true,
-      }).select(["-password", "-__v", "-isAdmin"]);
+      });
 
       if (!user)
         throw new Error(
