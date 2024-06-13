@@ -3,20 +3,24 @@ import userType from "../types/userType";
 import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CachedIcon from "@mui/icons-material/Cached";
+import { useMediaQuery } from "@mui/material";
 
 const Users = ({ users, onDelete, onChangeStatus }) => {
+  const isMobile = useMediaQuery("(max-width: 600px)");
+
   const columns = [
-    { field: "idNumber", headerName: "Number", width: 90 },
+    { field: "idNumber", headerName: "Number", width: 90, hide: isMobile },
     { field: "firstName", headerName: "First name", width: 130 },
     { field: "lastName", headerName: "Last name", width: 130 },
     { field: "email", headerName: "Email", width: 130 },
-    { field: "phone", headerName: "Phone", width: 130 },
+    { field: "phone", headerName: "Phone", width: 130, hide: isMobile },
     {
       field: "isBusiness",
       headerName: "Business",
       type: "boolean",
       width: 90,
       editable: true,
+      hide: isMobile,
     },
     {
       field: "isAdmin",
@@ -24,6 +28,7 @@ const Users = ({ users, onDelete, onChangeStatus }) => {
       type: "boolean",
       width: 90,
       editable: true,
+      hide: isMobile,
     },
     {
       field: "Delete",
@@ -70,13 +75,14 @@ const Users = ({ users, onDelete, onChangeStatus }) => {
   }));
 
   return (
-    <div style={{ height: 400, width: "100%" }}>
+    <div style={{ height: "auto", width: "100%" }}>
       <DataGrid
         rows={rows}
         columns={columns}
         pageSize={5}
         getRowId={(row) => row.id}
         rowsPerPageOptions={[5]}
+        autoHeight
       />
     </div>
   );

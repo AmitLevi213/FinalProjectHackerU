@@ -151,7 +151,7 @@ const useHandleUsersFunctions = () => {
       try {
         setLoading(true);
         await deleteUser(userId);
-        snackbar("success", "The business card has been successfully deleted");
+        snackbar("success", "The user has been successfully deleted");
       } catch (error) {
         requestStatus(false, error.message, null);
       }
