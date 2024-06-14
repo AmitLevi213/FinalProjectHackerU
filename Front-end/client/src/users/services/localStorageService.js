@@ -1,7 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 
 const TOKEN = "token";
-const INACTIVITY_TIMEOUT = 4 * 60 * 60 * 1000;
+const INACTIVITY_TIMEOUT = 14_000_000;
 
 let inactivityTimer = null;
 

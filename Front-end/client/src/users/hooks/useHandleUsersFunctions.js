@@ -113,14 +113,14 @@ const useHandleUsersFunctions = () => {
       try {
         setLoading(true);
         const userUpdate = await editUser(user, id);
-        requestStatus(false, null, null, userUpdate);
+        const updatedUser = getUser(id);
+        requestStatus(false, null, null, updatedUser);
       } catch (error) {
         requestStatus(false, error.message, null);
       }
     },
     [requestStatus]
   );
-
   const handleGetUser = useCallback(
     async (userId) => {
       try {
