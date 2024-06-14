@@ -38,6 +38,7 @@ const useMusic = () => {
       const filtered = cards.filter(
         (c) =>
           c.songTitle.includes(query) ||
+          c.album.includes(query) ||
           String(c.bizNumber).includes(query) ||
           c.artist.includes(query) ||
           c.releaseYear.includes(query)

@@ -6,6 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 import { formatDate } from "../CardForm";
+import { makeFirstLetterCapital } from "../../../forms/utils/upperCaseMethod";
 
 const CardBody = ({ card }) => {
   const { songTitle, artist, genre, releaseYear, duration, album } = card;
@@ -13,7 +14,11 @@ const CardBody = ({ card }) => {
 
   return (
     <CardContent>
-      <CardHeader title={songTitle} subheader={artist} sx={{ p: 0, md: 1 }} />
+      <CardHeader
+        title={makeFirstLetterCapital(songTitle)}
+        subheader={makeFirstLetterCapital(artist)}
+        sx={{ p: 0, md: 1 }}
+      />
       <Divider />
       <Box mt={1}>
         <Typography variant="body2" color="text.secondary">
@@ -40,7 +45,7 @@ const CardBody = ({ card }) => {
           <Typography variant="subtitle2" component="strong">
             Album:{" "}
           </Typography>
-          {album}
+          {makeFirstLetterCapital(album)}
         </Typography>
       </Box>
     </CardContent>
