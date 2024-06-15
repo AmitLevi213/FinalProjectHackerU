@@ -115,6 +115,7 @@ const useHandleUsersFunctions = () => {
         const userUpdate = await editUser(user, id);
         const updatedUser = getUser(id);
         requestStatus(false, null, null, updatedUser);
+        snackbar("success", "you have updated your account information");
       } catch (error) {
         requestStatus(false, error.message, null);
       }
