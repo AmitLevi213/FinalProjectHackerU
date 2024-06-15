@@ -1,7 +1,7 @@
 import { Typography } from "@mui/material";
 import { useTheme } from "../../providers/DarkThemeProvider";
 import "./musicPlayer.css";
-
+import { makeFirstLetterCapital } from "../../forms/utils/upperCaseMethod";
 const MusicPlayer = ({ card }) => {
   const { isDark } = useTheme();
   const { songTitle, artist, audio, lyrics } = card;
@@ -16,7 +16,7 @@ const MusicPlayer = ({ card }) => {
       }}
     >
       <Typography variant="h5" color={isDark ? "lightgray" : "textSecondary"}>
-        {songTitle} - {artist}
+        {makeFirstLetterCapital(songTitle)} - {makeFirstLetterCapital(artist)}
       </Typography>
       <audio controls className="custom-audio-player">
         <source src={audio} type="audio/mpeg" />

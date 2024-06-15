@@ -15,6 +15,7 @@ import { useTheme } from "../../providers/DarkThemeProvider";
 import MusicPlayer from "../musicPlayer/MusicPlayer";
 import "../../index.css";
 import { formatDate } from "../components/CardForm";
+import { makeFirstLetterCapital } from "../../forms/utils/upperCaseMethod";
 const MusicDetailsPage = () => {
   const { id } = useParams();
   const {
@@ -64,7 +65,7 @@ const MusicDetailsPage = () => {
                 variant="h5"
                 color={isDark ? "lightgray" : "textScondary"}
               >
-                {card.album}
+                {makeFirstLetterCapital(card.album)}
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={3} align="center">
@@ -73,7 +74,7 @@ const MusicDetailsPage = () => {
                 variant="h5"
                 color={isDark ? "lightgray" : "textScondary"}
               >
-                {card.artist}
+                {makeFirstLetterCapital(card.artist)}
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={3} align="center">

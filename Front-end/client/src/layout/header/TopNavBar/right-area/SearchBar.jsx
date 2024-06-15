@@ -17,7 +17,7 @@ const SearchBar = () => {
       <FormControl variant="standard">
         <OutlinedInput
           sx={{
-            backgroundColor: isDark ? "#d16aff" : " #F9FAFD",
+            backgroundColor: isDark ? "#d16aff" : "#F9FAFD",
             color: "#1D1B26 ",
           }}
           placeholder="Search"
