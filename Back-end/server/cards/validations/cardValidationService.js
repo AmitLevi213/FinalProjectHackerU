@@ -1,4 +1,4 @@
-const validateCardWithJoi = require("./Joi/validateCardWithJoi");
+const validateCardWithJoi = require("./joi/validateCardWithJoi");
 
 const validator = undefined || "Joi";
 
