@@ -3,6 +3,7 @@ import PageHeader from "../../components/PageHeader";
 import useMusic from "../hooks/useMusic";
 import { useEffect } from "react";
 import CardsFeedback from "../components/CardsFeedBack";
+import MyMusicPlayer from "../../music-cards/musicPlayer/MyMusicPlayer";
 const MusicPage = () => {
   const {
     value: { error, isPending, filteredCards },
@@ -31,6 +32,7 @@ const MusicPage = () => {
         cards={filteredCards}
         onDeleteCard={onDeleteCard}
       />
+      <MyMusicPlayer />
     </Container>
   );
 };

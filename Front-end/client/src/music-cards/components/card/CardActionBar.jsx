@@ -10,12 +10,15 @@ import { useEffect, useState } from "react";
 import CardDeleteDialog from "../card/CardDeleteDialog";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
+import { useTheme } from "../../../providers/DarkThemeProvider";
 const CardActionBar = ({ card, onDeleteCard, onLike }) => {
   const { audio } = card;
   const { handleLikeCard } = useMusic();
   const [isDialogOpen, setIsDialog] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioInstance, setAudioInstance] = useState(null);
+  const { isDark } = useTheme();
+  const iconColor = isDark ? "#d16aff" : "#F4FDFF";
 
   const playOrPauseMusic = () => {
     const audioEl = new Audio(audio);
@@ -78,7 +81,11 @@ const CardActionBar = ({ card, onDeleteCard, onLike }) => {
       >
         <Box display="flex" alignItems="center">
           {user && (user._id === card.user_id || user.isAdmin) && (
-            <IconButton onClick={() => handleDialog("open")} size="large">
+            <IconButton
+              sx={{ color: iconColor }}
+              onClick={() => handleDialog("open")}
+              size="large"
+            >
               <DeleteIcon />
             </IconButton>
           )}
@@ -92,11 +99,19 @@ const CardActionBar = ({ card, onDeleteCard, onLike }) => {
           )}
         </Box>
         <Box display="flex" alignItems="center">
-          <IconButton onClick={handleToggle} size="large">
+          <IconButton
+            sx={{ color: iconColor }}
+            onClick={handleToggle}
+            size="large"
+          >
             {isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
           </IconButton>
           {user && (
-            <IconButton onClick={handleLike} size="large">
+            <IconButton
+              sx={{ color: iconColor }}
+              onClick={handleLike}
+              size="large"
+            >
               <FavoriteIcon color={isLiked ? "error" : "inherit"} />
             </IconButton>
           )}

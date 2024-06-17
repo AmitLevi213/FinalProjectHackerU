@@ -13,6 +13,7 @@ const Footer = () => {
   const navigateTo = (to) => navigate(to);
   const { user } = useUser();
   const { isDark } = useTheme();
+  const iconColor = isDark ? "#d16aff" : "#F4FDFF";
 
   return (
     <Paper
@@ -37,12 +38,14 @@ const Footer = () => {
           onClick={() => navigateTo(ROUTES.ABOUT)}
           label="About Us"
           icon={<InfoIcon />}
+          sx={{ color: iconColor }}
         />
         {user && (
           <BottomNavigationAction
             onClick={() => navigateTo(ROUTES.FAV_MUSIC)}
             label="Favorites "
             icon={<FavoriteIcon />}
+            sx={{ color: iconColor }}
           />
         )}
 
@@ -51,6 +54,7 @@ const Footer = () => {
             onClick={() => navigateTo(ROUTES.MY_MUSIC)}
             label="My Music"
             icon={<LibraryMusicIcon />}
+            sx={{ color: iconColor }}
           />
         )}
         <BottomNavigationAction
@@ -62,6 +66,7 @@ const Footer = () => {
           }
           label="Linkedin"
           icon={<LinkedInIcon />}
+          sx={{ color: iconColor }}
         />
       </BottomNavigation>
     </Paper>

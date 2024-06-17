@@ -11,6 +11,8 @@ const Main = ({ children }) => {
         sx={{
           minHeight: "100vh",
           backgroundColor: isDark ? "#310047" : "#e3f2fd",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         {children}

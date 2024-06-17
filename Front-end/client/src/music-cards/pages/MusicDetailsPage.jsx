@@ -45,8 +45,9 @@ const MusicDetailsPage = () => {
             </Box>
             <MusicPlayer card={card} />
             <Typography
+              sx={{ pt: 2 }}
               variant="body1"
-              color={isDark ? "lightgray" : "textScondary"}
+              color={isDark ? "#d16aff" : "black"}
             >
               {card.description}
             </Typography>
@@ -61,28 +62,19 @@ const MusicDetailsPage = () => {
           >
             <Grid item xs={12} sm={6} md={3} align="center">
               <AlbumIcon fontSize="large" color="secondary" />
-              <Typography
-                variant="h5"
-                color={isDark ? "lightgray" : "textScondary"}
-              >
+              <Typography variant="h5" color={isDark ? "#d16aff" : "#000401"}>
                 {makeFirstLetterCapital(card.album)}
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={3} align="center">
               <PeopleIcon fontSize="large" color="secondary" />
-              <Typography
-                variant="h5"
-                color={isDark ? "lightgray" : "textScondary"}
-              >
+              <Typography variant="h5" color={isDark ? "#d16aff" : "#000401"}>
                 {makeFirstLetterCapital(card.artist)}
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={3} align="center">
               <DateRangeIcon fontSize="large" color="secondary" />
-              <Typography
-                variant="h5"
-                color={isDark ? "lightgray" : "textScondary"}
-              >
+              <Typography variant="h5" color={isDark ? "#d16aff" : "#000401"}>
                 {formatDate(card.releaseYear)}
               </Typography>
             </Grid>
@@ -100,10 +92,10 @@ const MusicDetailsPage = () => {
                 component={Link}
                 to={card.web}
                 style={{
-                  color: isDark ? "lightgray" : "black",
+                  color: isDark ? "#d16aff" : "#000401",
                   textDecoration: "none",
                 }}
-                variant="h6"
+                variant="h5"
               >
                 Band Page
               </Typography>
