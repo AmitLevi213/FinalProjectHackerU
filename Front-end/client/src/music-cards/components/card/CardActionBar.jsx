@@ -94,7 +94,7 @@ const CardActionBar = ({ card, onDeleteCard, onLike }) => {
               onClick={() => navigate(`${ROUTES.EDIT_MUSIC}/${card._id}`)}
               size="large"
             >
-              <EditModeIcon />
+              <EditModeIcon sx={{ color: iconColor }} />
             </IconButton>
           )}
         </Box>

@@ -37,7 +37,7 @@ const CardBody = ({ card }) => {
           <Typography variant="subtitle2" component="strong">
             Genre:{" "}
           </Typography>
-          {formattedGenre}
+          {makeFirstLetterCapital(formattedGenre)}
         </Typography>
 
         <Typography variant="body2" color={textColor}>

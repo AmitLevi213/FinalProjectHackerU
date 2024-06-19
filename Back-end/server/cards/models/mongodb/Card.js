@@ -38,7 +38,7 @@ const cardSchema = new mongoose.Schema({
   trackNumber: {
     type: Number,
     min: 1,
-    max: 4,
+    max: 250,
     required: true,
     trim: true,
   },
