@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
-import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
 import VolumeMuteIcon from "@mui/icons-material/VolumeMute";
 import VolumeDownIcon from "@mui/icons-material/VolumeDown";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
@@ -15,14 +13,29 @@ const MusicPlayer = ({ card }) => {
   const { songTitle, artist, audio, lyrics } = card;
   const { isDark } = useTheme();
   const [isPlaying, setIsPlaying] = useState(false);
-  const [volume, setVolume] = useState(50);
+  const [volume, setVolume] = useState(75);
   const [isMuted, setIsMuted] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
   const audioRef = useRef(new Audio(audio));
   const myColor = isDark ? "#d16aff" : "#F4FDFF";
+  const iconColor = isDark ? "#d16aff" : "#F4FDFF";
+
   useEffect(() => {
     audioRef.current.volume = volume / 100;
     audioRef.current.src = audio;
   }, [audio]);
+
+  useEffect(() => {
+    const updateTime = () => {
+      setCurrentTime(audioRef.current.currentTime);
+    };
+
+    audioRef.current.addEventListener("timeupdate", updateTime);
+
+    return () => {
+      audioRef.current.removeEventListener("timeupdate", updateTime);
+    };
+  }, []);
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -32,27 +45,18 @@ const MusicPlayer = ({ card }) => {
     }
     setIsPlaying(!isPlaying);
   };
-
-  const handleVolumeChange = (event, newValue) => {
-    setVolume(newValue);
-    audioRef.current.volume = newValue / 100;
-    if (newValue === 0) {
-      setIsMuted(true);
-    } else {
-      setIsMuted(false);
-    }
-  };
-
   const handleMute = () => {
     setIsMuted(!isMuted);
     audioRef.current.muted = !isMuted;
   };
 
-  const iconColor = isDark ? "#d16aff" : "#F4FDFF";
+  const handleTimestampChange = (event, newValue) => {
+    setCurrentTime(newValue);
+    audioRef.current.currentTime = newValue;
+  };
 
   return (
     <div
-      className="music-player-container"
       style={{
         background: isDark
           ? "linear-gradient(135deg, #4B0082 30%, #7F00FF 70%)"
@@ -66,24 +70,22 @@ const MusicPlayer = ({ card }) => {
         textAlign: "center",
       }}
     >
-      <Typography variant="h5" color={isDark ? "#d16aff" : "#F4FDFF"}>
+      <Typography variant="h5" color={iconColor}>
         {makeFirstLetterCapital(songTitle)} - {makeFirstLetterCapital(artist)}
       </Typography>
-      <audio ref={audioRef} className="custom-audio-player">
-        <source src={audio} type="audio/mpeg" />
-      </audio>
       <Box mt={2}>
         <Grid container alignItems="center" spacing={2}>
           <Grid item>
-            <IconButton onClick={handlePlayPause} sx={{ color: iconColor }}>
+            <IconButton onClick={handlePlayPause} sx={{ color: myColor }}>
               {isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
             </IconButton>
           </Grid>
           <Grid item xs>
             <Slider
-              value={volume}
-              onChange={handleVolumeChange}
-              aria-labelledby="continuous-slider"
+              value={currentTime}
+              max={audioRef.current.duration}
+              onChange={handleTimestampChange}
+              aria-labelledby="timestamp-slider"
               sx={{ color: iconColor }}
             />
           </Grid>

@@ -9,7 +9,7 @@ import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { useTheme } from "../../providers/DarkThemeProvider";
 import { storage } from "../../firebase/firebaseStore";
 import { getDownloadURL, listAll, ref, getMetadata } from "firebase/storage";
-import { IconButton, Slider, Box, Grid, Typography } from "@mui/material";
+import { IconButton, Slider, Box, Grid } from "@mui/material";
 
 const MyMusicPlayer = () => {
   const { isDark } = useTheme();
