@@ -16,26 +16,41 @@ const MusicPlayer = ({ card }) => {
   const [volume, setVolume] = useState(75);
   const [isMuted, setIsMuted] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const audioRef = useRef(new Audio(audio));
   const myColor = isDark ? "#d16aff" : "#F4FDFF";
   const iconColor = isDark ? "#d16aff" : "#F4FDFF";
 
-  useEffect(() => {
-    audioRef.current.volume = volume / 100;
-    audioRef.current.src = audio;
-  }, [audio]);
+  const audioRefCurrent = audioRef.current;
 
   useEffect(() => {
+    const updateDuration = () => {
+      setDuration(audioRef.current.duration);
+    };
+
     const updateTime = () => {
       setCurrentTime(audioRef.current.currentTime);
     };
 
+    audioRef.current.addEventListener("loadedmetadata", updateDuration);
     audioRef.current.addEventListener("timeupdate", updateTime);
 
     return () => {
+      audioRef.current.removeEventListener("loadedmetadata", updateDuration);
       audioRef.current.removeEventListener("timeupdate", updateTime);
     };
-  }, []);
+  }, [audioRefCurrent]);
+
+  useEffect(() => {
+    audioRef.current.volume = volume / 100;
+  }, [volume]);
+
+  useEffect(() => {
+    audioRef.current.src = audio;
+    setDuration(0);
+    setCurrentTime(0);
+    setIsPlaying(false);
+  }, [audio]);
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -45,6 +60,7 @@ const MusicPlayer = ({ card }) => {
     }
     setIsPlaying(!isPlaying);
   };
+
   const handleMute = () => {
     setIsMuted(!isMuted);
     audioRef.current.muted = !isMuted;
@@ -53,6 +69,15 @@ const MusicPlayer = ({ card }) => {
   const handleTimestampChange = (event, newValue) => {
     setCurrentTime(newValue);
     audioRef.current.currentTime = newValue;
+  };
+
+  const handleVolumeChange = (event, newValue) => {
+    setVolume(newValue);
+    if (newValue === 0) {
+      setIsMuted(true);
+    } else {
+      setIsMuted(false);
+    }
   };
 
   return (
@@ -83,7 +108,7 @@ const MusicPlayer = ({ card }) => {
           <Grid item xs>
             <Slider
               value={currentTime}
-              max={audioRef.current.duration}
+              max={isNaN(duration) ? 0 : duration}
               onChange={handleTimestampChange}
               aria-labelledby="timestamp-slider"
               sx={{ color: iconColor }}
@@ -99,6 +124,14 @@ const MusicPlayer = ({ card }) => {
                 <VolumeDownIcon />
               )}
             </IconButton>
+          </Grid>
+          <Grid item xs>
+            <Slider
+              value={volume}
+              onChange={handleVolumeChange}
+              aria-labelledby="volume-slider"
+              sx={{ color: iconColor }}
+            />
           </Grid>
         </Grid>
       </Box>

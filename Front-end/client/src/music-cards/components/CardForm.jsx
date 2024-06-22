@@ -1,4 +1,3 @@
-import React from "react";
 import { func, object } from "prop-types";
 import ROUTES from "../../routes/routesModel";
 import InputComponent from "../../forms/components/InputComponent";

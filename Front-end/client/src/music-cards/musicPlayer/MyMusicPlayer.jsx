@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
@@ -18,6 +18,8 @@ const MyMusicPlayer = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(50);
   const [isMuted, setIsMuted] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const audioRef = useRef(new Audio());
 
   useEffect(() => {
@@ -48,7 +50,28 @@ const MyMusicPlayer = () => {
     if (audioFiles.length > 0) {
       audioRef.current.src = audioFiles[currentIndex];
       audioRef.current.volume = volume / 100;
+      setCurrentTime(0);
+      setDuration(0);
+      setIsPlaying(false);
     }
+  }, [audioFiles, currentIndex]);
+
+  useEffect(() => {
+    const updateDuration = () => {
+      setDuration(audioRef.current.duration);
+    };
+
+    const updateTime = () => {
+      setCurrentTime(audioRef.current.currentTime);
+    };
+
+    audioRef.current.addEventListener("loadedmetadata", updateDuration);
+    audioRef.current.addEventListener("timeupdate", updateTime);
+
+    return () => {
+      audioRef.current.removeEventListener("loadedmetadata", updateDuration);
+      audioRef.current.removeEventListener("timeupdate", updateTime);
+    };
   }, [audioFiles, currentIndex]);
 
   const handlePlayPause = () => {
@@ -63,11 +86,7 @@ const MyMusicPlayer = () => {
   const handleVolumeChange = (event, newValue) => {
     setVolume(newValue);
     audioRef.current.volume = newValue / 100;
-    if (newValue === 0) {
-      setIsMuted(true);
-    } else {
-      setIsMuted(false);
-    }
+    setIsMuted(newValue === 0);
   };
 
   const handleMute = () => {
@@ -83,6 +102,11 @@ const MyMusicPlayer = () => {
     setCurrentIndex(
       (prevIndex) => (prevIndex - 1 + audioFiles.length) % audioFiles.length
     );
+  };
+
+  const handleTimestampChange = (event, newValue) => {
+    setCurrentTime(newValue);
+    audioRef.current.currentTime = newValue;
   };
 
   const iconColor = isDark ? "#d16aff" : "#F4FDFF";
@@ -120,12 +144,11 @@ const MyMusicPlayer = () => {
         </Grid>
         <Grid item xs>
           <Slider
-            value={volume}
-            onChange={handleVolumeChange}
-            aria-labelledby="continuous-slider"
-            sx={{
-              color: iconColor,
-            }}
+            value={currentTime}
+            max={isNaN(duration) ? 0 : duration}
+            onChange={handleTimestampChange}
+            aria-labelledby="timestamp-slider"
+            sx={{ color: iconColor }}
           />
         </Grid>
         <Grid item>
@@ -138,6 +161,16 @@ const MyMusicPlayer = () => {
               <VolumeDownIcon />
             )}
           </IconButton>
+        </Grid>
+        <Grid item xs>
+          <Slider
+            value={volume}
+            onChange={handleVolumeChange}
+            aria-labelledby="volume-slider"
+            sx={{
+              color: iconColor,
+            }}
+          />
         </Grid>
       </Grid>
     </Box>
