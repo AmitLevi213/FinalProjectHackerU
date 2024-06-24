@@ -25,32 +25,32 @@ const MusicPlayer = ({ card }) => {
 
   useEffect(() => {
     const updateDuration = () => {
-      setDuration(audioRef.current.duration);
+      setDuration(audioRefCurrent.duration);
     };
 
     const updateTime = () => {
-      setCurrentTime(audioRef.current.currentTime);
+      setCurrentTime(audioRefCurrent.currentTime);
     };
 
-    audioRef.current.addEventListener("loadedmetadata", updateDuration);
-    audioRef.current.addEventListener("timeupdate", updateTime);
+    audioRefCurrent.addEventListener("loadedmetadata", updateDuration);
+    audioRefCurrent.addEventListener("timeupdate", updateTime);
 
     return () => {
-      audioRef.current.removeEventListener("loadedmetadata", updateDuration);
-      audioRef.current.removeEventListener("timeupdate", updateTime);
+      audioRefCurrent.removeEventListener("loadedmetadata", updateDuration);
+      audioRefCurrent.removeEventListener("timeupdate", updateTime);
     };
   }, [audioRefCurrent]);
 
   useEffect(() => {
-    audioRef.current.volume = volume / 100;
-  }, [volume]);
+    audioRefCurrent.volume = volume / 100;
+  }, [volume, audioRefCurrent]);
 
   useEffect(() => {
-    audioRef.current.src = audio;
+    audioRefCurrent.src = audio;
     setDuration(0);
     setCurrentTime(0);
     setIsPlaying(false);
-  }, [audio]);
+  }, [audio, audioRefCurrent]);
 
   const handlePlayPause = () => {
     if (isPlaying) {
