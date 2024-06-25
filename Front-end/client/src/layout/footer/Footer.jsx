@@ -13,7 +13,7 @@ const Footer = () => {
   const navigateTo = (to) => navigate(to);
   const { user } = useUser();
   const { isDark } = useTheme();
-  const iconColor = isDark ? "#d16aff" : "#F4FDFF";
+  const iconColor = isDark ? "#e3f2fd" : "#1a0033";
 
   return (
     <Paper
@@ -29,9 +29,7 @@ const Footer = () => {
       <BottomNavigation
         showLabels
         sx={{
-          background: isDark
-            ? "linear-gradient(135deg, #4B0082 30%, #7F00FF 70%)"
-            : "linear-gradient(135deg, #9c27b0 30%, #7b1fa2 80%)",
+          background: isDark ? "#1a0033" : "#e3f2fd",
         }}
       >
         <BottomNavigationAction

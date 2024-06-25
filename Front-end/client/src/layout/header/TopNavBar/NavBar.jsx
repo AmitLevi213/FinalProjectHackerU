@@ -15,9 +15,7 @@ const NavBar = () => {
         <Toolbar
           sx={{
             justifyContent: "space-between",
-            background: isDark
-              ? "linear-gradient(135deg, #4B0082 30%, #7F00FF 70%)"
-              : "linear-gradient(135deg, #9c27b0 30%, #7b1fa2 80%)",
+            background: isDark ? "#1a0033" : "#e3f2fd",
           }}
         >
           <LeftNavBar />

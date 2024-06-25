@@ -18,7 +18,7 @@ const CardActionBar = ({ card, onDeleteCard, onLike }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioInstance, setAudioInstance] = useState(null);
   const { isDark } = useTheme();
-  const iconColor = isDark ? "#d16aff" : "#F4FDFF";
+  const iconColor = isDark ? "#ffffff" : "#310047";
 
   const playOrPauseMusic = () => {
     const audioEl = new Audio(audio);

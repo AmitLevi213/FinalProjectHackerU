@@ -17,8 +17,8 @@ const SearchBar = () => {
       <FormControl variant="standard">
         <OutlinedInput
           sx={{
-            backgroundColor: isDark ? "#d16aff" : "#F9FAFD",
-            color: "#1D1B26 ",
+            backgroundColor: isDark ? "#e3f2fd" : "#1a0033",
+            color: isDark ? "#1a0033" : "#ffffff",
           }}
           placeholder="Search"
           size="small"
@@ -26,7 +26,10 @@ const SearchBar = () => {
           onChange={handleChange}
           endAdornment={
             <InputAdornment position="end">
-              <IconButton edge="end">
+              <IconButton
+                edge="end"
+                sx={{ color: isDark ? "#1a0033" : "#ffffff" }}
+              >
                 <SearchIcon />
               </IconButton>
             </InputAdornment>

@@ -10,7 +10,7 @@ const Main = ({ children }) => {
       <Box
         sx={{
           minHeight: "100vh",
-          backgroundColor: isDark ? "#310047" : "#e3f2fd",
+          backgroundColor: isDark ? "#1a0033" : "#e3f2fd",
           display: "flex",
           flexDirection: "column",
         }}

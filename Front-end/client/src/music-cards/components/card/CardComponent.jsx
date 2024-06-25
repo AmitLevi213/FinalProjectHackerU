@@ -14,9 +14,7 @@ const CardComponent = ({ card, onDeleteCard, onLike }) => {
     <Card
       sx={{
         width: 260,
-        background: isDark
-          ? "linear-gradient(135deg, #4B0082 30%, #7F00FF 70%)"
-          : "linear-gradient(135deg, #9c27b0 30%, #7b1fa2 80%)",
+        background: isDark ? "#310047" : "#e3f2fd",
         boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.5)",
         overflow: "hidden",
         m: 2,

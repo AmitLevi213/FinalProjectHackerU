@@ -9,7 +9,7 @@ const Logo = () => {
     <NavBarLink to={ROUTES.ROOT}>
       <Typography
         variant="h5"
-        color={isDark ? "#d16aff" : "#F4FDFF"}
+        color={isDark ? "#e3f2fd" : "#1a0033"}
         sx={{
           display: { xs: "none", md: "inline-flex" },
           marginRight: 2,

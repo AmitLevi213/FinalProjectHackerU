@@ -47,7 +47,7 @@ const MusicDetailsPage = () => {
             <Typography
               sx={{ pt: 2 }}
               variant="body1"
-              color={isDark ? "#d16aff" : "black"}
+              color={isDark ? "#e3f2fd" : "#1a0033"}
             >
               {card.description}
             </Typography>
@@ -62,19 +62,19 @@ const MusicDetailsPage = () => {
           >
             <Grid item xs={12} sm={6} md={3} align="center">
               <AlbumIcon fontSize="large" color="secondary" />
-              <Typography variant="h5" color={isDark ? "#d16aff" : "#000401"}>
+              <Typography variant="h5" color={isDark ? "#e3f2fd" : "#1a0033"}>
                 {makeFirstLetterCapital(card.album)}
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={3} align="center">
               <PeopleIcon fontSize="large" color="secondary" />
-              <Typography variant="h5" color={isDark ? "#d16aff" : "#000401"}>
+              <Typography variant="h5" color={isDark ? "#e3f2fd" : "#1a0033"}>
                 {makeFirstLetterCapital(card.artist)}
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={3} align="center">
               <DateRangeIcon fontSize="large" color="secondary" />
-              <Typography variant="h5" color={isDark ? "#d16aff" : "#000401"}>
+              <Typography variant="h5" color={isDark ? "#e3f2fd" : "#1a0033"}>
                 {formatDate(card.releaseYear)}
               </Typography>
             </Grid>
@@ -92,7 +92,7 @@ const MusicDetailsPage = () => {
                 component={Link}
                 to={card.web}
                 style={{
-                  color: isDark ? "#d16aff" : "#000401",
+                  color: isDark ? "#e3f2fd" : "#1a0033",
                   textDecoration: "none",
                 }}
                 variant="h5"

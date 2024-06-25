@@ -13,7 +13,7 @@ const CardBody = ({ card }) => {
   const { isDark } = useTheme();
   const { songTitle, artist, genre, releaseYear, duration, album } = card;
   const formattedGenre = genre.join(", ");
-  const textColor = isDark ? "#d16aff" : "#F4FDFF";
+  const textColor = isDark ? "#ffffff" : "#310047";
 
   return (
     <CardContent>

@@ -50,9 +50,9 @@ const InputComponent = ({
         fullWidth
         autoComplete="off"
         sx={{
-          backgroundColor: isDark ? "#31004" : decreasedOpacityColor,
+          backgroundColor: isDark ? "#1a0033" : "#e3f2fd",
           "& .MuiInputLabel-root": {
-            color: labelColor,
+            color: isDark ? "#ffffff" : "#310047",
           },
         }}
       />
@@ -75,7 +75,6 @@ InputComponent.defaultProps = {
   variant: "outlined",
   type: "text",
   required: true,
-  labelColor: "text.primary",
 };
 
 export default InputComponent;

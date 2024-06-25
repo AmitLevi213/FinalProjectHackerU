@@ -10,13 +10,13 @@ const userType = shape({
   }),
   address: addressType.isRequired,
   image: imageType.isRequired,
-  bizNumber: number.isRequired,
+  bizNumber: number,
   phone: string.isRequired,
-  web: oneOfType([string]).isRequired,
+  web: oneOfType([string]),
   email: string.isRequired,
-  user_id: string.isRequired,
+  user_id: string,
   createdAt: string.isRequired,
-  isbusiness: string.isRequired,
+  isbusiness: string,
   isAdmin: bool.isRequired,
 });
 

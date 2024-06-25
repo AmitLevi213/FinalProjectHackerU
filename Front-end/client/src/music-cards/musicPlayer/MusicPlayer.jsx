@@ -18,8 +18,8 @@ const MusicPlayer = ({ card }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(new Audio(audio));
-  const myColor = isDark ? "#d16aff" : "#F4FDFF";
-  const iconColor = isDark ? "#d16aff" : "#F4FDFF";
+  const myColor = isDark ? "#e3f2fd" : "#1a0033";
+  const iconColor = isDark ? "#e3f2fd" : "#1a0033";
 
   const audioRefCurrent = audioRef.current;
 
@@ -81,11 +81,9 @@ const MusicPlayer = ({ card }) => {
   };
 
   return (
-    <div
+    <divs
       style={{
-        background: isDark
-          ? "linear-gradient(135deg, #4B0082 30%, #7F00FF 70%)"
-          : "linear-gradient(135deg, #9c27b0 30%, #7b1fa2 80%)",
+        background: isDark ? "#1a0033" : "#e3f2fd",
         padding: "20px",
         borderRadius: "10px",
         boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.5)",
@@ -95,7 +93,7 @@ const MusicPlayer = ({ card }) => {
         textAlign: "center",
       }}
     >
-      <Typography variant="h5" color={iconColor}>
+      <Typography variant="h5" color={myColor}>
         {makeFirstLetterCapital(songTitle)} - {makeFirstLetterCapital(artist)}
       </Typography>
       <Box mt={2}>
@@ -142,7 +140,7 @@ const MusicPlayer = ({ card }) => {
           </Typography>
         ))}
       </div>
-    </div>
+    </divs>
   );
 };
 

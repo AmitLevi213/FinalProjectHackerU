@@ -16,28 +16,28 @@ const LeftNavBar = () => {
 
       <Box sx={{ pb: 1, display: { xs: "none", md: "inline-flex" } }}>
         <NavItem
-          color={isDark ? "#d16aff" : "#F4FDFF"}
+          color={isDark ? "#e3f2fd" : "#1a0033"}
           label="About"
           to={ROUTES.ABOUT}
         ></NavItem>
         {user && user.isBusiness && (
           <>
             <NavItem
-              color={isDark ? "#d16aff" : "#F4FDFF"}
               label="Fav Music"
+              color={isDark ? "#e3f2fd" : "#1a0033"}
               to={ROUTES.FAV_MUSIC}
             ></NavItem>
             <NavItem
-              color={isDark ? "#d16aff" : "#F4FDFF"}
               label="My Music"
+              color={isDark ? "#e3f2fd" : "#1a0033"}
               to={ROUTES.MY_MUSIC}
             ></NavItem>
           </>
         )}
         {user && user.isAdmin && (
           <NavItem
-            color={isDark ? "#d16aff" : "#F4FDFF"}
             to={ROUTES.CRM}
+            color={isDark ? "#e3f2fd" : "#1a0033"}
             label="CRM"
           />
         )}

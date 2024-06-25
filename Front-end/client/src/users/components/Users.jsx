@@ -11,9 +11,15 @@ import {
   Collapse,
 } from "@mui/material";
 import { TransitionGroup } from "react-transition-group";
+import { useTheme } from "../../providers/DarkThemeProvider";
 
 const Users = ({ users, onDelete, onChangeStatus }) => {
   const isMobile = useMediaQuery("(max-width: 600px)");
+  const { isDark } = useTheme();
+
+  const getBackgroundColor = () => (isDark ? "#1a0033" : "#e3f2fd");
+  const getTextColor = () => (isDark ? "#ffffff" : "#000000");
+  const getBorderColor = () => (isDark ? "grey.800" : "grey.300");
 
   const columns = [
     { field: "idNumber", headerName: "Number", width: 90 },
@@ -45,7 +51,10 @@ const Users = ({ users, onDelete, onChangeStatus }) => {
           icon={<DeleteIcon />}
           label="Delete"
           onClick={() => onDelete(params.row.id)}
-          sx={{ display: !params.row.isAdmin ? "block" : "none" }}
+          sx={{
+            display: !params.row.isAdmin ? "block" : "none",
+            color: getTextColor(),
+          }}
         />,
       ],
     },
@@ -63,6 +72,7 @@ const Users = ({ users, onDelete, onChangeStatus }) => {
               isBusiness: !params.row.isBusiness,
             })
           }
+          sx={{ color: getTextColor() }}
         />,
       ],
     },
@@ -80,36 +90,63 @@ const Users = ({ users, onDelete, onChangeStatus }) => {
   }));
 
   return (
-    <div style={{ height: "auto", width: "100%" }}>
+    <div
+      style={{
+        height: "auto",
+        width: "100%",
+        backgroundColor: getBackgroundColor(),
+        color: getTextColor(),
+      }}
+    >
       {isMobile ? (
         <TransitionGroup>
           {rows.map((row) => (
             <Collapse key={row.id} timeout={500}>
               <Box
                 border={1}
-                borderColor="grey.300"
+                borderColor={getBorderColor()}
                 borderRadius={2}
                 p={2}
                 mb={2}
                 width="100%"
+                bgcolor={getBackgroundColor()}
               >
-                <Typography color="text.secondary" variant="h6">
+                <Typography
+                  color="text.secondary"
+                  variant="h6"
+                  sx={{ color: getTextColor() }}
+                >
                   {row.firstName} {row.lastName}
                 </Typography>
-                <Typography color="text.secondary">
+                <Typography
+                  color="text.secondary"
+                  sx={{ color: getTextColor() }}
+                >
                   Email: {row.email}
                 </Typography>
-                <Typography color="text.secondary">
+                <Typography
+                  color="text.secondary"
+                  sx={{ color: getTextColor() }}
+                >
                   Phone: {row.phone}
                 </Typography>
-                <Typography color="text.secondary">
+                <Typography
+                  color="text.secondary"
+                  sx={{ color: getTextColor() }}
+                >
                   Business: {row.isBusiness ? "Yes" : "No"}
                 </Typography>
-                <Typography color="text.secondary">
+                <Typography
+                  color="text.secondary"
+                  sx={{ color: getTextColor() }}
+                >
                   Admin: {row.isAdmin ? "Yes" : "No"}
                 </Typography>
                 {!row.isAdmin && (
-                  <IconButton onClick={() => onDelete(row.id)}>
+                  <IconButton
+                    onClick={() => onDelete(row.id)}
+                    sx={{ color: getTextColor() }}
+                  >
                     <DeleteIcon />
                   </IconButton>
                 )}
@@ -117,6 +154,7 @@ const Users = ({ users, onDelete, onChangeStatus }) => {
                   onClick={() =>
                     onChangeStatus(row.id, { isBusiness: !row.isBusiness })
                   }
+                  sx={{ color: getTextColor() }}
                 >
                   <CachedIcon />
                 </IconButton>
@@ -132,6 +170,24 @@ const Users = ({ users, onDelete, onChangeStatus }) => {
           getRowId={(row) => row.id}
           rowsPerPageOptions={[5]}
           autoHeight
+          sx={{
+            "& .MuiDataGrid-root": {
+              color: getTextColor(),
+              borderColor: getBorderColor(),
+              backgroundColor: getBackgroundColor(),
+            },
+            "& .MuiDataGrid-cell": {
+              color: getTextColor(),
+            },
+            "& .MuiDataGrid-columnHeaders": {
+              backgroundColor: getBackgroundColor(),
+              color: getTextColor(),
+            },
+            "& .MuiDataGrid-footerContainer": {
+              backgroundColor: getBackgroundColor(),
+              color: getTextColor(),
+            },
+          }}
         />
       )}
     </div>

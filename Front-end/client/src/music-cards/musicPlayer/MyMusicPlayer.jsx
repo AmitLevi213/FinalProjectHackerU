@@ -109,14 +109,12 @@ const MyMusicPlayer = () => {
     audioRef.current.currentTime = newValue;
   };
 
-  const iconColor = isDark ? "#d16aff" : "#F4FDFF";
+  const iconColor = isDark ? "#ffffff" : "#310047";
 
   return (
     <Box
       sx={{
-        background: isDark
-          ? "linear-gradient(135deg, #4B0082 30%, #7F00FF 70%)"
-          : "linear-gradient(135deg, #9c27b0 30%, #7b1fa2 80%)",
+        background: isDark ? "#1a0033" : "#e3f2fd",
         boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.5)",
         padding: "20px",
         borderRadius: "10px",
