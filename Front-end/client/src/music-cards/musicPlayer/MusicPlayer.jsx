@@ -81,7 +81,7 @@ const MusicPlayer = ({ card }) => {
   };
 
   return (
-    <divs
+    <div
       style={{
         background: isDark ? "#1a0033" : "#e3f2fd",
         padding: "20px",
@@ -140,7 +140,7 @@ const MusicPlayer = ({ card }) => {
           </Typography>
         ))}
       </div>
-    </divs>
+    </div>
   );
 };
 
