@@ -19,7 +19,6 @@ const InputComponent = ({
 }) => {
   const { isDark } = useTheme();
 
-  const decreasedOpacityColor = "rgba(209, 106, 255, 0.55)";
   if (type === "file")
     return (
       <Input

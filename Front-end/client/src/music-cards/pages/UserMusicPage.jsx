@@ -7,6 +7,7 @@ import ROUTES from "../../routes/routesModel";
 import CardsFeedback from "../components/CardsFeedBack";
 import AddIcon from "@mui/icons-material/Add";
 import useMusic from "../hooks/useMusic";
+import { useTheme } from "../../providers/DarkThemeProvider";
 
 const UserMusicPage = () => {
   const {
@@ -16,6 +17,7 @@ const UserMusicPage = () => {
   } = useMusic();
   const { user } = useUser();
   const navigate = useNavigate();
+  const { isDark } = useTheme();
 
   useEffect(() => {
     if (!user) navigate(ROUTES.LOGIN);
@@ -32,10 +34,20 @@ const UserMusicPage = () => {
       <PageHeader title="Cards" subtitle="Here you can find your music cards" />{" "}
       {cards && (
         <Fab
-          color="secondary"
+          color="primray"
           aria-label=""
           onClick={() => navigate(ROUTES.CREATE_MUSIC)}
-          sx={{ position: "absolute", bottom: 75, right: 16 }}
+          sx={{
+            position: "absolute",
+            bottom: 75,
+            right: 16,
+            backgroundColor: isDark ? "#e3f2fd" : "#1a0033",
+            color: isDark ? "#1a0033" : "#e3f2fd",
+            "&:hover": {
+              backgroundColor: isDark ? "#e3f2fd" : "#1a0033",
+              opacity: 0.8,
+            },
+          }}
         >
           <AddIcon />
         </Fab>
