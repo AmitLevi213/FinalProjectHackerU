@@ -19,6 +19,7 @@ const SearchBar = () => {
           sx={{
             backgroundColor: isDark ? "#e3f2fd" : "#1a0033",
             color: isDark ? "#1a0033" : "#ffffff",
+            borderRadius: 25, // Add this line to set the border radius
           }}
           placeholder="Search"
           size="small"
