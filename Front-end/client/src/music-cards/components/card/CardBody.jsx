@@ -19,12 +19,20 @@ const CardBody = ({ card }) => {
     <CardContent>
       <CardHeader
         title={
-          <Typography variant="h5" color={textColor}>
+          <Typography
+            variant="h5"
+            color={textColor}
+            sx={{ fontFamily: "Oswald, sans-serif" }}
+          >
             {makeFirstLetterCapital(songTitle)}
           </Typography>
         }
         subheader={
-          <Typography variant="subtitle1" color={textColor}>
+          <Typography
+            variant="subtitle1"
+            color={textColor}
+            sx={{ fontFamily: "Oswald, sans-serif" }}
+          >
             {makeFirstLetterCapital(artist)}
           </Typography>
         }
@@ -32,30 +40,39 @@ const CardBody = ({ card }) => {
       />
       <Divider />
       <Box mt={1}>
-        <Typography variant="body2" color={textColor}>
-          <Typography variant="subtitle2" component="strong">
-            Genre:{" "}
-          </Typography>
+        <Typography
+          variant="body2"
+          color={textColor}
+          sx={{ fontFamily: "Oswald, sans-serif" }}
+        >
+          <strong>Genre: </strong>
           {makeFirstLetterCapital(formattedGenre)}
         </Typography>
 
-        <Typography variant="body2" color={textColor}>
-          <Typography variant="subtitle2" component="strong">
-            Release Year:{" "}
-          </Typography>
+        <Typography
+          variant="body2"
+          color={textColor}
+          sx={{ fontFamily: "Oswald, sans-serif" }}
+        >
+          <strong>Release Year: </strong>
           {formatDate(releaseYear)}
         </Typography>
 
-        <Typography variant="body2" color={textColor}>
-          <Typography variant="subtitle2" component="strong">
-            Duration:{" "}
-          </Typography>
+        <Typography
+          variant="body2"
+          color={textColor}
+          sx={{ fontFamily: "Oswald, sans-serif" }}
+        >
+          <strong>Duration: </strong>
           {duration}
         </Typography>
-        <Typography variant="body2" color={textColor}>
-          <Typography variant="subtitle2" component="strong">
-            Album:{" "}
-          </Typography>
+
+        <Typography
+          variant="body2"
+          color={textColor}
+          sx={{ fontFamily: "Oswald, sans-serif" }}
+        >
+          <strong>Album: </strong>
           {makeFirstLetterCapital(album)}
         </Typography>
       </Box>

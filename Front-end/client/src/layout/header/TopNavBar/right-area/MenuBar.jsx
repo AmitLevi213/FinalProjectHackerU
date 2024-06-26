@@ -34,21 +34,43 @@ const MenuBar = ({ isMenuOpen, anchorEl, onCloseMenu }) => {
         {user && (
           <>
             <NavBarLink to={ROUTES.USER_PROFILE}>
-              <MenuItem onClick={onCloseMenu}>Profile</MenuItem>
+              <MenuItem
+                onClick={onCloseMenu}
+                sx={{ fontFamily: "Oswald, sans-serif" }}
+              >
+                Profile
+              </MenuItem>
             </NavBarLink>
             <NavBarLink to={ROUTES.EDIT_USER}>
-              <MenuItem onClick={onCloseMenu}>Edit account</MenuItem>
+              <MenuItem
+                onClick={onCloseMenu}
+                sx={{ fontFamily: "Oswald, sans-serif" }}
+              >
+                Edit account
+              </MenuItem>
             </NavBarLink>
             <NavBarLink to={ROUTES.ROOT}>
-              <MenuItem onClick={userLogoutFunction}>Logout</MenuItem>
+              <MenuItem
+                onClick={userLogoutFunction}
+                sx={{ fontFamily: "Oswald, sans-serif" }}
+              >
+                Logout
+              </MenuItem>
             </NavBarLink>
             <NavBarLink to={ROUTES.ABOUT}>
-              <MenuItem>About</MenuItem>
+              <MenuItem sx={{ fontFamily: "Oswald, sans-serif" }}>
+                About
+              </MenuItem>
             </NavBarLink>
             {user.isAdmin && (
               <>
                 <NavBarLink to={ROUTES.CRM}>
-                  <MenuItem onClick={onCloseMenu}>CRM</MenuItem>
+                  <MenuItem
+                    sx={{ fontFamily: "Oswald, sans-serif" }}
+                    onClick={onCloseMenu}
+                  >
+                    CRM
+                  </MenuItem>
                 </NavBarLink>
               </>
             )}

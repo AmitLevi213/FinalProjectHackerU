@@ -11,11 +11,18 @@ const AboutPage = () => {
       />
       <Grid container spacing={10}>
         <Grid item md={8} xs={12} alignSelf="center">
-          <Typography variant="h4" color="text.primary">
+          <Typography
+            sx={{ fontFamily: "Oswald, sans-serif" }}
+            variant="h4"
+            color="text.primary"
+          >
             {" "}
             Welcome to SoundScape Central Showcase{" "}
           </Typography>
-          <Typography color="text.primary">
+          <Typography
+            color="text.primary"
+            sx={{ fontFamily: "Oswald, sans-serif" }}
+          >
             {" "}
             SoundScape Central is an innovative platform designed to elevate
             your music presence by offering a dynamic and immersive experience

@@ -33,6 +33,7 @@ const TrackList = ({ cards, onSongClick }) => {
         variant="h6"
         color={isDark ? "#e3f2fd" : "#1a0033"}
         gutterBottom
+        sx={{ fontFamily: "Oswald, sans-serif" }}
       >
         Track List
       </Typography>
@@ -46,6 +47,7 @@ const TrackList = ({ cards, onSongClick }) => {
               sx={{
                 cursor: "pointer",
                 "&:hover": { boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.6)" },
+                fontFamily: "Oswald, sans-serif",
               }}
             >
               <ListItemAvatar>
@@ -55,7 +57,10 @@ const TrackList = ({ cards, onSongClick }) => {
                 primary={
                   <Typography
                     variant="body1"
-                    sx={{ color: isDark ? "#e3f2fd" : "#1a0033" }}
+                    sx={{
+                      color: isDark ? "#e3f2fd" : "#1a0033",
+                      fontFamily: "Oswald, sans-serif",
+                    }}
                   >
                     {makeFirstLetterCapital(card.songTitle)}
                   </Typography>
@@ -65,7 +70,11 @@ const TrackList = ({ cards, onSongClick }) => {
                     <Typography
                       component="span"
                       variant="body2"
-                      sx={{ color: isDark ? "#e3f2fd" : "#1a0033" }}
+                      sx={{
+                        color: isDark ? "#e3f2fd" : "#1a0033",
+                        fontFamily: "Oswald, sans-serif",
+                        fontFamily: "Oswald, sans-serif",
+                      }}
                     >
                       {makeFirstLetterCapital(card.artist)}
                     </Typography>
@@ -73,7 +82,10 @@ const TrackList = ({ cards, onSongClick }) => {
                     <Typography
                       component="span"
                       variant="body2"
-                      sx={{ color: isDark ? "#e3f2fd" : "#1a0033" }}
+                      sx={{
+                        color: isDark ? "#e3f2fd" : "#1a0033",
+                        fontFamily: "Oswald, sans-serif",
+                      }}
                     >
                       {makeFirstLetterCapital(card.album)}
                     </Typography>
@@ -83,7 +95,11 @@ const TrackList = ({ cards, onSongClick }) => {
             </ListItem>
           ))
         ) : (
-          <Typography variant="body1" color={isDark ? "#e3f2fd" : "#1a0033"}>
+          <Typography
+            variant="body1"
+            color={isDark ? "#e3f2fd" : "#1a0033"}
+            fontFamily="Oswald, sans-serif"
+          >
             No tracks found
           </Typography>
         )}

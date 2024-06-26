@@ -19,7 +19,6 @@ const MusicPlayer = ({ card }) => {
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(new Audio(audio));
   const myColor = isDark ? "#e3f2fd" : "#1a0033";
-  const iconColor = isDark ? "#e3f2fd" : "#1a0033";
 
   const audioRefCurrent = audioRef.current;
 
@@ -93,7 +92,10 @@ const MusicPlayer = ({ card }) => {
         textAlign: "center",
       }}
     >
-      <Typography variant="h5" color={myColor}>
+      <Typography
+        sx={{ fontFamily: "Oswald, sans-serif", color: myColor }}
+        variant="h5"
+      >
         {makeFirstLetterCapital(songTitle)} - {makeFirstLetterCapital(artist)}
       </Typography>
       <Box mt={2}>
@@ -109,11 +111,11 @@ const MusicPlayer = ({ card }) => {
               max={isNaN(duration) ? 0 : duration}
               onChange={handleTimestampChange}
               aria-labelledby="timestamp-slider"
-              sx={{ color: iconColor }}
+              sx={{ color: myColor }}
             />
           </Grid>
           <Grid item>
-            <IconButton onClick={handleMute} sx={{ color: iconColor }}>
+            <IconButton onClick={handleMute} sx={{ color: myColor }}>
               {isMuted ? (
                 <VolumeMuteIcon />
               ) : volume > 50 ? (
@@ -128,14 +130,18 @@ const MusicPlayer = ({ card }) => {
               value={volume}
               onChange={handleVolumeChange}
               aria-labelledby="volume-slider"
-              sx={{ color: iconColor }}
+              sx={{ color: myColor }}
             />
           </Grid>
         </Grid>
       </Box>
       <div className="lyrics-container" style={{ marginTop: "20px" }}>
         {lyrics.map((line, index) => (
-          <Typography key={index} variant="body1" style={{ color: myColor }}>
+          <Typography
+            key={index}
+            variant="body1"
+            sx={{ color: myColor, fontFamily: "Oswald, sans-serif" }}
+          >
             {line}
           </Typography>
         ))}

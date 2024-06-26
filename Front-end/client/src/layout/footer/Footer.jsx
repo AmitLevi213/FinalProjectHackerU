@@ -36,14 +36,14 @@ const Footer = () => {
           onClick={() => navigateTo(ROUTES.ABOUT)}
           label="About Us"
           icon={<InfoIcon />}
-          sx={{ color: iconColor }}
+          sx={{ color: iconColor, fontFamily: "Oswald, sans-serif" }}
         />
         {user && (
           <BottomNavigationAction
             onClick={() => navigateTo(ROUTES.FAV_MUSIC)}
             label="Favorites "
             icon={<FavoriteIcon />}
-            sx={{ color: iconColor }}
+            sx={{ color: iconColor, fontFamily: "Oswald, sans-serif" }}
           />
         )}
 
@@ -52,7 +52,7 @@ const Footer = () => {
             onClick={() => navigateTo(ROUTES.MY_MUSIC)}
             label="My Music"
             icon={<LibraryMusicIcon />}
-            sx={{ color: iconColor }}
+            sx={{ color: iconColor, fontFamily: "Oswald, sans-serif" }}
           />
         )}
         <BottomNavigationAction
@@ -64,7 +64,7 @@ const Footer = () => {
           }
           label="Linkedin"
           icon={<LinkedInIcon />}
-          sx={{ color: iconColor }}
+          sx={{ color: iconColor, fontFamily: "Oswald, sans-serif" }}
         />
       </BottomNavigation>
     </Paper>

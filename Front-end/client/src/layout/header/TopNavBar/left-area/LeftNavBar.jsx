@@ -9,37 +9,29 @@ import { useTheme } from "../../../../providers/DarkThemeProvider";
 const LeftNavBar = () => {
   const { user } = useUser();
   const { isDark } = useTheme();
+  const navItemStyle = {
+    color: isDark ? "#e3f2fd" : "#1a0033",
+  };
+
   return (
     <Box>
       <LogoIcon />
       <Logo />
 
       <Box sx={{ pb: 1, display: { xs: "none", md: "inline-flex" } }}>
-        <NavItem
-          color={isDark ? "#e3f2fd" : "#1a0033"}
-          label="About"
-          to={ROUTES.ABOUT}
-        ></NavItem>
+        <NavItem {...navItemStyle} label="About" to={ROUTES.ABOUT} />
         {user && user.isBusiness && (
           <>
             <NavItem
+              {...navItemStyle}
               label="Fav Music"
-              color={isDark ? "#e3f2fd" : "#1a0033"}
               to={ROUTES.FAV_MUSIC}
-            ></NavItem>
-            <NavItem
-              label="My Music"
-              color={isDark ? "#e3f2fd" : "#1a0033"}
-              to={ROUTES.MY_MUSIC}
-            ></NavItem>
+            />
+            <NavItem {...navItemStyle} label="My Music" to={ROUTES.MY_MUSIC} />
           </>
         )}
         {user && user.isAdmin && (
-          <NavItem
-            to={ROUTES.CRM}
-            color={isDark ? "#e3f2fd" : "#1a0033"}
-            label="CRM"
-          />
+          <NavItem {...navItemStyle} to={ROUTES.CRM} label="CRM" />
         )}
       </Box>
     </Box>

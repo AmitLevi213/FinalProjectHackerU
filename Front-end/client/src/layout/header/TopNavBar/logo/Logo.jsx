@@ -13,7 +13,7 @@ const Logo = () => {
         sx={{
           display: { xs: "none", md: "inline-flex" },
           marginRight: 2,
-          fontFamily: "fantasy",
+          fontFamily: "'Roboto Condensed', sans-serif",
         }}
       >
         {" "}

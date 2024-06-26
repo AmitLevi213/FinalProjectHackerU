@@ -6,6 +6,7 @@ import CardBody from "./CardBody";
 import ROUTES from "../../../routes/routesModel";
 import CardActionBar from "./CardActionBar";
 import { useTheme } from "../../../providers/DarkThemeProvider";
+
 const CardComponent = ({ card, onDeleteCard, onLike }) => {
   const navigate = useNavigate();
   const { isDark } = useTheme();
@@ -13,14 +14,21 @@ const CardComponent = ({ card, onDeleteCard, onLike }) => {
   return (
     <Card
       sx={{
-        width: 260,
-        background: isDark ? "#310047" : "#e3f2fd",
-        boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.5)",
+        width: 300,
+        borderRadius: 12,
+        boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.1)",
         overflow: "hidden",
-        m: 2,
+        margin: 16,
+        backgroundColor: isDark ? "#1f1f1f" : "#FFFFFF",
+        transition: "transform 0.3s ease-in-out, box-shadow 0.3s easse-in-out",
+        "&:hover": {
+          transform: "scale(1.03)",
+          boxShadow: "0px 15px 40px rgba(0, 0, 0, 0.2)",
+        },
       }}
     >
       <CardActionArea
+        sx={{ borderRadius: 12 }}
         onClick={() => navigate(`${ROUTES.MUSIC_DETAILS}/${card._id}`)}
       >
         <CardHead image={card.image} />

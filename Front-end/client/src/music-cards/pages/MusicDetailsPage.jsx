@@ -45,9 +45,12 @@ const MusicDetailsPage = () => {
             </Box>
             <MusicPlayer card={card} />
             <Typography
-              sx={{ pt: 2 }}
               variant="body1"
-              color={isDark ? "#e3f2fd" : "#1a0033"}
+              sx={{
+                fontFamily: "Oswald, sans-serif",
+                color: isDark ? "#e3f2fd" : "#1a0033",
+                pt: 3,
+              }}
             >
               {card.description}
             </Typography>
@@ -62,19 +65,37 @@ const MusicDetailsPage = () => {
           >
             <Grid item xs={12} sm={6} md={3} align="center">
               <AlbumIcon fontSize="large" color="secondary" />
-              <Typography variant="h5" color={isDark ? "#e3f2fd" : "#1a0033"}>
+              <Typography
+                variant="h5"
+                sx={{
+                  fontFamily: "Oswald, sans-serif",
+                  color: isDark ? "#e3f2fd" : "#1a0033",
+                }}
+              >
                 {makeFirstLetterCapital(card.album)}
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={3} align="center">
               <PeopleIcon fontSize="large" color="secondary" />
-              <Typography variant="h5" color={isDark ? "#e3f2fd" : "#1a0033"}>
+              <Typography
+                variant="h5"
+                sx={{
+                  fontFamily: "Oswald, sans-serif",
+                  color: isDark ? "#e3f2fd" : "#1a0033",
+                }}
+              >
                 {makeFirstLetterCapital(card.artist)}
               </Typography>
             </Grid>
             <Grid item xs={12} sm={6} md={3} align="center">
               <DateRangeIcon fontSize="large" color="secondary" />
-              <Typography variant="h5" color={isDark ? "#e3f2fd" : "#1a0033"}>
+              <Typography
+                variant="h5"
+                sx={{
+                  fontFamily: "Oswald, sans-serif",
+                  color: isDark ? "#e3f2fd" : "#1a0033",
+                }}
+              >
                 {formatDate(card.releaseYear)}
               </Typography>
             </Grid>
@@ -94,6 +115,7 @@ const MusicDetailsPage = () => {
                 style={{
                   color: isDark ? "#e3f2fd" : "#1a0033",
                   textDecoration: "none",
+                  fontFamily: "Oswald, sans-serif",
                 }}
                 variant="h5"
               >

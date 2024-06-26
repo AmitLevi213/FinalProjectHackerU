@@ -180,7 +180,10 @@ const SignupPage = () => {
               name="isBusiness"
               control={<Checkbox value={value.formData.isBusiness} />}
               label="Signup as business"
-              sx={{ color: isDark ? "#e3f2fd" : "#333333" }}
+              sx={{
+                color: isDark ? "#e3f2fd" : "#1a0033",
+                fontFamily: "Oswald, sans-serif",
+              }}
             ></FormControlLabel>
           </Grid>
         </FormComponent>
