@@ -18,8 +18,8 @@ const Users = ({ users, onDelete, onChangeStatus }) => {
   const { isDark } = useTheme();
 
   const getBackgroundColor = () => (isDark ? "#1a0033" : "#e3f2fd");
-  const getTextColor = () => (isDark ? "#ffffff" : "#000000");
-  const getBorderColor = () => (isDark ? "grey.800" : "grey.300");
+  const getTextColor = () => (isDark ? "#e3f2fd" : "#1a0033");
+  const getBorderColor = () => (isDark ? "#e3f2fd" : "#1a0033");
 
   const columns = [
     { field: "idNumber", headerName: "Number", width: 90 },
@@ -111,23 +111,13 @@ const Users = ({ users, onDelete, onChangeStatus }) => {
                 width="100%"
                 bgcolor={getBackgroundColor()}
               >
-                <Typography
-                  color="text.secondary"
-                  variant="h6"
-                  sx={{ color: getTextColor() }}
-                >
+                <Typography variant="h6" sx={{ color: getTextColor() }}>
                   {row.firstName} {row.lastName}
                 </Typography>
-                <Typography
-                  color="text.secondary"
-                  sx={{ color: getTextColor() }}
-                >
+                <Typography sx={{ color: getTextColor() }}>
                   Email: {row.email}
                 </Typography>
-                <Typography
-                  color="text.secondary"
-                  sx={{ color: getTextColor() }}
-                >
+                <Typography sx={{ color: getTextColor() }}>
                   Phone: {row.phone}
                 </Typography>
                 <Typography
