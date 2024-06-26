@@ -115,13 +115,12 @@ const MyMusicPlayer = () => {
     <Box
       sx={{
         background: isDark ? "#1a0033" : "#e3f2fd",
-        boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.5)",
-        padding: "20px",
+        boxShadow: "4px 4px 20px rgba(0, 0, 0, 1)",
+        padding: "15px",
         borderRadius: "10px",
         width: "100%",
-        maxWidth: "600px",
+        maxWidth: "650px",
         margin: "auto",
-        textAlign: "center",
       }}
     >
       <Grid container alignItems="center" spacing={2}>
