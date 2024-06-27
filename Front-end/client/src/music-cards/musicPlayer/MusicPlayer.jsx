@@ -79,6 +79,12 @@ const MusicPlayer = ({ card }) => {
     }
   };
 
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
+
   return (
     <div
       style={{
@@ -113,6 +119,20 @@ const MusicPlayer = ({ card }) => {
               aria-labelledby="timestamp-slider"
               sx={{ color: myColor }}
             />
+            <Grid container justifyContent="space-between">
+              <Typography
+                variant="caption"
+                sx={{ color: myColor, fontFamily: "Oswald, sans-serif" }}
+              >
+                {formatTime(currentTime)}
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{ color: myColor, fontFamily: "Oswald, sans-serif" }}
+              >
+                {formatTime(duration)}
+              </Typography>
+            </Grid>
           </Grid>
           <Grid item>
             <IconButton onClick={handleMute} sx={{ color: myColor }}>

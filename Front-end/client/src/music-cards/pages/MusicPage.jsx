@@ -40,7 +40,7 @@ const MusicPage = () => {
         cards={filteredCards || []}
         onDeleteCard={onDeleteCard}
       />
-      <MyMusicPlayer />
+      <MyMusicPlayer card={filteredCards} />
       <TrackList cards={filteredCards || []} onSongClick={handleSongSelect} />
     </Container>
   );

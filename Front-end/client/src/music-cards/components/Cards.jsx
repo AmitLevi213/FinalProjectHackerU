@@ -7,7 +7,7 @@ const Cards = ({ cards, onDeleteCard, onLike }) => {
   const { isDark } = useTheme();
   const methods = { onDeleteCard, onLike };
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
+  const itemsPerPage = 4;
 
   const totalPages = Math.ceil(cards.length / itemsPerPage);
 
@@ -33,8 +33,8 @@ const Cards = ({ cards, onDeleteCard, onLike }) => {
   return (
     <Container>
       <Stack
-        spacing={1}
-        gap={3}
+        spacing={4}
+        gap={2}
         direction="row"
         my={3}
         flexWrap="wrap"

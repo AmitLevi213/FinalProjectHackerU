@@ -14,7 +14,7 @@ const CardComponent = ({ card, onDeleteCard, onLike }) => {
   return (
     <Card
       sx={{
-        width: 300,
+        width: 250,
         borderRadius: 12,
         boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.1)",
         overflow: "hidden",

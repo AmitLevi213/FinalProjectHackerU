@@ -7,9 +7,8 @@ import VolumeMuteIcon from "@mui/icons-material/VolumeMute";
 import VolumeDownIcon from "@mui/icons-material/VolumeDown";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { useTheme } from "../../providers/DarkThemeProvider";
-import { storage } from "../../firebase/firebaseStore";
-import { getDownloadURL, listAll, ref, getMetadata } from "firebase/storage";
-import { IconButton, Slider, Box, Grid } from "@mui/material";
+import { IconButton, Slider, Box, Grid, Typography } from "@mui/material";
+import { getCards } from "../service/cardApiService";
 
 const MyMusicPlayer = () => {
   const { isDark } = useTheme();
@@ -25,30 +24,18 @@ const MyMusicPlayer = () => {
   useEffect(() => {
     const fetchAudioFiles = async () => {
       try {
-        const listRef = ref(storage, "/");
-        const res = await listAll(listRef);
-        const audioFilePromises = res.items.map(async (itemRef) => {
-          const metadata = await getMetadata(itemRef);
-          if (metadata.contentType === "audio/mpeg") {
-            const url = await getDownloadURL(itemRef);
-            return url;
-          }
-          return null;
-        });
-
-        const audioUrls = await Promise.all(audioFilePromises);
-        setAudioFiles(audioUrls.filter((url) => url !== null));
+        const response = await getCards();
+        setAudioFiles(response);
       } catch (error) {
         console.error("Failed to fetch audio files:", error);
       }
     };
-
     fetchAudioFiles();
   }, []);
 
   useEffect(() => {
     if (audioFiles.length > 0) {
-      audioRef.current.src = audioFiles[currentIndex];
+      audioRef.current.src = audioFiles[currentIndex].audio;
       audioRef.current.volume = volume / 100;
       setCurrentTime(0);
       setDuration(0);
@@ -109,6 +96,12 @@ const MyMusicPlayer = () => {
     audioRef.current.currentTime = newValue;
   };
 
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
+
   const iconColor = isDark ? "#ffffff" : "#310047";
 
   return (
@@ -123,6 +116,18 @@ const MyMusicPlayer = () => {
         margin: "auto",
       }}
     >
+      <Box mt={2} textAlign="center">
+        <Typography
+          variant="body1"
+          sx={{
+            color: iconColor,
+            fontFamily: "'Permanent Marker', cursive",
+          }}
+        >
+          {audioFiles[currentIndex]?.songTitle || "Unknown Title"} -{" "}
+          {audioFiles[currentIndex]?.artist || "Unknown Artist"}
+        </Typography>
+      </Box>
       <Grid container alignItems="center" spacing={2}>
         <Grid item>
           <IconButton onClick={handleSkipPrevious} sx={{ color: iconColor }}>
@@ -147,6 +152,20 @@ const MyMusicPlayer = () => {
             aria-labelledby="timestamp-slider"
             sx={{ color: iconColor }}
           />
+          <Grid container justifyContent="space-between">
+            <Typography
+              variant="caption"
+              sx={{ color: iconColor, fontFamily: "Oswald, sans-serif" }}
+            >
+              {formatTime(currentTime)}
+            </Typography>
+            <Typography
+              variant="caption"
+              sx={{ color: iconColor, fontFamily: "Oswald, sans-serif" }}
+            >
+              {formatTime(duration)}
+            </Typography>
+          </Grid>
         </Grid>
         <Grid item>
           <IconButton onClick={handleMute} sx={{ color: iconColor }}>
