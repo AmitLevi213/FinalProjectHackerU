@@ -116,7 +116,7 @@ const MyMusicPlayer = () => {
         margin: "auto",
       }}
     >
-      <Box mt={2} textAlign="center">
+      <Box textAlign="center">
         <Typography
           variant="body1"
           sx={{
@@ -144,7 +144,7 @@ const MyMusicPlayer = () => {
             <SkipNextIcon />
           </IconButton>
         </Grid>
-        <Grid item xs>
+        <Grid item xs md>
           <Slider
             value={currentTime}
             max={isNaN(duration) ? 0 : duration}
