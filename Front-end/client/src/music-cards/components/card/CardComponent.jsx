@@ -19,7 +19,7 @@ const CardComponent = ({ card, onDeleteCard, onLike }) => {
         boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.1)",
         overflow: "hidden",
         margin: 16,
-        backgroundColor: isDark ? "#1f1f1f" : "#FFFFFF",
+        backgroundColor: isDark ? "#1a0330" : "#cfe9fc",
         transition: "transform 0.3s ease-in-out, box-shadow 0.3s easse-in-out",
         "&:hover": {
           transform: "scale(1.03)",
