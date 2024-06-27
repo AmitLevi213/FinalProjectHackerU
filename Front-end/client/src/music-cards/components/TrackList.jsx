@@ -6,16 +6,33 @@ import {
   ListItemAvatar,
   ListItemText,
   Typography,
+  IconButton,
+  Grid,
 } from "@mui/material";
 import { arrayOf, func, shape, string } from "prop-types";
 import { makeFirstLetterCapital } from "../../forms/utils/upperCaseMethod";
 import { useTheme } from "../../providers/DarkThemeProvider";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { useState } from "react";
 
 const TrackList = ({ cards, onSongClick }) => {
-  const handleSongClick = (index) => {
-    onSongClick(index);
-  };
   const { isDark } = useTheme();
+  const [page, setPage] = useState(0);
+  const itemsPerPage = 5;
+
+  const handleNextPage = () => {
+    setPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setPage((prevPage) => Math.max(prevPage - 1, 0));
+  };
+
+  const visibleCards = cards.slice(
+    page * itemsPerPage,
+    (page + 1) * itemsPerPage
+  );
 
   return (
     <Container
@@ -38,16 +55,19 @@ const TrackList = ({ cards, onSongClick }) => {
         Track List
       </Typography>
       <List>
-        {cards && cards.length > 0 ? (
-          cards.map((card, index) => (
+        {visibleCards.length > 0 ? (
+          visibleCards.map((card, index) => (
             <ListItem
               key={card._id}
               alignItems="flex-start"
-              onClick={() => handleSongClick(index)}
+              onClick={() => onSongClick(page * itemsPerPage + index)}
               sx={{
                 cursor: "pointer",
-                "&:hover": { boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.6)" },
+                "&:hover": {
+                  boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.6)",
+                },
                 fontFamily: "Oswald, sans-serif",
+                marginBottom: "10px", // Adjust spacing between items
               }}
             >
               <ListItemAvatar>
@@ -72,7 +92,6 @@ const TrackList = ({ cards, onSongClick }) => {
                       variant="body2"
                       sx={{
                         color: isDark ? "#e3f2fd" : "#1a0033",
-                        fontFamily: "Oswald, sans-serif",
                         fontFamily: "Oswald, sans-serif",
                       }}
                     >
@@ -104,6 +123,22 @@ const TrackList = ({ cards, onSongClick }) => {
           </Typography>
         )}
       </List>
+      <Grid container justifyContent="center" mt={2}>
+        <IconButton
+          aria-label="previous page"
+          onClick={handlePrevPage}
+          disabled={page === 0}
+        >
+          <NavigateBeforeIcon />
+        </IconButton>
+        <IconButton
+          aria-label="next page"
+          onClick={handleNextPage}
+          disabled={(page + 1) * itemsPerPage >= cards.length}
+        >
+          <NavigateNextIcon />
+        </IconButton>
+      </Grid>
     </Container>
   );
 };
