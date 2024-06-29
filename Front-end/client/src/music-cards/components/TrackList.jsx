@@ -67,7 +67,7 @@ const TrackList = ({ cards, onSongClick }) => {
                   boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.6)",
                 },
                 fontFamily: "Oswald, sans-serif",
-                marginBottom: "10px", // Adjust spacing between items
+                marginBottom: "10px",
               }}
             >
               <ListItemAvatar>

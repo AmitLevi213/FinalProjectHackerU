@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "@mui/material";
 import PageHeader from "../../components/PageHeader";
 import useMusic from "../hooks/useMusic";
@@ -7,6 +7,7 @@ import MyMusicPlayer from "../../music-cards/musicPlayer/MyMusicPlayer";
 import TrackList from "../components/TrackList";
 
 const MusicPage = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
   const {
     value: { error, isPending, filteredCards },
     handleGetCardsFromApi,
@@ -25,7 +26,7 @@ const MusicPage = () => {
   };
 
   const handleSongSelect = (index) => {
-    console.log(index);
+    setCurrentIndex(index);
   };
 
   return (
@@ -40,7 +41,11 @@ const MusicPage = () => {
         cards={filteredCards || []}
         onDeleteCard={onDeleteCard}
       />
-      <MyMusicPlayer />
+      <MyMusicPlayer
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
+        audioFiles={filteredCards || []}
+      />
       <TrackList cards={filteredCards || []} onSongClick={handleSongSelect} />
     </Container>
   );

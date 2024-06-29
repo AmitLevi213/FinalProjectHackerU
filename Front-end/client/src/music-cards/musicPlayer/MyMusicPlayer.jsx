@@ -8,30 +8,15 @@ import VolumeDownIcon from "@mui/icons-material/VolumeDown";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import { useTheme } from "../../providers/DarkThemeProvider";
 import { IconButton, Slider, Box, Grid, Typography } from "@mui/material";
-import { getCards } from "../service/cardApiService";
 
-const MyMusicPlayer = () => {
+const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
   const { isDark } = useTheme();
-  const [audioFiles, setAudioFiles] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(50);
   const [isMuted, setIsMuted] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const audioRef = useRef(new Audio());
-
-  useEffect(() => {
-    const fetchAudioFiles = async () => {
-      try {
-        const response = await getCards();
-        setAudioFiles(response);
-      } catch (error) {
-        console.error("Failed to fetch audio files:", error);
-      }
-    };
-    fetchAudioFiles();
-  }, []);
 
   useEffect(() => {
     if (audioFiles.length > 0) {
