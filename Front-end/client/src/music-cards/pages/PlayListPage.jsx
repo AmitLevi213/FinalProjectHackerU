@@ -31,7 +31,8 @@ const PlayListPage = () => {
     navigate(`${ROUTES.PLAYLIST_DETAILS}/${encodeURIComponent(genre)}`);
   };
 
-  const handleAddClick = () => {
+  const handleAddClick = (event) => {
+    event.stopPropagation();
     navigate(ROUTES.CREATE_MUSIC);
   };
 
