@@ -13,6 +13,8 @@ import EditUserInfo from "../users/pages/EditUserInfo";
 import UserProfile from "../users/pages/UserProfile";
 import EditUserMusicPage from "../music-cards/pages/EditUserMusicPage";
 import CrmPage from "../users/pages/CrmPage";
+import PlaylistPage from "../music-cards/pages/PlayListPage";
+import PlaylistDetailsPage from "../music-cards/pages/PlayListDetailsPage";
 
 const Router = () => {
   return (
@@ -39,6 +41,11 @@ const Router = () => {
         element={<EditUserMusicPage />}
       ></Route>
       <Route path={ROUTES.CRM} element={<CrmPage />} />
+      <Route path={ROUTES.PLAYLIST} element={<PlaylistPage />}></Route>
+      <Route
+        path={`${ROUTES.PLAYLIST_DETAILS}/:genre`}
+        element={<PlaylistDetailsPage />}
+      ></Route>
 
       <Route path="*" element={<ErrorPage />}></Route>
     </Routes>
