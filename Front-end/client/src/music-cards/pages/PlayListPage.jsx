@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { getCards } from "../service/cardApiService";
 import ROUTES from "../../routes/routesModel";
 import { useTheme } from "../../providers/DarkThemeProvider";
+import { useUser } from "../../users/providers/UserProvider";
 
 const PlayListPage = () => {
   const { isDark } = useTheme();
+  const { user } = useUser();
   const [genres, setGenres] = useState([]);
   const navigate = useNavigate();
   const textColor = isDark ? "#e3f2fd" : "#1a0033";
@@ -35,6 +37,8 @@ const PlayListPage = () => {
     event.stopPropagation();
     navigate(ROUTES.CREATE_MUSIC);
   };
+
+  const isBusinessOrAdmin = user && (user.isBusiness || user.isAdmin);
 
   return (
     <Box
@@ -71,27 +75,29 @@ const PlayListPage = () => {
           <Typography variant="h6" component="div" sx={{ color: textColor }}>
             {genre}
           </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            startIcon={<AddIcon />}
-            className="add-button"
-            sx={{
-              position: "absolute",
-              bottom: 16,
-              right: 16,
-              opacity: 0,
-              transition: "opacity 0.3s",
-              backgroundColor: buttonColor,
-              color: isDark ? "#1a0033" : "#e3f2fd",
-              "&:hover": {
-                backgroundColor: isDark ? "#e3f2fd" : "#1a0033",
-              },
-            }}
-            onClick={handleAddClick}
-          >
-            Add
-          </Button>
+          {isBusinessOrAdmin && (
+            <Button
+              variant="contained"
+              color="primary"
+              startIcon={<AddIcon />}
+              className="add-button"
+              sx={{
+                position: "absolute",
+                bottom: 16,
+                right: 16,
+                opacity: 0,
+                transition: "opacity 0.3s",
+                backgroundColor: buttonColor,
+                color: isDark ? "#1a0033" : "#e3f2fd",
+                "&:hover": {
+                  backgroundColor: isDark ? "#e3f2fd" : "#1a0033",
+                },
+              }}
+              onClick={handleAddClick}
+            >
+              Add
+            </Button>
+          )}
         </Box>
       ))}
     </Box>
