@@ -26,7 +26,7 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
       setDuration(0);
       setIsPlaying(false);
     }
-  }, [audioFiles, currentIndex]);
+  }, [audioFiles, currentIndex, volume]);
 
   useEffect(() => {
     const updateDuration = () => {
@@ -55,7 +55,7 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
     setIsPlaying(!isPlaying);
   };
 
-  const handleVolumeChange = (event, newValue) => {
+  const handleVolumeChange = (newValue) => {
     setVolume(newValue);
     audioRef.current.volume = newValue / 100;
     setIsMuted(newValue === 0);
