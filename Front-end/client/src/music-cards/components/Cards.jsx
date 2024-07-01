@@ -7,7 +7,7 @@ const Cards = ({ cards, onDeleteCard, onLike }) => {
   const { isDark } = useTheme();
   const methods = { onDeleteCard, onLike };
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 4;
+  const itemsPerPage = 3;
 
   const totalPages = Math.ceil(cards.length / itemsPerPage);
 
