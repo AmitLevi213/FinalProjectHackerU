@@ -138,7 +138,6 @@ const MenuBar = ({ isMenuOpen, anchorEl, onCloseMenu }) => {
           <NavBarLink to={ROUTES.PLAYLIST}>
             <MenuItem
               sx={{
-                marginLeft: 1,
                 color: myColor,
                 display: { xs: "block", md: "none" },
               }}
