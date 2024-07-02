@@ -113,7 +113,12 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
           {audioFiles[currentIndex]?.artist || "Unknown Artist"}
         </Typography>
       </Box>
-      <Grid container alignItems="center" spacing={2}>
+      <Grid
+        container
+        alignItems="center"
+        justifyContent="space-evenly"
+        flexWrap="nowrap"
+      >
         <Grid item>
           <IconButton onClick={handleSkipPrevious} sx={{ color: iconColor }}>
             <SkipPreviousIcon />
@@ -129,13 +134,13 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
             <SkipNextIcon />
           </IconButton>
         </Grid>
-        <Grid item xs md>
+        <Grid item xs={3}>
           <Slider
             value={currentTime}
             max={isNaN(duration) ? 0 : duration}
             onChange={handleTimestampChange}
             aria-labelledby="timestamp-slider"
-            sx={{ color: iconColor }}
+            sx={{ color: iconColor, mt: 2 }}
           />
           <Grid container justifyContent="space-between">
             <Typography
@@ -152,7 +157,7 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
             </Typography>
           </Grid>
         </Grid>
-        <Grid item>
+        <Grid item alignItems="center">
           <IconButton onClick={handleMute} sx={{ color: iconColor }}>
             {isMuted ? (
               <VolumeMuteIcon />
@@ -163,7 +168,7 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
             )}
           </IconButton>
         </Grid>
-        <Grid item xs>
+        <Grid item xs={3}>
           <Slider
             value={volume}
             onChange={handleVolumeChange}
