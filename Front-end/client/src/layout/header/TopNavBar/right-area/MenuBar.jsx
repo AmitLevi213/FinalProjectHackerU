@@ -6,14 +6,25 @@ import ROUTES from "../../../../routes/routesModel";
 import { useUser } from "../../../../users/providers/UserProvider";
 import useHandleUsersFunctions from "../../../../users/hooks/useHandleUsersFunctions";
 import { useTheme } from "../../../../providers/DarkThemeProvider";
-
 import DarkModeIcon from "@mui/icons-material/DarkMode";
-import LightModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import QueueMusicIcon from "@mui/icons-material/QueueMusic";
 
 const MenuBar = ({ isMenuOpen, anchorEl, onCloseMenu }) => {
   const { user } = useUser();
   const { userLogoutFunction } = useHandleUsersFunctions();
   const { isDark, toggleDarkMode } = useTheme();
+  const myColor = isDark ? "#e3f2fd" : "#1a0033";
+
+  const handleToggleDarkMode = () => {
+    toggleDarkMode();
+    onCloseMenu();
+  };
+
+  const handleUserLogout = () => {
+    userLogoutFunction();
+    onCloseMenu();
+  };
 
   return (
     <MuiMenu
@@ -36,7 +47,7 @@ const MenuBar = ({ isMenuOpen, anchorEl, onCloseMenu }) => {
             <NavBarLink to={ROUTES.USER_PROFILE}>
               <MenuItem
                 onClick={onCloseMenu}
-                sx={{ fontFamily: "Oswald, sans-serif" }}
+                sx={{ fontFamily: "Oswald, sans-serif", color: myColor }}
               >
                 Profile
               </MenuItem>
@@ -44,29 +55,40 @@ const MenuBar = ({ isMenuOpen, anchorEl, onCloseMenu }) => {
             <NavBarLink to={ROUTES.EDIT_USER}>
               <MenuItem
                 onClick={onCloseMenu}
-                sx={{ fontFamily: "Oswald, sans-serif" }}
+                sx={{ fontFamily: "Oswald, sans-serif", color: myColor }}
               >
                 Edit account
               </MenuItem>
             </NavBarLink>
             <NavBarLink to={ROUTES.ROOT}>
               <MenuItem
-                onClick={userLogoutFunction}
-                sx={{ fontFamily: "Oswald, sans-serif" }}
+                onClick={handleUserLogout}
+                sx={{ fontFamily: "Oswald, sans-serif", color: myColor }}
               >
                 Logout
               </MenuItem>
             </NavBarLink>
             <NavBarLink to={ROUTES.ABOUT}>
-              <MenuItem sx={{ fontFamily: "Oswald, sans-serif" }}>
+              <MenuItem
+                onClick={onCloseMenu}
+                sx={{ fontFamily: "Oswald, sans-serif", color: myColor }}
+              >
                 About
+              </MenuItem>
+            </NavBarLink>
+            <NavBarLink to={ROUTES.PLAYLIST}>
+              <MenuItem
+                onClick={onCloseMenu}
+                sx={{ fontFamily: "Oswald, sans-serif", color: myColor }}
+              >
+                <QueueMusicIcon />
               </MenuItem>
             </NavBarLink>
             {user.isAdmin && (
               <>
                 <NavBarLink to={ROUTES.CRM}>
                   <MenuItem
-                    sx={{ fontFamily: "Oswald, sans-serif" }}
+                    sx={{ fontFamily: "Oswald, sans-serif", color: myColor }}
                     onClick={onCloseMenu}
                   >
                     CRM
@@ -74,9 +96,14 @@ const MenuBar = ({ isMenuOpen, anchorEl, onCloseMenu }) => {
                 </NavBarLink>
               </>
             )}
-            <IconButton sx={{ marginLeft: 1 }} onClick={toggleDarkMode}>
-              {isDark ? <LightModeIcon /> : <DarkModeIcon />}
-            </IconButton>
+            <NavBarLink>
+              <MenuItem
+                onClick={handleToggleDarkMode}
+                sx={{ display: { xs: "block", md: "none" }, color: myColor }}
+              >
+                {isDark ? <LightModeIcon /> : <DarkModeIcon />}
+              </MenuItem>
+            </NavBarLink>
           </>
         )}
       </Box>
@@ -85,7 +112,7 @@ const MenuBar = ({ isMenuOpen, anchorEl, onCloseMenu }) => {
         <Box>
           <NavBarLink to={ROUTES.LOGIN}>
             <MenuItem
-              sx={{ display: { xs: "block", md: "none" } }}
+              sx={{ display: { xs: "block", md: "none" }, color: myColor }}
               onClick={onCloseMenu}
             >
               Login
@@ -94,15 +121,32 @@ const MenuBar = ({ isMenuOpen, anchorEl, onCloseMenu }) => {
 
           <NavBarLink to={ROUTES.SIGNUP}>
             <MenuItem
-              sx={{ display: { xs: "block", md: "none" } }}
+              sx={{ display: { xs: "block", md: "none" }, color: myColor }}
               onClick={onCloseMenu}
             >
               Signup
             </MenuItem>
           </NavBarLink>
-          <IconButton sx={{ marginLeft: 1 }} onClick={toggleDarkMode}>
-            {isDark ? <LightModeIcon /> : <DarkModeIcon />}
-          </IconButton>
+          <NavBarLink>
+            <MenuItem
+              onClick={handleToggleDarkMode}
+              sx={{ display: { xs: "block", md: "none" }, color: myColor }}
+            >
+              {isDark ? <LightModeIcon /> : <DarkModeIcon />}
+            </MenuItem>
+          </NavBarLink>
+          <NavBarLink to={ROUTES.PLAYLIST}>
+            <MenuItem
+              sx={{
+                marginLeft: 1,
+                color: myColor,
+                display: { xs: "block", md: "none" },
+              }}
+              onClick={onCloseMenu}
+            >
+              <QueueMusicIcon />
+            </MenuItem>
+          </NavBarLink>
         </Box>
       )}
     </MuiMenu>

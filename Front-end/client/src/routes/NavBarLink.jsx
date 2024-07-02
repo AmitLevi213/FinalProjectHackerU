@@ -10,7 +10,7 @@ const NavBarLink = ({ to, color, children }) => {
 };
 
 NavBarLink.propTypes = {
-  to: string.isRequired,
+  to: string,
   color: string.isRequired,
   children: node.isRequired,
 };
