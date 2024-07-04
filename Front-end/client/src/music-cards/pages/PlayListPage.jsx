@@ -85,7 +85,11 @@ const PlayListPage = () => {
                 position: "absolute",
                 bottom: 16,
                 right: 16,
-                opacity: 0,
+                opacity: {
+                  xs: 1, 
+                  sm: 1, 
+                  md: 0, 
+                },
                 transition: "opacity 0.3s",
                 backgroundColor: buttonColor,
                 color: isDark ? "#1a0033" : "#e3f2fd",
