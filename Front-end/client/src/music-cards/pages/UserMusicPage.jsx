@@ -41,6 +41,7 @@ const UserMusicPage = () => {
             position: "absolute",
             bottom: 75,
             right: 16,
+            zIndex: 0,
             backgroundColor: isDark ? "#e3f2fd" : "#1a0033",
             color: isDark ? "#1a0033" : "#e3f2fd",
             "&:hover": {

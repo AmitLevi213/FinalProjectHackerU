@@ -12,7 +12,7 @@ const validateCardWithJoi = (card) => {
     genre: Joi.array().items(Joi.string()).allow(),
     releaseYear: Joi.date().required(),
     lyrics: Joi.array().items(Joi.string()).allow(),
-    trackNumber: Joi.number().min(2).max(250).required(),
+    trackNumber: Joi.number().min(1).max(250).required(),
     duration: Joi.string().min(2).max(50).required(),
     web: Joi.string()
       .ruleset.regex(urlRegex)

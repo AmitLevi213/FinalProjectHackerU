@@ -12,7 +12,7 @@ const cardSchema = {
   duration: Joi.string().min(2).max(50).required(),
   releaseYear: Joi.date().required(),
   lyrics: Joi.array().items(Joi.string()).required(),
-  trackNumber: Joi.number().min(2).max(250).required(),
+  trackNumber: Joi.number().min(1).max(250).required(),
   webUrl: Joi.string()
     .ruleset.regex(urlRegex)
     .rule({ message: 'card "web" mast be a valid url' })

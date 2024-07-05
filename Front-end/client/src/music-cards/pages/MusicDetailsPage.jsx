@@ -119,7 +119,7 @@ const MusicDetailsPage = () => {
                 }}
                 variant="h5"
               >
-                Band Page
+                Website
               </Typography>
             </Grid>
           </Grid>
