@@ -6,7 +6,7 @@ import { getCards } from "../service/cardApiService";
 import ROUTES from "../../routes/routesModel";
 import { useTheme } from "../../providers/DarkThemeProvider";
 import { useUser } from "../../users/providers/UserProvider";
-
+import { makeFirstLetterCapital } from "../../forms/utils/upperCaseMethod";
 const PlayListPage = () => {
   const { isDark } = useTheme();
   const { user } = useUser();
@@ -73,7 +73,7 @@ const PlayListPage = () => {
           onClick={() => handleGenreClick(genre)}
         >
           <Typography variant="h6" component="div" sx={{ color: textColor }}>
-            {genre}
+            {makeFirstLetterCapital(genre)}
           </Typography>
           {isBusinessOrAdmin && (
             <Button
