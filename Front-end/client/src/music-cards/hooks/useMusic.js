@@ -41,7 +41,10 @@ const useMusic = () => {
           c.album.includes(query) ||
           String(c.bizNumber).includes(query) ||
           c.artist.includes(query) ||
-          c.releaseYear.includes(query)
+          c.releaseYear.includes(query) ||
+          (Array.isArray(c.genre)
+            ? c.genre.some((g) => g.includes(query))
+            : c.genre.includes(query))
       );
       setFilteredCards(filtered);
     }

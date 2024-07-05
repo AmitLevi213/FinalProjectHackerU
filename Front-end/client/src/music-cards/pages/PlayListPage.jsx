@@ -86,11 +86,11 @@ const PlayListPage = () => {
                 bottom: 16,
                 right: 16,
                 opacity: {
-                  xs: 1, 
-                  sm: 1, 
-                  md: 0, 
+                  xs: 1,
+                  sm: 1,
+                  md: 0,
                 },
-                transition: "opacity 0.3s",
+                transition: "opacity 0.5s",
                 backgroundColor: buttonColor,
                 color: isDark ? "#1a0033" : "#e3f2fd",
                 "&:hover": {
