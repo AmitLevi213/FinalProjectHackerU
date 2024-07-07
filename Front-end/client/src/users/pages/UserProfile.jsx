@@ -42,7 +42,7 @@ const UserProfile = () => {
         elevation={3}
         sx={{
           pt: 2,
-          backgroundColor: isDark ? "#310047" : "#e3f2fd",
+          backgroundColor: isDark ? "#1a0333" : "#e3f2fd",
         }}
       >
         <Grid container alignItems="center" justifyContent="center">

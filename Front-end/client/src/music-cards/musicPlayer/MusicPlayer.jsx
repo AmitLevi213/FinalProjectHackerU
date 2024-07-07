@@ -107,18 +107,14 @@ const MusicPlayer = ({ card }) => {
       <Box mt={2}>
         <Grid container alignItems="center" spacing={2}>
           <Grid item>
-            <IconButton onClick={handlePlayPause} sx={{ color: myColor }}>
+            <IconButton
+              onClick={handlePlayPause}
+              sx={{ color: myColor, mt: 3 }}
+            >
               {isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
             </IconButton>
           </Grid>
-          <Grid item xs>
-            <Slider
-              value={currentTime}
-              max={isNaN(duration) ? 0 : duration}
-              onChange={handleTimestampChange}
-              aria-labelledby="timestamp-slider"
-              sx={{ color: myColor }}
-            />
+          <Grid item xs mt={2}>
             <Grid container justifyContent="space-between">
               <Typography
                 variant="caption"
@@ -133,9 +129,16 @@ const MusicPlayer = ({ card }) => {
                 {formatTime(duration)}
               </Typography>
             </Grid>
+            <Slider
+              value={currentTime}
+              max={isNaN(duration) ? 0 : duration}
+              onChange={handleTimestampChange}
+              aria-labelledby="timestamp-slider"
+              sx={{ color: myColor }}
+            />
           </Grid>
           <Grid item>
-            <IconButton onClick={handleMute} sx={{ color: myColor }}>
+            <IconButton onClick={handleMute} sx={{ color: myColor, mt: 3 }}>
               {isMuted ? (
                 <VolumeMuteIcon />
               ) : volume > 50 ? (
@@ -150,7 +153,7 @@ const MusicPlayer = ({ card }) => {
               value={volume}
               onChange={handleVolumeChange}
               aria-labelledby="volume-slider"
-              sx={{ color: myColor }}
+              sx={{ color: myColor, mt: 3 }}
             />
           </Grid>
         </Grid>
