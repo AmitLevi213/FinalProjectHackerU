@@ -87,16 +87,8 @@ const MusicPlayer = ({ card }) => {
 
   return (
     <div
-      style={{
-        background: isDark ? "#1a0033" : "#e3f2fd",
-        padding: "20px",
-        borderRadius: "10px",
-        boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.5)",
-        width: "100%",
-        maxWidth: "600px",
-        margin: "auto",
-        textAlign: "center",
-      }}
+      className="music-player"
+      style={{ background: isDark ? "#1a0033" : "#e3f2fd" }}
     >
       <Typography
         sx={{ fontFamily: "Oswald, sans-serif", color: myColor }}
@@ -109,6 +101,7 @@ const MusicPlayer = ({ card }) => {
           <Grid item>
             <IconButton
               onClick={handlePlayPause}
+              className="icon-button"
               sx={{ color: myColor, mt: 3 }}
             >
               {isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
@@ -134,11 +127,16 @@ const MusicPlayer = ({ card }) => {
               max={isNaN(duration) ? 0 : duration}
               onChange={handleTimestampChange}
               aria-labelledby="timestamp-slider"
+              className="slider"
               sx={{ color: myColor }}
             />
           </Grid>
           <Grid item>
-            <IconButton onClick={handleMute} sx={{ color: myColor, mt: 3 }}>
+            <IconButton
+              onClick={handleMute}
+              className="icon-button"
+              sx={{ color: myColor, mt: 3 }}
+            >
               {isMuted ? (
                 <VolumeMuteIcon />
               ) : volume > 50 ? (
@@ -153,16 +151,18 @@ const MusicPlayer = ({ card }) => {
               value={volume}
               onChange={handleVolumeChange}
               aria-labelledby="volume-slider"
+              className="slider"
               sx={{ color: myColor, mt: 3 }}
             />
           </Grid>
         </Grid>
       </Box>
-      <div className="lyrics-container" style={{ marginTop: "20px" }}>
+      <div className="lyrics-container">
         {lyrics.map((line, index) => (
           <Typography
             key={index}
             variant="body1"
+            className="lyrics-line"
             sx={{ color: myColor, fontFamily: "Oswald, sans-serif" }}
           >
             {line}
