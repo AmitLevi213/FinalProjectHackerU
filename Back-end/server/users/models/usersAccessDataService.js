@@ -6,123 +6,111 @@ const User = require("./mongodb/User");
 const lodash = require("lodash");
 
 const registerUser = async (normalizedUser) => {
-  if (DB === "MONGODB") {
-    try {
-      const { email } = normalizedUser;
-      let user = await User.findOne({ email });
-      if (user) {
-        throw new Error("User already exists");
-      }
-      user = new User(normalizedUser);
-      user = await user.save();
-      user = lodash.pick(user, ["_id", "name", "email"]);
-      return Promise.resolve(user);
-    } catch (error) {
-      error.status = 404;
-      return Promise.reject(error);
+  if (DB !== "MONGODB") return "registerUser not in mongoDB";
+
+  try {
+    const { email } = normalizedUser;
+    let user = await User.findOne({ email });
+    if (user) {
+      throw new Error("User already exists");
     }
+    user = new User(normalizedUser);
+    user = await user.save();
+    user = lodash.pick(user, ["_id", "name", "email"]);
+    return user;
+  } catch (error) {
+    return handleBadRequest("Mongoose", { ...error, status: 404 });
   }
-  return Promise.resolve("registerUser  not in mongoDB");
 };
 
 const loginUser = async ({ email, password }) => {
+  if (DB !== "MONGODB") return "loginUser not in mongoDB";
+
   try {
-    if (DB === "MONGODB") {
-      const user = await User.findOne({ email });
-      if (!user) throw new Error("Invalid email or password");
-      const validPassword = comparePassword(password, user.password);
-      if (!validPassword) throw new Error("Invalid email or password");
-      const token = generateAuthToken(user);
-      return Promise.resolve(token);
-    } else {
-      return Promise.resolve("user created not in mongoDB");
+    const user = await User.findOne({ email });
+    if (!user || !comparePassword(password, user.password)) {
+      throw new Error("Invalid email or password");
     }
+    const token = generateAuthToken(user);
+    return token;
   } catch (error) {
-    return handleBadRequest("Mongoose", error);
+    return handleBadRequest("Mongoose", { ...error, status: 404 });
   }
 };
 
 const getUsers = async () => {
-  if (DB === "MONGODB") {
-    try {
-      const users = await User.find();
-      return Promise.resolve(users);
-    } catch (error) {
-      error.status = 404;
-      return Promise.reject(error);
-    }
+  if (DB !== "MONGODB") return "getUsers not in mongoDB";
+
+  try {
+    const users = await User.find();
+    return users;
+  } catch (error) {
+    return handleBadRequest("Mongoose", { ...error, status: 404 });
   }
-  return Promise.resolve("get users not in mongodb");
 };
 
 const getUser = async (userId) => {
-  if (DB === "MONGODB") {
-    try {
-      const user = await User.findOne({ _id: userId });
-      if (!user) throw new Error("User not found");
-      return Promise.resolve(user);
-    } catch (error) {
-      error.status = 404;
-      return Promise.reject(error);
-    }
+  if (DB !== "MONGODB") return "getUser not in mongoDB";
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) throw new Error("User not found");
+    return user;
+  } catch (error) {
+    return handleBadRequest("Mongoose", { ...error, status: 404 });
   }
-  return Promise.resolve("get user not in mongodb");
 };
 
-const updateUser = async (userId, normalizeUser) => {
-  if (DB === "MONGODB") {
-    try {
-      const user = await User.findByIdAndUpdate(userId, normalizeUser, {
-        new: true,
-      });
-      return Promise.resolve({ user });
-    } catch (error) {
-      error.status = 400;
-      return Promise.reject(error);
-    }
+const updateUser = async (userId, normalizedUser) => {
+  if (DB !== "MONGODB") return "updateUser not in mongoDB";
+
+  try {
+    const user = await User.findByIdAndUpdate(userId, normalizedUser, {
+      new: true,
+    });
+    return user;
+  } catch (error) {
+    return handleBadRequest("Mongoose", { ...error, status: 400 });
   }
-  return Promise.resolve("card update not in mongodb");
 };
 
 const changeUserBusinessStatus = async (id) => {
-  if (DB === "MONGODB") {
-    try {
-      const pipeline = [{ $set: { isBusiness: { $not: "$isBusiness" } } }];
-      const user = await User.findByIdAndUpdate(id, pipeline, {
-        new: true,
-      });
+  if (DB !== "MONGODB") return "changeUserBusinessStatus not in mongoDB";
 
-      if (!user)
-        throw new Error(
-          "Could not update this user isBusiness status because a user with this ID cannot be found in the database"
-        );
-      return Promise.resolve(user);
-    } catch (error) {
-      error.status = 404;
-      return handleBadRequest("Mongoose", error);
-    }
+  try {
+    const user = await User.findByIdAndUpdate(
+      id,
+      { $set: { isBusiness: { $not: "$isBusiness" } } },
+      { new: true }
+    );
+    if (!user)
+      throw new Error(
+        "Could not update this user's isBusiness status because a user with this ID cannot be found in the database"
+      );
+    return user;
+  } catch (error) {
+    return handleBadRequest("Mongoose", { ...error, status: 404 });
   }
-
-  return Promise.resolve("Card Updated!");
 };
 
 const deleteUser = async (userId) => {
-  if (DB === "MONGODB") {
-    try {
-      const user = User.findByIdAndDelete(userId);
-      return Promise.resolve(user);
-    } catch (error) {
-      error.status = 400;
-      return Promise.reject(error);
-    }
+  if (DB !== "MONGODB") return "deleteUser not in mongoDB";
+
+  try {
+    const user = await User.findByIdAndDelete(userId);
+    if (!user) throw new Error("User not found");
+    return user;
+  } catch (error) {
+    return handleBadRequest("Mongoose", { ...error, status: 400 });
   }
-  return Promise.resolve("card deleted not in mongodb");
 };
 
-exports.registerUser = registerUser;
-exports.loginUser = loginUser;
-exports.getUsers = getUsers;
-exports.getUser = getUser;
-exports.updateUser = updateUser;
-exports.changeUserBusinessStatus = changeUserBusinessStatus;
-exports.deleteUser = deleteUser;
+module.exports = {
+  registerUser,
+  loginUser,
+  getUsers,
+  getUser,
+  updateUser,
+  changeUserBusinessStatus,
+  deleteUser,
+};
