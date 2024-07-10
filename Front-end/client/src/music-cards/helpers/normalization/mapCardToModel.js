@@ -4,6 +4,7 @@ export const mapCardToModel = (card) => ({
   artist: card.artist,
   album: card.album,
   trackNumber: card.trackNumber,
+  lyrics: card.lyrics,
   releaseYear: card.releaseYear,
   duration: card.duration,
   webUrl: card.web,

@@ -51,7 +51,7 @@ const EditUserMusicPage = () => {
       }}
     >
       <EditCardForm
-        title="Edit Your Music"
+        title="Edit Your Card Music"
         data={value.formData}
         onSubmit={rest.onSubmit}
         onReset={() => rest.setFormData(initialForm)}

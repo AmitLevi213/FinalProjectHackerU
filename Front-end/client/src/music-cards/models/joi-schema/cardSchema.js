@@ -28,7 +28,6 @@ export const editCardSchema = {
   artist: Joi.string().min(2).max(250).required(),
   album: Joi.string().min(2).max(250).required(),
   description: Joi.string().min(2).max(250).required(),
-  genre: Joi.array().items(Joi.string()).allow(),
   duration: Joi.string().min(2).max(50).required(),
   releaseYear: Joi.date().required(),
   lyrics: Joi.array().items(Joi.string()).allow(),
@@ -41,7 +40,6 @@ export const editCardSchema = {
     .ruleset.regex(urlRegex)
     .rule({ message: 'card.image "url" mast be a valid url' }),
   imageAlt: Joi.string().min(2).max(250).allow(""),
-  audio: Joi.object().unknown(true).allow(),
 };
 
 export default cardSchema;

@@ -23,6 +23,7 @@ export const initialEditCardForm = {
   artist: "",
   album: "",
   duration: "",
+  lyrics: "",
   releaseYear: new Date(),
 };
 export default initialCardForm;
