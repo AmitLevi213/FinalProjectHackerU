@@ -7,7 +7,7 @@ const validateCardWithJoi = (card) => {
   const schema = Joi.object({
     songTitle: Joi.string().min(2).max(256).required(),
     artist: Joi.string().min(2).max(256).required(),
-    description: Joi.string().min(2).max(1024).required(),
+    description: Joi.string().min(2).max(2560).required(),
     album: Joi.string().min(2).max(250).required(),
     genre: Joi.array().items(Joi.string()).allow(),
     releaseYear: Joi.date().required(),

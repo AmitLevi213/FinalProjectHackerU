@@ -2,8 +2,8 @@ import { func, object } from "prop-types";
 import ROUTES from "../../routes/routesModel";
 import InputComponent from "../../forms/components/InputComponent";
 import FormComponent from "../../forms/components/FormComponent";
-import styled from "styled-components";
-
+import "./CardForm.css";
+import { useTheme } from "../../providers/DarkThemeProvider";
 export const formatDate = (date) => {
   const d = new Date(date);
   let month = "" + (d.getMonth() + 1);
@@ -16,37 +16,6 @@ export const formatDate = (date) => {
   return [year, month, day].join("-");
 };
 
-const StyledFileInput = styled.div`
-  .file-input-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-  }
-  .file-input {
-    display: none;
-  }
-  .file-label {
-    display: inline-block;
-    width: 100%;
-    padding: 10px 20px;
-    background-color: #1a0033;
-    color: #e3f2fd;
-    text-align: center;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-
-    &:hover {
-      background-color: #5a0da2;
-    }
-  }
-  .file-name {
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: purple;
-  }
-`;
-
 const CardForm = ({
   onSubmit,
   onReset,
@@ -56,13 +25,16 @@ const CardForm = ({
   onInputChange,
   title,
 }) => {
+  const { isDark } = useTheme();
+  const myColor = isDark ? "#1a0033" : "#e3f2fd";
+  const textColor = isDark ? "#e3f2fd" : "#1a0033";
+
   const formattedData = {
     ...data,
     releaseYear: data.releaseYear ? formatDate(data.releaseYear) : "",
     genre: Array.isArray(data.genre) ? data.genre.join(", ") : "",
-    lyrics: Array.isArray(data.lyrics) ? data.lyrics.join("\n") : "",
+    lyrics: Array.isArray(data.lyrics) ? data.lyrics.join(", ") : "\n",
   };
-
   const handleGenreChange = (event) => {
     const { value } = event.target;
     const genres = value ? value.split(",").map((genre) => genre.trim()) : [];
@@ -76,27 +48,14 @@ const CardForm = ({
 
   const handleLyricsChange = (event) => {
     const { value } = event.target;
-    const lyricsArray = value
-      ? value.split("\n").map((line) => line.trim())
-      : [];
+    const lyrics = value ? value.split(",").map((line) => line.trim()) : [];
     onInputChange({
       target: {
         name: "lyrics",
-        value: lyricsArray,
+        value: lyrics,
       },
     });
   };
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    onInputChange({
-      target: {
-        name: "audio",
-        value: file,
-      },
-    });
-  };
-
   return (
     <FormComponent
       onSubmit={onSubmit}
@@ -145,6 +104,7 @@ const CardForm = ({
         error={errors.genre}
         handleChange={handleGenreChange}
         data={formattedData}
+        required={false}
         sm={6}
       />
       <InputComponent
@@ -202,24 +162,24 @@ const CardForm = ({
         error={errors.lyrics}
         handleChange={handleLyricsChange}
         data={formattedData}
+        required={false}
         sm={6}
       />
 
-      <StyledFileInput>
-        <div className="file-input-wrapper">
-          <input
-            type="file"
-            id="audio"
-            name="audio"
-            className="file-input"
-            onChange={handleFileChange}
-          />
-          <label htmlFor="audio" className="file-label">
-            Choose a file
-          </label>
-          {data.audio && <div className="file-name">{data.audio.name}</div>}
-        </div>
-      </StyledFileInput>
+      <div
+        className="custom-file-input"
+        style={{ backgroundColor: myColor, color: textColor }}
+      >
+        <input
+          type="file"
+          name="audio"
+          onChange={onInputChange}
+          className="custom-file-input"
+          required
+          data={formattedData}
+        />
+        Choose File
+      </div>
     </FormComponent>
   );
 };

@@ -1,0 +1,29 @@
+.custom-file-input {
+  position: relative;
+  display: inline-block;
+  border: 2px solid #ccc;
+  padding: 10px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.custom-file-input input[type="file"] {
+  position: absolute;
+  font-size: 100px;
+  opacity: 0;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+.custom-file-input:hover {
+  background-color: #e0e0e0;
+}
+
+.custom-file-input:active {
+  background-color: #d0d0d0;
+}

@@ -9,7 +9,7 @@ const cardSchema = new mongoose.Schema({
   description: {
     type: String,
     minLength: 2,
-    maxLength: 256,
+    maxLength: 2560,
     trim: true,
     lowercase: true,
     required: false,
