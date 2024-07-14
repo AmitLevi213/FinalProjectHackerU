@@ -73,24 +73,26 @@ const updateUser = async (userId, normalizedUser) => {
     return handleBadRequest("Mongoose", { ...error, status: 400 });
   }
 };
-
 const changeUserBusinessStatus = async (id) => {
-  if (DB !== "MONGODB") return "changeUserBusinessStatus not in mongoDB";
+  if (DB === "MONGODB") {
+    try {
+      const pipeline = [{ $set: { isBusiness: { $not: "$isBusiness" } } }];
+      const user = await User.findByIdAndUpdate(id, pipeline, {
+        new: true,
+      });
 
-  try {
-    const user = await User.findByIdAndUpdate(
-      id,
-      { $set: { isBusiness: { $not: "$isBusiness" } } },
-      { new: true }
-    );
-    if (!user)
-      throw new Error(
-        "Could not update this user's isBusiness status because a user with this ID cannot be found in the database"
-      );
-    return user;
-  } catch (error) {
-    return handleBadRequest("Mongoose", { ...error, status: 404 });
+      if (!user)
+        throw new Error(
+          "Could not update this user isBusiness status because a user with this ID cannot be found in the database"
+        );
+      return Promise.resolve(user);
+    } catch (error) {
+      error.status = 404;
+      return handleBadRequest("Mongoose", error);
+    }
   }
+
+  return Promise.resolve("Card Updated!");
 };
 
 const deleteUser = async (userId) => {

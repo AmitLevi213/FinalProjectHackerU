@@ -106,15 +106,18 @@ router.patch("/:id", auth, async (req, res) => {
   try {
     const { _id } = req.user;
     const { id } = req.params;
-    if (_id !== id && !req.user.isAdmin)
+    if (_id !== id && !req.user.isAdmin) {
+      console.log("Authorization failed");
       return handleError(
         res,
         403,
-        "Authorization Error: You must the registered user or admin to change this user status"
+        "Authorization Error: You must be the registered user or admin to change this user status"
       );
+    }
     const user = await changeUserBusinessStatus(id);
     return res.send(user);
   } catch (error) {
+    console.error("Error in changeUserBusinessStatus:", error);
     return handleError(res, error.status || 500, error.message);
   }
 });
