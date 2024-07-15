@@ -6,7 +6,9 @@ const NavItem = ({ label, to, color }) => {
   return (
     <NavBarLink to={to} color={color}>
       <Button color="inherit">
-        <Typography sx={{ fontFamily: "Oswald, sans-serif" }}>
+        <Typography
+          sx={{ fontFamily: "Oswald, sans-serif", textTransform: "none" }}
+        >
           {label}
         </Typography>
       </Button>

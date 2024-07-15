@@ -2,7 +2,11 @@ import { useNavigate } from "react-router-dom";
 import InfoIcon from "@mui/icons-material/Info";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
-import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
+import {
+  AppBar,
+  BottomNavigation,
+  BottomNavigationAction,
+} from "@mui/material";
 import ROUTES from "../../routes/routesModel";
 import { useUser } from "../../users/providers/UserProvider";
 import { useTheme } from "../../providers/DarkThemeProvider";
@@ -16,12 +20,10 @@ const Footer = () => {
   const iconColor = isDark ? "#e3f2fd" : "#1a0033";
 
   return (
-    <Paper
+    <AppBar
       sx={{
         position: "sticky",
         bottom: 0,
-        left: 0,
-        right: 0,
         boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.5)",
       }}
       elevation={3}
@@ -67,7 +69,7 @@ const Footer = () => {
           sx={{ color: iconColor, fontFamily: "Oswald, sans-serif" }}
         />
       </BottomNavigation>
-    </Paper>
+    </AppBar>
   );
 };
 export default Footer;

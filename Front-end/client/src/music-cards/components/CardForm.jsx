@@ -26,7 +26,6 @@ const CardForm = ({
   title,
 }) => {
   const { isDark } = useTheme();
-  const myColor = isDark ? "#1a0033" : "#e3f2fd";
   const textColor = isDark ? "#e3f2fd" : "#1a0033";
 
   const formattedData = {
@@ -89,6 +88,7 @@ const CardForm = ({
         type="date"
         data={formattedData}
         sm={6}
+        className={isDark ? "dark-theme" : "light-theme"}
       />
       <InputComponent
         name="album"
@@ -170,7 +170,9 @@ const CardForm = ({
 
       <div
         className="custom-file-input"
-        style={{ backgroundColor: myColor, color: textColor }}
+        style={{
+          color: textColor,
+        }}
       >
         <input
           type="file"

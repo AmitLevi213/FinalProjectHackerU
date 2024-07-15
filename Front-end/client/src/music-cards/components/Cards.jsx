@@ -1,32 +1,28 @@
 import { useState } from "react";
-import { Container, Stack, Typography, Button, Box } from "@mui/material";
+import { Container, Stack, Typography, Box, IconButton } from "@mui/material";
 import CardComponent from "./card/CardComponent";
-import { useTheme } from "../../providers/DarkThemeProvider";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 const Cards = ({ cards, onDeleteCard, onLike }) => {
-  const { isDark } = useTheme();
   const methods = { onDeleteCard, onLike };
-  const [currentPage, setCurrentPage] = useState(1);
+  const [page, setPage] = useState(0);
   const itemsPerPage = 3;
 
-  const totalPages = Math.ceil(cards.length / itemsPerPage);
-
   const handleNextPage = () => {
-    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+    setPage((prevPage) => prevPage + 1);
   };
 
   const handlePrevPage = () => {
-    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+    setPage((prevPage) => Math.max(prevPage - 1, 0));
   };
 
-  const getPaginatedCards = () => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    return cards.slice(startIndex, startIndex + itemsPerPage);
-  };
+  const visibleCards = cards.slice(
+    page * itemsPerPage,
+    (page + 1) * itemsPerPage
+  );
 
-  const paginatedCards = getPaginatedCards();
-
-  if (!paginatedCards.length) {
+  if (!visibleCards.length) {
     return <Typography variant="h5">No cards found</Typography>;
   }
 
@@ -34,45 +30,31 @@ const Cards = ({ cards, onDeleteCard, onLike }) => {
     <Container>
       <Stack
         spacing={4}
-        gap={2}
+        gap={3}
         direction="row"
-        my={3}
+        my={2}
         flexWrap="wrap"
         justifyContent="center"
       >
-        {paginatedCards.map((card, i) => (
+        {visibleCards.map((card, i) => (
           <CardComponent {...methods} card={card} key={i}></CardComponent>
         ))}
       </Stack>
       <Box display="flex" justifyContent="center" m={3}>
-        <Button
+        <IconButton
+          aria-label="previous page"
           onClick={handlePrevPage}
-          disabled={currentPage === 1}
-          sx={{
-            backgroundColor: isDark ? "#1a0033" : "#e3f2fd",
-            color: isDark ? "#e3f2fd" : "#1a0033",
-            mx: 1,
-          }}
+          disabled={page === 0}
         >
-          Prev
-        </Button>
-        <Typography
-          variant="body1"
-          sx={{ color: isDark ? "#e3f2fd" : "#1a0033", mx: 1 }}
-        >
-          Page {currentPage} of {totalPages}
-        </Typography>
-        <Button
+          <NavigateBeforeIcon />
+        </IconButton>
+        <IconButton
+          aria-label="next page"
           onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-          sx={{
-            backgroundColor: isDark ? "#1a0033" : "#e3f2fd",
-            color: isDark ? "#e3f2fd" : "#1a0033",
-            mx: 1,
-          }}
+          disabled={(page + 1) * itemsPerPage >= cards.length}
         >
-          Next
-        </Button>
+          <NavigateNextIcon />
+        </IconButton>
       </Box>
     </Container>
   );
