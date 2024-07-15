@@ -35,27 +35,27 @@ const CardForm = ({
     genre: Array.isArray(data.genre) ? data.genre.join(", ") : "",
     lyrics: Array.isArray(data.lyrics) ? data.lyrics.join(", ") : "\n",
   };
+
   const handleGenreChange = (event) => {
     const { value } = event.target;
-    const genres = value ? value.split(",").map((genre) => genre.trim()) : [];
     onInputChange({
       target: {
         name: "genre",
-        value: genres,
+        value: value.split(",").map((genre) => genre.trim()),
       },
     });
   };
 
   const handleLyricsChange = (event) => {
     const { value } = event.target;
-    const lyrics = value ? value.split(",").map((line) => line.trim()) : [];
     onInputChange({
       target: {
         name: "lyrics",
-        value: lyrics,
+        value: value.split(",").map((line) => line.trim()),
       },
     });
   };
+
   return (
     <FormComponent
       onSubmit={onSubmit}
