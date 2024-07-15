@@ -164,6 +164,8 @@ const CardForm = ({
         data={formattedData}
         required={false}
         sm={6}
+        multiline={true}
+        rows="3"
       />
 
       <div
@@ -176,7 +178,7 @@ const CardForm = ({
           onChange={onInputChange}
           className="custom-file-input"
           required
-          data={formattedData}
+          data={data}
         />
         Choose File
       </div>

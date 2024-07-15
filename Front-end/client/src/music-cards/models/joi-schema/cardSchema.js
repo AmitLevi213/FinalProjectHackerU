@@ -11,7 +11,7 @@ const cardSchema = {
   genre: Joi.array().items(Joi.string()).allow(),
   duration: Joi.string().min(2).max(50).required(),
   releaseYear: Joi.date().required(),
-  lyrics: Joi.array().items(Joi.string()).required(),
+  lyrics: Joi.array().items(Joi.string()).allow(),
   trackNumber: Joi.number().min(1).max(250).required(),
   webUrl: Joi.string()
     .ruleset.regex(urlRegex)
@@ -21,7 +21,7 @@ const cardSchema = {
     .ruleset.regex(urlRegex)
     .rule({ message: 'card.image "url" mast be a valid url' }),
   imageAlt: Joi.string().min(2).max(250).allow(""),
-  audio: Joi.object().unknown(true).allow(),
+  audio: Joi.object().unknown(true).required(),
 };
 export const editCardSchema = {
   songTitle: Joi.string().min(2).max(250).required(),
@@ -30,7 +30,7 @@ export const editCardSchema = {
   description: Joi.string().min(2).max(2560).required(),
   duration: Joi.string().min(2).max(50).required(),
   releaseYear: Joi.date().required(),
-  lyrics: Joi.array().items(Joi.string()).allow(),
+  lyrics: Joi.array().items(Joi.string()).required(),
   trackNumber: Joi.number().required(),
   webUrl: Joi.string()
     .ruleset.regex(urlRegex)
@@ -38,7 +38,8 @@ export const editCardSchema = {
     .required(),
   imageUrl: Joi.string()
     .ruleset.regex(urlRegex)
-    .rule({ message: 'card.image "url" mast be a valid url' }),
+    .rule({ message: 'card.image "url" mast be a valid url' })
+    .allow(),
   imageAlt: Joi.string().min(2).max(250).allow(""),
 };
 

@@ -15,6 +15,8 @@ const InputComponent = ({
   error,
   handleChange,
   labelColor,
+  multiline,
+  rows,
   ...rest
 }) => {
   const { isDark } = useTheme();
@@ -48,6 +50,8 @@ const InputComponent = ({
         onChange={handleChange}
         fullWidth
         autoComplete="off"
+        multiline={multiline}
+        rows={rows}
         sx={{
           backgroundColor: isDark ? "#1a0033" : "#e3f2fd",
           "& .MuiInputLabel-root": {
@@ -68,12 +72,16 @@ InputComponent.propTypes = {
   variant: string,
   data: object.isRequired,
   labelColor: string,
+  multiline: bool,
+  rows: string,
 };
 
 InputComponent.defaultProps = {
   variant: "outlined",
   type: "text",
   required: true,
+  multiline: false,
+  rows: "1",
 };
 
 export default InputComponent;

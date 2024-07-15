@@ -16,7 +16,8 @@ const validateCardWithJoi = (card) => {
     duration: Joi.string().min(2).max(50).required(),
     web: Joi.string()
       .ruleset.regex(urlRegex)
-      .rule({ message: 'card "web" mast be a valid url' }),
+      .rule({ message: 'card "web" mast be a valid url' })
+      .required(),
     image: Joi.object()
       .keys({
         url: Joi.string()
@@ -28,7 +29,7 @@ const validateCardWithJoi = (card) => {
       .required(),
     bizNumber: Joi.number().allow(""),
     user_id: Joi.string().allow(""),
-    audio: Joi.string().allow(),
+    audio: Joi.string().required(),
   });
   return schema.validate(card);
 };

@@ -49,12 +49,27 @@ const EditCardForm = ({
         sm={6}
       />
       <InputComponent
+        name="artist"
+        label="artist"
+        error={errors.artist}
+        handleChange={onInputChange}
+        data={data}
+        sm={6}
+      />
+      <InputComponent
+        name="album"
+        label="album"
+        error={errors.album}
+        handleChange={onInputChange}
+        data={data}
+        sm={6}
+      />
+      <InputComponent
         name="description"
         label="description"
         error={errors.description}
         handleChange={onInputChange}
         data={data}
-        required={false}
         sm={6}
       />
       <InputComponent
@@ -72,6 +87,7 @@ const EditCardForm = ({
         handleChange={onInputChange}
         data={data}
         sm={6}
+        required={false}
       />
       <InputComponent
         name="imageAlt"
@@ -82,24 +98,7 @@ const EditCardForm = ({
         sm={6}
         required={false}
       />
-      <InputComponent
-        name="artist"
-        label="artist"
-        error={errors.artist}
-        handleChange={onInputChange}
-        data={data}
-        sm={6}
-        required={false}
-      />
-      <InputComponent
-        name="album"
-        label="album"
-        error={errors.album}
-        handleChange={onInputChange}
-        data={data}
-        sm={6}
-        required={false}
-      />
+
       <InputComponent
         name="duration"
         label="duration"
