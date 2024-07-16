@@ -26,7 +26,7 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
       setDuration(0);
       setIsPlaying(false);
     }
-  }, [audioFiles, currentIndex, volume]);
+  }, [audioFiles, currentIndex]);
 
   useEffect(() => {
     const updateDuration = () => {
@@ -44,7 +44,11 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
       audioRef.current.removeEventListener("loadedmetadata", updateDuration);
       audioRef.current.removeEventListener("timeupdate", updateTime);
     };
-  }, [audioFiles, currentIndex]);
+  }, []);
+
+  useEffect(() => {
+    audioRef.current.volume = volume / 100;
+  }, [volume]);
 
   const handlePlayPause = () => {
     if (isPlaying) {
@@ -56,9 +60,11 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
   };
 
   const handleVolumeChange = (newValue) => {
-    setVolume(newValue);
-    audioRef.current.volume = newValue / 100;
-    setIsMuted(newValue === 0);
+    if (isFinite(newValue)) {
+      setVolume(newValue);
+      audioRef.current.volume = newValue / 100;
+      setIsMuted(newValue === 0);
+    }
   };
 
   const handleMute = () => {
@@ -171,7 +177,7 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
         <Grid item xs={3}>
           <Slider
             value={volume}
-            onChange={handleVolumeChange}
+            onChange={(e, newValue) => handleVolumeChange(newValue)}
             aria-labelledby="volume-slider"
             sx={{
               color: iconColor,
