@@ -118,6 +118,7 @@ const CardForm = ({
       <InputComponent
         name="trackNumber"
         label="Track Number"
+        type="number"
         error={errors.trackNumber}
         handleChange={onInputChange}
         data={data}
