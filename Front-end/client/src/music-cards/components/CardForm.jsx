@@ -104,7 +104,7 @@ const CardForm = ({
         error={errors.genre}
         handleChange={handleGenreChange}
         data={formattedData}
-        required={false}
+        required={true}
         sm={6}
       />
       <InputComponent
@@ -163,7 +163,7 @@ const CardForm = ({
         error={errors.lyrics}
         handleChange={handleLyricsChange}
         data={formattedData}
-        required={false}
+        required={true}
         sm={6}
         multiline={true}
         rows="3"

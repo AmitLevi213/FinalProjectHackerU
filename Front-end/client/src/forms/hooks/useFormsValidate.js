@@ -76,9 +76,7 @@ const useFormsValidate = (initialForm, schema, handleSubmit) => {
         }));
         return;
       }
-
       const { audio, ...formDataWithoutAudio } = formData;
-
       if (audio) {
         try {
           const downloadURL = await uploadAudioToFirebase(audio);

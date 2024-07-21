@@ -8,10 +8,10 @@ const cardSchema = {
   artist: Joi.string().min(2).max(250).required(),
   album: Joi.string().min(2).max(250).required(),
   description: Joi.string().min(2).max(2560).required(),
-  genre: Joi.array().items(Joi.string()).allow(),
+  genre: Joi.array().items(Joi.string()).required(),
   duration: Joi.string().min(2).max(50).required(),
   releaseYear: Joi.date().required(),
-  lyrics: Joi.array().items(Joi.string()).allow(),
+  lyrics: Joi.array().items(Joi.string()).required(),
   trackNumber: Joi.number().min(1).max(250).required(),
   webUrl: Joi.string()
     .ruleset.regex(urlRegex)
@@ -21,7 +21,7 @@ const cardSchema = {
     .ruleset.regex(urlRegex)
     .rule({ message: 'card.image "url" mast be a valid url' }),
   imageAlt: Joi.string().min(2).max(250).allow(""),
-  audio: Joi.object().unknown(true).required(),
+  audio: Joi.object().unknown(true).allow(),
 };
 export const editCardSchema = {
   songTitle: Joi.string().min(2).max(250).required(),

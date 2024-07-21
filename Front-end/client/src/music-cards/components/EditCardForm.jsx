@@ -132,7 +132,9 @@ const EditCardForm = ({
         handleChange={handleLyricsChange}
         data={formattedData}
         sm={6}
-        required={true}
+        required={false}
+        multiline={true}
+        rows="3"
       />
     </FormComponent>
   );
