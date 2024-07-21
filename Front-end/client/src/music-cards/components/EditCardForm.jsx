@@ -87,7 +87,6 @@ const EditCardForm = ({
         handleChange={onInputChange}
         data={data}
         sm={6}
-        required={false}
       />
       <InputComponent
         name="imageAlt"
