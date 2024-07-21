@@ -35,21 +35,22 @@ const useMusic = () => {
 
   useEffect(() => {
     if (cards) {
-      const filtered = cards.filter(
-        (c) =>
-          c.songTitle.includes(query) ||
-          c.album.includes(query) ||
-          String(c.bizNumber).includes(query) ||
-          c.artist.includes(query) ||
-          c.releaseYear.includes(query) ||
+      const filtered = cards.filter((c) => {
+        const normalizedQuery = query.toLowerCase();
+        return (
+          c.songTitle.toLowerCase().includes(normalizedQuery) ||
+          c.album.toLowerCase().includes(normalizedQuery) ||
+          String(c.bizNumber).includes(normalizedQuery) ||
+          c.artist.toLowerCase().includes(normalizedQuery) ||
+          c.releaseYear.includes(normalizedQuery) ||
           (Array.isArray(c.genre)
-            ? c.genre.some((g) => g.includes(query))
-            : c.genre.includes(query))
-      );
+            ? c.genre.some((g) => g.toLowerCase().includes(normalizedQuery))
+            : c.genre.toLowerCase().includes(normalizedQuery))
+        );
+      });
       setFilteredCards(filtered);
     }
   }, [query, cards]);
-
   const requestStatus = (card, cards, isPending, error) => {
     setCard(card);
     setCards(cards);
