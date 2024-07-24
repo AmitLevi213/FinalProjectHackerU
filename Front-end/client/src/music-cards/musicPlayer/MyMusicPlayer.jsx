@@ -82,7 +82,7 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
     );
   };
 
-  const handleTimestampChange = (event, newValue) => {
+  const handleTimestampChange = (newValue) => {
     setCurrentTime(newValue);
     audioRef.current.currentTime = newValue;
   };
@@ -93,7 +93,7 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
     return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
   };
 
-  const iconColor = isDark ? "#ffffff" : "#310047";
+  const iconColor = isDark ? "#e3f2fd" : "#1a0033";
 
   return (
     <Box
