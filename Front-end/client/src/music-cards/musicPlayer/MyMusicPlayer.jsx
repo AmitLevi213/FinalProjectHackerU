@@ -16,10 +16,12 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
   const [isMuted, setIsMuted] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const audioRef = useRef(new Audio());
 
   useEffect(() => {
     if (audioFiles.length > 0) {
+      setIsLoading(true);
       audioRef.current.src = audioFiles[currentIndex].audio;
       audioRef.current.volume = volume / 100;
       setCurrentTime(0);
@@ -31,6 +33,7 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
   useEffect(() => {
     const updateDuration = () => {
       setDuration(audioRef.current.duration);
+      setIsLoading(false);
     };
 
     const updateTime = () => {
@@ -50,13 +53,21 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
     audioRef.current.volume = volume / 100;
   }, [volume]);
 
-  const handlePlayPause = () => {
+  const handlePlayPause = async () => {
     if (isPlaying) {
       audioRef.current.pause();
+      setIsPlaying(false);
     } else {
-      audioRef.current.play();
+      try {
+        setIsLoading(true);
+        await audioRef.current.play();
+        setIsPlaying(true);
+      } catch (error) {
+        console.error("Error playing audio:", error);
+      } finally {
+        setIsLoading(false);
+      }
     }
-    setIsPlaying(!isPlaying);
   };
 
   const handleVolumeChange = (newValue) => {
@@ -83,8 +94,10 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
   };
 
   const handleTimestampChange = (newValue) => {
-    setCurrentTime(newValue);
-    audioRef.current.currentTime = newValue;
+    if (isFinite(newValue)) {
+      setCurrentTime(newValue);
+      audioRef.current.currentTime = newValue;
+    }
   };
 
   const formatTime = (time) => {
@@ -131,7 +144,11 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
           </IconButton>
         </Grid>
         <Grid item>
-          <IconButton onClick={handlePlayPause} sx={{ color: iconColor }}>
+          <IconButton
+            onClick={handlePlayPause}
+            sx={{ color: iconColor }}
+            disabled={isLoading}
+          >
             {isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
           </IconButton>
         </Grid>
@@ -144,7 +161,7 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
           <Slider
             value={currentTime}
             max={isNaN(duration) ? 0 : duration}
-            onChange={handleTimestampChange}
+            onChange={(e, newValue) => handleTimestampChange(newValue)}
             aria-labelledby="timestamp-slider"
             sx={{ color: iconColor, mt: 2 }}
           />
