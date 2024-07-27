@@ -1,8 +1,14 @@
 import PageHeader from "../components/PageHeader";
 import { Container, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import { useTheme } from "../providers/DarkThemeProvider";
 
 const AboutPage = () => {
+  const { isDark } = useTheme();
+  const imageSrc = isDark
+    ? "/assets/images/darkImage.png"
+    : "/assets/images/lightImage.png";
+
   return (
     <Container>
       <PageHeader
@@ -16,14 +22,12 @@ const AboutPage = () => {
             variant="h4"
             color="text.primary"
           >
-            {" "}
-            Welcome to SoundScape Central Showcase{" "}
+            Welcome to SoundScape Central Showcase
           </Typography>
           <Typography
             color="text.primary"
             sx={{ fontFamily: "Oswald, sans-serif" }}
           >
-            {" "}
             SoundScape Central is an innovative platform designed to elevate
             your music presence by offering a dynamic and immersive experience
             for both creators and enthusiasts. Through visually captivating
@@ -42,7 +46,7 @@ const AboutPage = () => {
           alignSelf="center"
           sx={{ display: { md: "flex", xs: "flex" }, justifyContent: "center" }}
         >
-          <img src="/assets/images/demoCard.png" alt="card" width="100%" />
+          <img src={imageSrc} alt="card" width="100%" />
         </Grid>
       </Grid>
     </Container>
