@@ -1,4 +1,4 @@
-SoundScape Central Backend Overview
+<!-- SoundScape Central Backend Overview
 Welcome to SoundScape Central Backend, a robust Node.js application tailored to meet the demands of managing your music-centric business operations efficiently. Whether you're a musician, a music producer, or a music venue owner, this backend system offers a solid foundation for powering your music-related offerings behind the scenes.
 
 Features
@@ -72,4 +72,4 @@ react: Version 18.2.0
 react-dom: Version 18.2.0
 react-router-dom: Version 6.21.3
 react-scripts: Version 5.0.1
-web-vitals: Version 2.1.4
+web-vitals: Version 2.1.4 -->
