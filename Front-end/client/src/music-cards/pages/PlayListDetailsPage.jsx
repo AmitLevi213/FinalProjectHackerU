@@ -6,7 +6,7 @@ import { getCards } from "../service/cardApiService";
 import { useTheme } from "../../providers/DarkThemeProvider";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-
+import PageHeader from "../../components/PageHeader";
 const PlaylistDetailsPage = () => {
   const { isDark } = useTheme();
   const { genre } = useParams();
@@ -46,13 +46,14 @@ const PlaylistDetailsPage = () => {
         padding: 2,
       }}
     >
-      <Typography
+      {/* <Typography
         sx={{ color: myColor, marginBottom: 2 }}
         variant="h4"
         align="center"
       >
         {genre} Playlist
-      </Typography>
+      </Typography> */}
+      <PageHeader title="Playlist" subtitle={genre} />
       <Grid item>
         {cards
           .slice(currentPage * cardsPerPage, (currentPage + 1) * cardsPerPage)
