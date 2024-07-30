@@ -26,7 +26,6 @@
 - **Create Music Card**: Add a new card to the system.
 - **Edit Music Card**: Update card information.
 - **Like Music Card**: Like a specific card.
-- **Patch Music Card Business Number**: Update the business number of a card.
 - **Delete Music Card**: Remove a card from the system.
 
 
