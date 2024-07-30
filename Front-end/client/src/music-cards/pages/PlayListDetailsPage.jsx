@@ -7,6 +7,7 @@ import { useTheme } from "../../providers/DarkThemeProvider";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import PageHeader from "../../components/PageHeader";
+
 const PlaylistDetailsPage = () => {
   const { isDark } = useTheme();
   const { genre } = useParams();
@@ -18,10 +19,15 @@ const PlaylistDetailsPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getCards();
-      const filteredCards = data.filter((card) => card.genre.includes(genre));
+      const normalizedCards = data.map((card) => ({
+        ...card,
+        genre: card.genre ? card.genre.map((g) => g.trim().toLowerCase()) : [],
+      }));
+      const filteredCards = normalizedCards.filter((card) =>
+        card.genre.includes(genre.toLowerCase())
+      );
       setCards(filteredCards);
     };
-
     fetchData();
   }, [genre]);
 
@@ -46,13 +52,6 @@ const PlaylistDetailsPage = () => {
         padding: 2,
       }}
     >
-      {/* <Typography
-        sx={{ color: myColor, marginBottom: 2 }}
-        variant="h4"
-        align="center"
-      >
-        {genre} Playlist
-      </Typography> */}
       <PageHeader title="Playlist" subtitle={genre} />
       <Grid item>
         {cards
