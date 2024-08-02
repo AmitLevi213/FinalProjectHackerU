@@ -25,6 +25,7 @@ const Footer = () => {
         position: "sticky",
         bottom: 0,
         boxShadow: "4px 4px 20px rgba(0, 0, 0, 0.5)",
+        backgroundColor: isDark ? "#1a0033" : "#e3f2fd",
       }}
       elevation={3}
     >
