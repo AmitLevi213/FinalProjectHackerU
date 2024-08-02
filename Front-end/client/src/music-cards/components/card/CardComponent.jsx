@@ -7,7 +7,7 @@ import ROUTES from "../../../routes/routesModel";
 import CardActionBar from "./CardActionBar";
 import { useTheme } from "../../../providers/DarkThemeProvider";
 
-const CardComponent = ({ card, onDeleteCard, onLike }) => {
+const CardComponent = ({ card, onDeleteCard, onLike, isLiked }) => {
   const navigate = useNavigate();
   const { isDark } = useTheme();
 
@@ -20,7 +20,7 @@ const CardComponent = ({ card, onDeleteCard, onLike }) => {
         overflow: "hidden",
         margin: 16,
         backgroundColor: isDark ? "#1a0330" : "#cfe9fc",
-        transition: "transform 0.3s ease-in-out, box-shadow 0.3s easse-in-out",
+        transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
         "&:hover": {
           transform: "scale(1.03)",
           boxShadow: "0px 15px 40px rgba(0, 0, 0, 0.2)",
@@ -34,7 +34,12 @@ const CardComponent = ({ card, onDeleteCard, onLike }) => {
         <CardHead image={card.image} />
         <CardBody card={card} />
       </CardActionArea>
-      <CardActionBar {...{ card, onDeleteCard, onLike }} />
+      <CardActionBar
+        card={card}
+        onDeleteCard={onDeleteCard}
+        onLike={onLike}
+        isLiked={isLiked}
+      />
     </Card>
   );
 };

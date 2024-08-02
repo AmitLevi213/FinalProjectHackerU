@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Container, Stack, Typography, Box, IconButton } from "@mui/material";
 import CardComponent from "./card/CardComponent";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 const Cards = ({ cards, onDeleteCard, onLike }) => {
-  const methods = { onDeleteCard, onLike };
+  const [likedCards, setLikedCards] = useState({});
   const [page, setPage] = useState(0);
   const itemsPerPage = 3;
+
+  useEffect(() => {
+    const savedLikes = JSON.parse(localStorage.getItem("likedCards")) || {};
+    setLikedCards(savedLikes);
+  }, []);
 
   const handleNextPage = () => {
     setPage((prevPage) => prevPage + 1);
@@ -15,6 +20,18 @@ const Cards = ({ cards, onDeleteCard, onLike }) => {
 
   const handlePrevPage = () => {
     setPage((prevPage) => Math.max(prevPage - 1, 0));
+  };
+
+  const handleLikeToggle = (cardId) => {
+    setLikedCards((prevLikedCards) => {
+      const newLikedCards = {
+        ...prevLikedCards,
+        [cardId]: !prevLikedCards[cardId],
+      };
+      localStorage.setItem("likedCards", JSON.stringify(newLikedCards));
+      return newLikedCards;
+    });
+    onLike(cardId);
   };
 
   const visibleCards = cards.slice(
@@ -37,7 +54,13 @@ const Cards = ({ cards, onDeleteCard, onLike }) => {
         justifyContent="center"
       >
         {visibleCards.map((card, i) => (
-          <CardComponent {...methods} card={card} key={i}></CardComponent>
+          <CardComponent
+            key={i}
+            card={card}
+            onDeleteCard={onDeleteCard}
+            onLike={() => handleLikeToggle(card._id)}
+            isLiked={likedCards[card._id] || false}
+          />
         ))}
       </Stack>
       <Box display="flex" justifyContent="center" m={3}>

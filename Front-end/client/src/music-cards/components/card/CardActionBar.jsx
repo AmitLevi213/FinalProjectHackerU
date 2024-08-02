@@ -11,7 +11,8 @@ import CardDeleteDialog from "../card/CardDeleteDialog";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import { useTheme } from "../../../providers/DarkThemeProvider";
-const CardActionBar = ({ card, onDeleteCard, onLike }) => {
+
+const CardActionBar = ({ card, onDeleteCard, onLike, isLiked }) => {
   const { audio } = card;
   const { handleLikeCard } = useMusic();
   const [isDialogOpen, setIsDialog] = useState(false);
@@ -52,6 +53,7 @@ const CardActionBar = ({ card, onDeleteCard, onLike }) => {
       return newState;
     });
   };
+
   const handleDialog = (term) => {
     if (term === "open") setIsDialog(true);
     else setIsDialog(false);
@@ -63,15 +65,9 @@ const CardActionBar = ({ card, onDeleteCard, onLike }) => {
   };
 
   const handleLike = async () => {
-    const currentLikedState = isLiked;
-    setLiked((prev) => !prev);
-    await handleLikeCard(card._id, currentLikedState);
-    await onLike();
+    await handleLikeCard(card._id, isLiked);
+    onLike(card._id);
   };
-
-  const [isLiked, setLiked] = useState(
-    () => !!user && !!card.likes.find((id) => id === user._id)
-  );
 
   return (
     <>

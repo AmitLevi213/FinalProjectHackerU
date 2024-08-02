@@ -4,6 +4,7 @@ import { arrayOf, bool, func, string } from "prop-types";
 import cardType from "../models/types/cardType";
 import { Typography } from "@mui/material";
 import Cards from "./Cards";
+
 const CardsFeedback = ({ isPending, error, cards, onDeleteCard, onLike }) => {
   if (isPending) return <Spinner />;
   if (error) return <Error errorMessage={error} />;
@@ -27,4 +28,5 @@ CardsFeedback.propTypes = {
 CardsFeedback.defaultProps = {
   onLike: async () => {},
 };
+
 export default CardsFeedback;
