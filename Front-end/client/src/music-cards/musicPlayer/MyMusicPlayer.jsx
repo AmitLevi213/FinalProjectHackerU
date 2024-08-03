@@ -79,8 +79,15 @@ const MyMusicPlayer = ({ currentIndex, setCurrentIndex, audioFiles }) => {
   };
 
   const handleMute = () => {
-    setIsMuted(!isMuted);
-    audioRef.current.muted = !isMuted;
+    if (isMuted) {
+      setIsMuted(false);
+      audioRef.current.muted = false;
+      setVolume(50);
+    } else {
+      setIsMuted(true);
+      audioRef.current.muted = true;
+      setVolume(0);
+    }
   };
 
   const handleSkipNext = () => {
