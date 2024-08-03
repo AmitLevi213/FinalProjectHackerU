@@ -61,8 +61,15 @@ const MusicPlayer = ({ card }) => {
   };
 
   const handleMute = () => {
-    setIsMuted(!isMuted);
-    audioRef.current.muted = !isMuted;
+    if (isMuted) {
+      setIsMuted(false);
+      audioRef.current.muted = false;
+      setVolume(75); // Restore previous volume level or a default volume level
+    } else {
+      setIsMuted(true);
+      audioRef.current.muted = true;
+      setVolume(0); // Set volume to 0 when muted
+    }
   };
 
   const handleTimestampChange = (event, newValue) => {
