@@ -7,6 +7,7 @@
             elements, SoundScape Central redefines the way music is showcased
             and experienced online, fostering connections between artists and
             their audience in an exciting and dynamic digital
+you can read the documentation here [Link Text](https://documenter.getpostman.com/view/29937654/2sA3rwNEzj#intro)
 - ## Features
 ### Users:
 - **Get Users**: Retrieve a list of all users.
