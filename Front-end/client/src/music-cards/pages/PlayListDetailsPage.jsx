@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Box, Grid, IconButton } from "@mui/material";
 import CardComponent from "../components/card/CardComponent";
-import { getCards } from "../service/cardApiService";
+import { deleteCard, getCards } from "../service/cardApiService";
 import { useTheme } from "../../providers/DarkThemeProvider";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
@@ -12,10 +12,10 @@ const PlaylistDetailsPage = () => {
   const { isDark } = useTheme();
   const { genre } = useParams();
   const [cards, setCards] = useState([]);
+  const [likedCards, setLikedCards] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
   const cardsPerPage = 4;
   const myColor = isDark ? "#e3f2fd" : "#1a0033";
-
   useEffect(() => {
     const fetchData = async () => {
       const data = await getCards();
@@ -27,6 +27,11 @@ const PlaylistDetailsPage = () => {
         card.genre.includes(genre.toLowerCase())
       );
       setCards(filteredCards);
+      const initialLikedState = {};
+      filteredCards.forEach((card) => {
+        initialLikedState[card._id] = card.isLiked;
+      });
+      setLikedCards(initialLikedState);
     };
     fetchData();
   }, [genre]);
@@ -43,6 +48,17 @@ const PlaylistDetailsPage = () => {
     }
   };
 
+  const handleLike = (cardId) => {
+    setLikedCards((prevLikedCards) => ({
+      ...prevLikedCards,
+      [cardId]: !prevLikedCards[cardId],
+    }));
+  };
+
+  const handleDeleteCard = async (cardId) => {
+    await deleteCard(cardId);
+    setCards(cards.filter((card) => card._id !== cardId));
+  };
   return (
     <Box
       sx={{
@@ -58,7 +74,12 @@ const PlaylistDetailsPage = () => {
           .slice(currentPage * cardsPerPage, (currentPage + 1) * cardsPerPage)
           .map((card) => (
             <Grid item xs={12} sm={6} md={3} key={card._id}>
-              <CardComponent card={card} />
+              <CardComponent
+                card={card}
+                onLike={handleLike}
+                isLiked={likedCards[card._id]}
+                onDeleteCard={handleDeleteCard}
+              />
             </Grid>
           ))}
       </Grid>
