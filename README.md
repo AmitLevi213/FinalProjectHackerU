@@ -32,7 +32,7 @@ you can read the documentation here [Link Text](https://documenter.getpostman.co
 - ## Authentication
 The API uses JWT for authentication, with tokens containing properties for user roles (isBusiness, isAdmin) and user ID. Authorization middleware ensures appropriate permissions for protected endpoints. Additionally, there is a CORS policy that allows only approved IPs to send requests and a rate limiter that restricts requests to no more than 100 per second.
 
- ##SERVER
+ ## SERVER
 ### Installation
 1. Clone the repo:
 ```
@@ -50,7 +50,7 @@ npm run dev
 ```
 npm run start
 ```
-##CLIENT
+## CLIENT
 1. Install dependencies:
 ```
 npm install
