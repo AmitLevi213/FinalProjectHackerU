@@ -31,4 +31,39 @@ you can read the documentation here [Link Text](https://documenter.getpostman.co
 
 - ## Authentication
 The API uses JWT for authentication, with tokens containing properties for user roles (isBusiness, isAdmin) and user ID. Authorization middleware ensures appropriate permissions for protected endpoints. Additionally, there is a CORS policy that allows only approved IPs to send requests and a rate limiter that restricts requests to no more than 100 per second.
- 
+
+ ##SERVER
+### Installation
+1. Clone the repo:
+```
+git clone <repository-url>
+```
+2. Install dependencies:
+```
+npm install
+```
+3. Run the server locally:
+```
+npm run dev
+```
+4. Run the server on mongodb atlas:
+```
+npm run start
+```
+##CLIENT
+1. Install dependencies:
+```
+npm install
+```
+2. Run the client side:
+```
+npm start
+```
+#### I am adding here the list of users and their passwords to make it easier to use
+#### If you don't want to, you can sign up and build your user:
+```
+admin@gmail.com       Aa1234!
+bussiness@gmail.com   Aa1234!
+regular@gmail.com     Aa1234!
+
+```
