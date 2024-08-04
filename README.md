@@ -17,7 +17,6 @@ you can read the documentation here [Link Text](https://documenter.getpostman.co
 - **Edit User**: Update user information.
 - **Delete User**: Remove a user from the system.
 - **Patch User's Business Status**: Update the business status of a user.
-- **Login with Google**: Authenticate a user using their Google account.
 
 
 ### Cards:
