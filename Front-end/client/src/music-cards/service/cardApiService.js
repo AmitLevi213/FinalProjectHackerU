@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:9191/cards";
+const apiUrl =
+  process.env.REACT_APP_API_URL ||
+  "https://finalprojecthackeru-server.onrender.com";
 export const getCards = async () => {
   try {
     const response = await axios.get(`${apiUrl}`);
