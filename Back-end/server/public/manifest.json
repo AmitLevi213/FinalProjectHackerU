@@ -1,0 +1,24 @@
+{
+  "short_name": "SoundScape Central",
+  "name": "SoundScape Central for business and clients",
+  "icons": [
+    {
+      "src": "./assets/images/musictone.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "./assets/images/musictone.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "./assets/images/musictone.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000"
+}
