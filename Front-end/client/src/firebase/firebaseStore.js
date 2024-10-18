@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA1aGHDCSDQt9_eKygbrsr_3YsZYy1tqHk",
-  authDomain: "mp3-storage-58830.firebaseapp.com",
-  projectId: "mp3-storage-58830",
-  storageBucket: "mp3-storage-58830.appspot.com",
-  messagingSenderId: "558744293013",
-  appId: "1:558744293013:web:3239a9521ccddfc355d59c",
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID,
 };
 
 const fireStoreApp = initializeApp(firebaseConfig);
