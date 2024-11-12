@@ -15,7 +15,7 @@ const LogoIcon = () => {
         color: "inherit",
       }}
     >
-      <Avatar alt="me" src="/assets/Images/musiclogo.jpg"></Avatar>
+      <Avatar alt="me" src="/assets/images/musiclogo.jpg"></Avatar>
     </IconButton>
   );
 };
