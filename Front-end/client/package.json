@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "xcopy /E /I public\\assets build\\assets && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
