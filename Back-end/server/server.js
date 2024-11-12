@@ -13,7 +13,7 @@ require("dotenv").config();
 app.use(cors);
 app.use(logger);
 app.use(express.json());
-app.use(express.static("public/assets/Images"));
+app.use(express.static("./public/assets/Images"));
 
 app.use(router);
 
