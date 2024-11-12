@@ -1,5 +1,6 @@
 const chalk = require("chalk");
 const express = require("express");
+const path = require("path"); // Add this line
 const { handleError } = require("./utils/handleErrors");
 const app = express();
 const router = require("./router/router");
@@ -12,10 +13,10 @@ const { generateInitialData } = require("./initialData/initialDataService");
 app.use(cors);
 app.use(logger);
 app.use(express.json());
-app.use(express.static("./public/assets/Images"));
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-});
+app.use(express.static("public/assets/Images"));
+// app.get("/", (req, res) => {
+//   res.sendFile(path.join(__dirname, "public", "index.html"));
+// });
 
 app.use(router);
 
