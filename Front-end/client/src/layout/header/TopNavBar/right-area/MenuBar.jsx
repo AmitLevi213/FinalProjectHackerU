@@ -9,6 +9,7 @@ import { useTheme } from "../../../../providers/DarkThemeProvider";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import QueueMusicIcon from "@mui/icons-material/QueueMusic";
+import { removeToken } from "../../../../users/services/StorageService";
 
 const MenuBar = ({ isMenuOpen, anchorEl, onCloseMenu }) => {
   const { user } = useUser();
@@ -22,6 +23,7 @@ const MenuBar = ({ isMenuOpen, anchorEl, onCloseMenu }) => {
   };
 
   const handleUserLogout = () => {
+    removeToken();
     userLogoutFunction();
     onCloseMenu();
   };

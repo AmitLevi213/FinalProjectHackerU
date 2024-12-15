@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 
 const TOKEN = "token";
@@ -12,29 +13,30 @@ const resetInactivityTimer = () => {
   }, INACTIVITY_TIMEOUT);
 };
 
-export const setTokenInLocalStorage = (encodedToken) => {
-  localStorage.setItem(TOKEN, encodedToken);
+export const setTokenInCookies = (encodedToken) => {
+  Cookies.set(TOKEN, encodedToken, { expires: 7, sameSite: "Strict" });
   resetInactivityTimer();
 };
 
 export const getUser = () => {
   try {
-    const user = localStorage.getItem(TOKEN);
+    const token = Cookies.get(TOKEN);
     resetInactivityTimer();
-    return jwtDecode(user);
+    return token ? jwtDecode(token) : null;
   } catch (error) {
     return null;
   }
 };
 
 export const removeToken = () => {
-  localStorage.removeItem(TOKEN);
+  Cookies.remove(TOKEN, { sameSite: "Strict" });
   clearTimeout(inactivityTimer);
 };
 
 export const getToken = () => {
   resetInactivityTimer();
-  return localStorage.getItem(TOKEN);
+  return Cookies.get(TOKEN);
 };
 
+// Reset inactivity timer on user activity
 document.addEventListener("click", resetInactivityTimer);

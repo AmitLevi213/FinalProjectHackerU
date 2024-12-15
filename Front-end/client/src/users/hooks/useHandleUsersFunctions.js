@@ -5,8 +5,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   getUser,
   removeToken,
-  setTokenInLocalStorage,
-} from "../services/localStorageService";
+  setTokenInCookies,
+} from "../services/StorageService";
 import {
   changeBusinessStatus,
   deleteUser,
@@ -72,10 +72,10 @@ const useHandleUsersFunctions = () => {
     async (user) => {
       try {
         const token = await login(user);
-        setTokenInLocalStorage(token);
+        setTokenInCookies(token);
         setToken(token);
-        const userFromLocalStorage = getUser();
-        requestStatus(false, null, null, userFromLocalStorage);
+        const userFromCookies = getUser();
+        requestStatus(false, null, null, userFromCookies);
         snackbar(
           "success",
           "you have been successfully logged in to your user "

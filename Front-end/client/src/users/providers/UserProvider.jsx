@@ -1,23 +1,24 @@
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { getToken, getUser } from "../services/localStorageService";
+import { getToken, getUser } from "../services/StorageService";
 import { node } from "prop-types";
+
 const UserContext = createContext(undefined);
 
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => {
-    const tokenFromLocalStorage = getToken();
-    if (tokenFromLocalStorage) {
-      const userFromLocalStorage = getUser();
-      setUser(userFromLocalStorage);
+    const tokenFromCookies = getToken();
+    if (tokenFromCookies) {
+      const userFromCookies = getUser();
+      setUser(userFromCookies);
     }
-    return tokenFromLocalStorage;
+    return tokenFromCookies;
   });
 
   useEffect(() => {
     if (!user) {
-      const userFromLocalStorage = getUser();
-      setUser(userFromLocalStorage);
+      const userFromCookies = getUser();
+      setUser(userFromCookies);
     }
   }, [user]);
 
@@ -35,7 +36,9 @@ export const useUser = () => {
   }
   return context;
 };
+
 UserContext.propTypes = {
   children: node.isRequired,
 };
+
 export default UserProvider;
