@@ -3,4 +3,3 @@ node_modules
 .env
 production.json
 default.json
-firebaseAdmin.js
