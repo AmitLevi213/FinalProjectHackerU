@@ -9,8 +9,11 @@ const {
   updateUser,
   changeUserBusinessStatus,
   deleteUser,
+  registerGoogleUser,
 } = require("../models/usersAccessDataService");
-
+const dotenv = require("dotenv");
+dotenv.config();
+const { OAuth2Client } = require("google-auth-library");
 const {
   validateRegistration,
   validateLogin,
@@ -18,7 +21,14 @@ const {
 } = require("../validations/userValidationService");
 const { generateUserPassword } = require("../helpers/bcrypt");
 const { auth } = require("../../auth/authService");
+const admin = require("../../firebaseAdmin");
+const { generateAuthToken } = require("../../auth/Providers/jwt");
 const router = express.Router();
+// Initialize the Google OAuth client
+const client = new OAuth2Client({
+  clientId: process.env.CLIENT_ID, // Your Google OAuth client ID
+  clientSecret: process.env.CLIENT_SECRET, // Your Google OAuth client secret
+});
 
 router.post("/", async (req, res) => {
   try {
@@ -46,6 +56,52 @@ router.post("/login", async (req, res) => {
     return res.send(user);
   } catch (error) {
     return handleError(res, error.status || 500, error.message);
+  }
+});
+router.post("/google", async (req, res) => {
+  try {
+    const { token } = req.body;
+    if (!token) {
+      return handleError(res, 400, "No token provided");
+    }
+
+    // Verify the Firebase ID token
+    const decodedToken = await admin.auth().verifyIdToken(token);
+    const { email, name, picture, uid } = decodedToken;
+
+    if (!email || !uid) {
+      return handleError(res, 400, "Invalid token payload");
+    }
+
+    // Prepare user data for database
+    const googleUserData = {
+      uid,
+      email,
+      name: name || email.split("@")[0],
+      picture: picture || null,
+      password: null,
+      isBusiness: true,
+    };
+
+    // Register or update the Google user in your database
+    const user = await registerGoogleUser(googleUserData);
+
+    // Debug: Check user data before token generation
+    console.log("User data for token generation:", user);
+
+    // Generate JWT token
+    const authToken = generateAuthToken(user);
+
+    // Debug: Check generated token
+    console.log("Generated auth token:", authToken);
+
+    return res.status(200).json({
+      user,
+      token: authToken,
+    });
+  } catch (error) {
+    console.error("Full error object:", error);
+    return handleError(res, 401, `Authentication failed: ${error.message}`);
   }
 });
 

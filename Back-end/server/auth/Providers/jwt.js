@@ -4,9 +4,16 @@ const config = require("config");
 const key = config.get("JWT_KEY");
 
 const generateAuthToken = (user) => {
-  const { _id, isAdmin, isBusiness } = user;
-  const token = jwt.sign({ _id, isAdmin, isBusiness }, key);
-  return token;
+  return jwt.sign(
+    {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      isBusiness: user.isBusiness,
+    },
+    key
+  );
 };
 
 const verifyAuthToken = (token) => {

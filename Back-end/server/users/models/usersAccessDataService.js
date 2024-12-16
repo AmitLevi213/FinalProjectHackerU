@@ -3,6 +3,7 @@ const { generateAuthToken } = require("../../auth/Providers/jwt");
 const { handleBadRequest } = require("../../utils/handleErrors");
 const { comparePassword } = require("../helpers/bcrypt");
 const User = require("./mongodb/User");
+const GoogleUser = require("./mongodb/GoogleUser");
 const lodash = require("lodash");
 
 const registerUser = async (normalizedUser) => {
@@ -22,7 +23,43 @@ const registerUser = async (normalizedUser) => {
     return handleBadRequest("Mongoose", { ...error, status: 404 });
   }
 };
+const registerGoogleUser = async (googleUserData) => {
+  try {
+    const { email, uid } = googleUserData;
 
+    // Try to find an existing user first
+    let user = await GoogleUser.findOne({ $or: [{ email }, { uid }] });
+
+    if (user) {
+      // Update existing user if needed
+      user = await GoogleUser.findOneAndUpdate(
+        { $or: [{ email }, { uid }] },
+        {
+          ...googleUserData,
+          // Preserve existing business or admin status if not explicitly changed
+          isAdmin: user.isAdmin,
+          isBusiness: user.isBusiness || googleUserData.isBusiness,
+        },
+        { new: true }
+      );
+    } else {
+      // Register new Google user
+      user = new GoogleUser(googleUserData);
+      user = await user.save();
+    }
+
+    return lodash.pick(user, [
+      "_id",
+      "name",
+      "email",
+      "picture",
+      "isAdmin",
+      "isBusiness",
+    ]);
+  } catch (error) {
+    throw new Error("Google User Registration Failed: " + error.message);
+  }
+};
 const loginUser = async ({ email, password }) => {
   if (DB !== "MONGODB") return "loginUser not in mongoDB";
 
@@ -35,6 +72,17 @@ const loginUser = async ({ email, password }) => {
     return token;
   } catch (error) {
     return handleBadRequest("Mongoose", { ...error, status: 404 });
+  }
+};
+const loginGoogleUser = async (email, uid) => {
+  try {
+    const user = await GoogleUser.findOne({ $or: [{ email }, { uid }] });
+    if (!user) {
+      throw new Error("User not found");
+    }
+    return user;
+  } catch (error) {
+    throw new Error("Google User Login Failed: " + error.message);
   }
 };
 
@@ -115,4 +163,6 @@ module.exports = {
   updateUser,
   changeUserBusinessStatus,
   deleteUser,
+  registerGoogleUser,
+  loginGoogleUser,
 };

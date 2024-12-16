@@ -5,11 +5,13 @@ import { DarkThemeProvider } from "./providers/DarkThemeProvider";
 import { SnackbarProvider } from "./providers/SnackbarProvider";
 import UserProvider from "./users/providers/UserProvider";
 import Router from "./routes/Router";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
+     <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}>
         <DarkThemeProvider>
           <SnackbarProvider>
             <UserProvider>
@@ -19,6 +21,7 @@ function App() {
             </UserProvider>
           </SnackbarProvider>
         </DarkThemeProvider>
+          </GoogleOAuthProvider>
       </BrowserRouter>
     </div>
   );
