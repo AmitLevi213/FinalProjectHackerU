@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiUrl =
-  `${process.env.REACT_APP_API_URL}/user` || "http://localhost:9191/users";
+  `${process.env.REACT_APP_API_URL}/users` || "http://localhost:9191/users";
 
 export const login = async (user) => {
   try {

@@ -37,7 +37,7 @@ const FormComponent = ({
       const token = await result.user.getIdToken();
 
       const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/users/google`,
+        `${process.env.REACT_APP_API_URL}/users/google`,
         {
           method: "POST",
           headers: {
