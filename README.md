@@ -76,31 +76,7 @@ regular@gmail.com     Aa1234!
 ```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-- ##Environment Configuration
+ ##Environment Configuration
 Make sure to set up your environment variables:
 - #Server (.env)
 ```
@@ -108,12 +84,12 @@ MONGODB_URI=your_mongodb_uri
 JWT_SECRET=your_jwt_secret
 PORT=9191
 ```
-- ##Client (.env)
+ ##Client (.env)
 ```
 REACT_APP_API_URL=your_backend_url
 ```
-- ##Contributing
+ ##Contributing
 Feel free to submit issues and enhancement requests!
 
--## License
+##License
 MIT
