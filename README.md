@@ -75,6 +75,31 @@ regular@gmail.com     Aa1234!
 
 ```
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 - ##Environment Configuration
 Make sure to set up your environment variables:
 - #Server (.env)
