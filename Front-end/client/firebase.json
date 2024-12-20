@@ -1,0 +1,45 @@
+{
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**",
+      "**/.env*",
+      "**/.git/**",
+      "**/.vscode/**",
+      "**/src/**",
+      "Back-end/**",
+      "front-end/client/src/**",
+      "**/package-lock.json",
+      "**/package.json",
+      "**/README.md",
+      "**/setupTests.js",
+      "**/App.test.js",
+      "**/reportWebVitals.js",
+      "**/.gitignore",
+      "**/firebaserc"
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=86400"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          }
+        ]
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

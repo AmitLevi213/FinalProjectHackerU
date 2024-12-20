@@ -3,17 +3,17 @@
   "name": "SoundScape Central for business and clients",
   "icons": [
     {
-      "src": "./assets/images/musictone.png",
+      "src": "/assets/images/musictone.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "./assets/images/musictone.png",
+      "src": "/assets/images/musictone.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "./assets/images/musictone.png",
+      "src": "/assets/images/musictone.png",
       "type": "image/png",
       "sizes": "512x512"
     }
