@@ -1,14 +1,12 @@
- SoundScape Central is an innovative platform designed to elevate
-            your music presence by offering a dynamic and immersive experience
-            for both creators and enthusiasts. Through visually captivating
-            cards, users can effortlessly explore and engage with a diverse
-            array of musical compositions, albums, playlists, and more. With its
-            intuitive interface, customizable design options, and interactive
-            elements, SoundScape Central redefines the way music is showcased
-            and experienced online, fostering connections between artists and
-            their audience in an exciting and dynamic digital
+ SoundScape Central is an innovative platform designed to elevate your music presence by offering a dynamic and immersive experience for both creators and enthusiasts. Through visually captivating cards, users can effortlessly explore and engage with a diverse array of musical compositions, albums, playlists, and more. With its intuitive interface, customizable design options, and interactive elements, SoundScape Central redefines the way music is showcased and experienced online, fostering connections between artists and their audience in an exciting and dynamic digital environment.
 you can read the documentation here [Link Text](https://documenter.getpostman.com/view/29937654/2sA3rwNEzj#intro)
+Live Demo :[Link Text](https://mp3-storage-58830.web.app/)
 - ## Features
+Authentication & Authorization
+- **Local Authentication**: Email and password-based registration and login
+- **Google Authentication**: Sign in with Google using Firebase Authentication
+- **JWT Token**: Secure token-based authentication for API requests
+-**Role-Based Access**: Different permissions for regular users, business users, and admins
 ### Users:
 - **Get Users**: Retrieve a list of all users.
 - **Register User**: Register a new user in the system.
@@ -28,9 +26,18 @@ you can read the documentation here [Link Text](https://documenter.getpostman.co
 - **Like Music Card**: Like a specific card.
 - **Delete Music Card**: Remove a card from the system.
 
+- ## Technology Stack
+- ### Frontend
+- **React.js**
+- **Material-UI**
+- **Firebase Hosting**
+- **Firebase Authentication**
 
-- ## Authentication
-The API uses JWT for authentication, with tokens containing properties for user roles (isBusiness, isAdmin) and user ID. Authorization middleware ensures appropriate permissions for protected endpoints. Additionally, there is a CORS policy that allows only approved IPs to send requests and a rate limiter that restricts requests to no more than 100 per second.
+- ### Backend
+- **Node.js & Express**
+- **MongoDB Atlas**
+- **AWS EC2 for deployment**
+- **JWT for authentication**
 
  ## SERVER
 ### Installation
@@ -67,3 +74,22 @@ bussiness@gmail.com   Aa1234!
 regular@gmail.com     Aa1234!
 
 ```
+
+
+ ### Environment Configuration
+Make sure to set up your environment variables:
+- # Server (.env)
+```
+MONGODB_URI=your_mongodb_uri
+JWT_SECRET=your_jwt_secret
+PORT=9191
+```
+ # Client (.env)
+```
+REACT_APP_API_URL=your_backend_url
+```
+ # Contributing
+Feel free to submit issues and enhancement requests!
+
+# License
+MIT
