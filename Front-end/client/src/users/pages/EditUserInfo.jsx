@@ -9,11 +9,14 @@ import { getUser } from "../services/usersApiService";
 import { mapEditUserToModel } from "../helpers/normalization/mapUserToModel";
 import PageHeader from "../../components/PageHeader";
 import EditUserForm from "../helpers/initialForms/EditUserForm";
-import { Container, Typography } from "@mui/material";
+import { Container, Typography, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../routes/routesModel";
 
 const EditUserInfo = () => {
   const [initialForm, setInitForm] = useState(initialEditForm);
   const { user } = useUser();
+  const navigate = useNavigate();
   const { value, ...rest } = useFormsValidate(
     initialEditForm,
     updateUserSchema,
@@ -28,10 +31,16 @@ const EditUserInfo = () => {
   );
   const { editUserFunction } = useHandleUsersFunctions();
 
-  // Check if user is a Google user
-  const isGoogleUser = !!user?.uid;
+  const isGoogleUser =
+    user && (user.uid || user.providerData?.[0]?.providerId === "google.com");
 
   useEffect(() => {
+    if (isGoogleUser) {
+      setTimeout(() => {
+        navigate(ROUTES.ROOT);
+      }, 3000);
+    }
+
     if (user && (user._id || user.uid)) {
       getUser(user._id || user.uid).then((data) => {
         const modeledUser = mapEditUserToModel(data);
@@ -39,7 +48,7 @@ const EditUserInfo = () => {
         rest.setFormData(modeledUser);
       });
     }
-  }, [user]);
+  }, [user, isGoogleUser, navigate]);
 
   if (isGoogleUser) {
     return (
@@ -48,10 +57,15 @@ const EditUserInfo = () => {
           title="Edit User Page"
           subtitle="Google Account Information"
         />
-        <Typography variant="h6" align="center" color="error" sx={{ mt: 4 }}>
-          Google account details cannot be edited. These are managed through
-          your Google account settings.
-        </Typography>
+        <Box sx={{ textAlign: "center", mt: 4 }}>
+          <Typography variant="h6" color="error" gutterBottom>
+            Google account details cannot be edited. These are managed through
+            your Google account settings.
+          </Typography>
+          <Typography variant="body1" color="textSecondary">
+            Redirecting to home page...
+          </Typography>
+        </Box>
       </Container>
     );
   }
