@@ -138,12 +138,23 @@ router.put("/:id", auth, async (req, res) => {
   try {
     const userId = req.params.id;
     const user = req.user;
-    if (userId !== user._id && !user.isAdmin)
+
+    if (user.uid) {
       return handleError(
         res,
         403,
-        "Authorization Error: You must be the registered user to update its  details"
+        "Google users cannot be edited through this API"
       );
+    }
+
+    if (userId !== user._id && !user.isAdmin) {
+      return handleError(
+        res,
+        403,
+        "Authorization Error: You must be the registered user to update its details"
+      );
+    }
+
     const userPayload = req.body.user;
     const { error } = validateUserUpdate(userPayload);
     if (error)

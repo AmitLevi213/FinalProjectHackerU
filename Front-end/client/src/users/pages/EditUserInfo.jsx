@@ -9,7 +9,8 @@ import { getUser } from "../services/usersApiService";
 import { mapEditUserToModel } from "../helpers/normalization/mapUserToModel";
 import PageHeader from "../../components/PageHeader";
 import EditUserForm from "../helpers/initialForms/EditUserForm";
-import { Container } from "@mui/material";
+import { Container, Typography } from "@mui/material";
+
 const EditUserInfo = () => {
   const [initialForm, setInitForm] = useState(initialEditForm);
   const { user } = useUser();
@@ -27,23 +28,40 @@ const EditUserInfo = () => {
   );
   const { editUserFunction } = useHandleUsersFunctions();
 
-  useEffect(() => {
-    if (user && user._id) {
-      getUser(user._id).then((data) => {
-        const modeledUser = mapEditUserToModel(data);
+  // Check if user is a Google user
+  const isGoogleUser = !!user?.uid;
 
+  useEffect(() => {
+    if (user && (user._id || user.uid)) {
+      getUser(user._id || user.uid).then((data) => {
+        const modeledUser = mapEditUserToModel(data);
         setInitForm(modeledUser);
         rest.setFormData(modeledUser);
       });
     }
   }, [user]);
 
+  if (isGoogleUser) {
+    return (
+      <Container>
+        <PageHeader
+          title="Edit User Page"
+          subtitle="Google Account Information"
+        />
+        <Typography variant="h6" align="center" color="error" sx={{ mt: 4 }}>
+          Google account details cannot be edited. These are managed through
+          your Google account settings.
+        </Typography>
+      </Container>
+    );
+  }
+
   return (
     <>
       <PageHeader
         title="Edit User Page"
         subtitle="Here you can edit your user information"
-      ></PageHeader>
+      />
       <Container
         sx={{
           pt: 6,
@@ -60,9 +78,10 @@ const EditUserInfo = () => {
           errors={value.formErrors}
           onFormChange={rest.validateForm}
           onInputChange={rest.handleChange}
-        ></EditUserForm>
+        />
       </Container>
     </>
   );
 };
+
 export default EditUserInfo;

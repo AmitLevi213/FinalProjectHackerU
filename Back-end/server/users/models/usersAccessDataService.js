@@ -118,6 +118,11 @@ const updateUser = async (userId, normalizedUser) => {
   if (DB !== "MONGODB") return "updateUser not in mongoDB";
 
   try {
+    const googleUser = await GoogleUser.findOne({ uid: userId });
+    if (googleUser) {
+      throw new Error("Cannot update Google user");
+    }
+
     const user = await User.findByIdAndUpdate(userId, normalizedUser, {
       new: true,
     });

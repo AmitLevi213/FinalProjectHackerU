@@ -23,7 +23,19 @@ const UserProfile = () => {
           return;
         }
         const userData = await getUser(userId);
-        setCurrentUser(userData);
+        const isGoogleUser = !!user.uid;
+
+        if (isGoogleUser) {
+          setCurrentUser({
+            name: { first: user.displayName },
+            email: user.email,
+            image: { url: user.photoURL },
+            phone: userData?.phone || "N/A",
+            address: userData?.address || {},
+          });
+        } else {
+          setCurrentUser(userData);
+        }
       } catch (error) {
         setError(error.message);
         console.error("Error fetching user data:", error);
@@ -61,7 +73,7 @@ const UserProfile = () => {
         <Grid container alignItems="center" justifyContent="center" spacing={2}>
           <Grid item xs={12} sm={4} display="flex" justifyContent="center">
             <Avatar
-              alt={currentUser?.image?.alt || user?.displayName || "User"}
+              alt={currentUser?.name?.first || user?.displayName || "User"}
               src={currentUser?.image?.url || user?.photoURL}
               sx={{ width: 150, height: 150 }}
             />
@@ -81,7 +93,9 @@ const UserProfile = () => {
             <Typography variant="subtitle1" gutterBottom>
               Address:{" "}
               {currentUser?.address
-                ? `${currentUser.address.country}, ${currentUser.address.city}, ${currentUser.address.street}`
+                ? `${currentUser.address.country || "N/A"}, ${
+                    currentUser.address.city || "N/A"
+                  }, ${currentUser.address.street || "N/A"}`
                 : "N/A"}
             </Typography>
           </Grid>
