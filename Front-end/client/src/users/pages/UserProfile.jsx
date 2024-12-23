@@ -12,24 +12,37 @@ const UserProfile = () => {
   const { isDark } = useTheme();
   const { user } = useUser();
   const [currentUser, setCurrentUser] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const userData = await getUser(user._id);
+        const userId = user._id || user.uid;
+        if (!userId) {
+          setError("No user ID found");
+          return;
+        }
+        const userData = await getUser(userId);
         setCurrentUser(userData);
       } catch (error) {
+        setError(error.message);
         console.error("Error fetching user data:", error);
       }
     };
 
-    if (user && user._id) {
-      fetchUser();
-    }
+    if (user) fetchUser();
   }, [user]);
 
-  if (!currentUser) {
-    return <Spinner justifyContent="center" alignItems="center" />;
+  if (error) {
+    return (
+      <Typography color="error" align="center">
+        {error}
+      </Typography>
+    );
+  }
+
+  if (!currentUser && !user) {
+    return <Spinner />;
   }
 
   return (
@@ -45,28 +58,31 @@ const UserProfile = () => {
           backgroundColor: isDark ? "#1a0333" : "#e3f2fd",
         }}
       >
-        <Grid container alignItems="center" justifyContent="center">
+        <Grid container alignItems="center" justifyContent="center" spacing={2}>
           <Grid item xs={12} sm={4} display="flex" justifyContent="center">
             <Avatar
-              alt={currentUser.image.alt}
-              src={currentUser.image.url}
+              alt={currentUser?.image?.alt || user?.displayName || "User"}
+              src={currentUser?.image?.url || user?.photoURL}
               sx={{ width: 150, height: 150 }}
             />
           </Grid>
           <Grid item xs={12} sm={8}>
             <Typography variant="h4" gutterBottom>
-              {currentUser.name.first} {currentUser.name.middle}{" "}
-              {currentUser.name.last}
+              {currentUser?.name?.first || user?.displayName || ""}
+              {currentUser?.name?.middle ? ` ${currentUser.name.middle} ` : " "}
+              {currentUser?.name?.last || ""}
             </Typography>
             <Typography variant="subtitle1" gutterBottom>
-              Phone: {currentUser.phone}
+              Phone: {currentUser?.phone || "N/A"}
             </Typography>
             <Typography variant="subtitle1" gutterBottom>
-              Email: {currentUser.email}
+              Email: {currentUser?.email || user?.email || "N/A"}
             </Typography>
             <Typography variant="subtitle1" gutterBottom>
-              Address: {currentUser.address.country}, {currentUser.address.city}
-              , {""} {currentUser.address.street}
+              Address:{" "}
+              {currentUser?.address
+                ? `${currentUser.address.country}, ${currentUser.address.city}, ${currentUser.address.street}`
+                : "N/A"}
             </Typography>
           </Grid>
           <Grid item xs={12}>
@@ -76,7 +92,7 @@ const UserProfile = () => {
               variant="contained"
               color="inherit"
               to={ROUTES.EDIT_USER}
-            ></NavItem>
+            />
           </Grid>
         </Grid>
       </Paper>

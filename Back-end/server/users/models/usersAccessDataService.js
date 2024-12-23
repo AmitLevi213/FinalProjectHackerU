@@ -101,7 +101,12 @@ const getUser = async (userId) => {
   if (DB !== "MONGODB") return "getUser not in mongoDB";
 
   try {
-    const user = await User.findById(userId);
+    let user = await User.findById(userId);
+
+    if (!user) {
+      user = await GoogleUser.findOne({ uid: userId });
+    }
+
     if (!user) throw new Error("User not found");
     return user;
   } catch (error) {
