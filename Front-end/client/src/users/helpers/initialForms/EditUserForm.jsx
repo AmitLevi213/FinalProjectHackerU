@@ -55,7 +55,6 @@ const EditUserForm = ({
         data={data}
         sm={6}
       />
-
       <InputComponent
         name="url"
         label="Image Url"
@@ -107,7 +106,6 @@ const EditUserForm = ({
         data={data}
         sm={6}
       />
-
       <InputComponent
         name="houseNumber"
         label="houseNumber"

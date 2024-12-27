@@ -17,6 +17,7 @@ const EditUserInfo = () => {
   const [initialForm, setInitForm] = useState(initialEditForm);
   const { user } = useUser();
   const navigate = useNavigate();
+
   const { value, ...rest } = useFormsValidate(
     initialEditForm,
     updateUserSchema,
@@ -25,14 +26,17 @@ const EditUserInfo = () => {
         {
           ...normalizeUser(value.formData),
         },
-        user._id
+        user?._id
       );
     }
   );
+
   const { editUserFunction } = useHandleUsersFunctions();
 
-  const isGoogleUser =
-    user && (user.uid || user.providerData?.[0]?.providerId === "google.com");
+  const isGoogleUser = Boolean(
+    user?.uid || 
+    (user?.providerData && user.providerData[0]?.providerId === "google.com")
+  );
 
   useEffect(() => {
     if (isGoogleUser) {
@@ -41,12 +45,22 @@ const EditUserInfo = () => {
       }, 3000);
     }
 
-    if (user && (user._id || user.uid)) {
-      getUser(user._id || user.uid).then((data) => {
-        const modeledUser = mapEditUserToModel(data);
-        setInitForm(modeledUser);
-        rest.setFormData(modeledUser);
-      });
+    if (user?._id) {
+      getUser(user._id)
+        .then((data) => {
+          if (!data) {
+            console.error("No user data found");
+            navigate(ROUTES.ROOT);
+            return;
+          }
+          const modeledUser = mapEditUserToModel(data);
+          setInitForm(modeledUser);
+          rest.setFormData(modeledUser);
+        })
+        .catch((error) => {
+          console.error("Error fetching user data:", error);
+          navigate(ROUTES.ROOT);
+        });
     }
   }, [user, isGoogleUser, navigate]);
 

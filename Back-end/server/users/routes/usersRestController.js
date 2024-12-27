@@ -119,7 +119,14 @@ router.get("/", auth, async (req, res) => {
 router.get("/:id", auth, async (req, res) => {
   try {
     const { id } = req.params;
-    const { _id, isAdmin } = req.user;
+    const { _id, isAdmin, uid } = req.user;
+    if (uid) {
+      return handleError(
+        res,
+        403,
+        "Google users cannot access this endpoint. Please manage your profile through Google."
+      );
+    }
 
     if (_id !== id && !isAdmin)
       return handleError(
