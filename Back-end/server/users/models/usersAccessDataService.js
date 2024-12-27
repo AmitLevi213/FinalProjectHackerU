@@ -102,27 +102,30 @@ const getUser = async (userId) => {
   try {
     let user = await User.findById(userId);
     if (!user) {
-      user = await GoogleUser.findOne({ uid: userId });
+      user = await GoogleUser.findOne({
+        $or: [{ _id: userId }, { uid: userId }],
+      });
     }
     if (!user) throw new Error("User not found");
     return user;
   } catch (error) {
-    return handleBadRequest("Mongoose", { ...error, status: 404 });
+    return handleBadRequest("Mongoose", error);
   }
 };
 
 const updateUser = async (userId, normalizedUser) => {
   if (DB !== "MONGODB") return "updateUser not in mongoDB";
-
   try {
-    const googleUser = await GoogleUser.findOne({ uid: userId });
+    const googleUser = await GoogleUser.findOne({
+      $or: [{ _id: userId }, { uid: userId }],
+    });
     if (googleUser) {
-      throw new Error("Cannot update Google user");
+      throw new Error("Google users cannot be updated through this API");
     }
-
     const user = await User.findByIdAndUpdate(userId, normalizedUser, {
       new: true,
     });
+    if (!user) throw new Error("User not found");
     return user;
   } catch (error) {
     return handleBadRequest("Mongoose", { ...error, status: 400 });

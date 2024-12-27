@@ -120,6 +120,8 @@ router.get("/:id", auth, async (req, res) => {
   try {
     const { id } = req.params;
     const { _id, isAdmin, uid } = req.user;
+
+    // Block direct API access for Google users
     if (uid) {
       return handleError(
         res,
@@ -128,14 +130,26 @@ router.get("/:id", auth, async (req, res) => {
       );
     }
 
-    if (_id !== id && !isAdmin)
+    if (_id !== id && !isAdmin) {
       return handleError(
         res,
         403,
         "Authorization Error: You must be an admin type user or the registered user to see this user details"
       );
+    }
 
     const user = await getUser(id);
+    if (!user) {
+      return handleError(res, 404, "User not found");
+    }
+    if (user.uid) {
+      return handleError(
+        res,
+        403,
+        "This user profile is managed through Google"
+      );
+    }
+
     return res.send(user);
   } catch (error) {
     return handleError(res, error.status || 500, error.message);
@@ -146,11 +160,14 @@ router.put("/:id", auth, async (req, res) => {
     const userId = req.params.id;
     const user = req.user;
 
-    if (user.uid) {
+    if (
+      user.uid ||
+      (user.providerData && user.providerData[0]?.providerId === "google.com")
+    ) {
       return handleError(
         res,
         403,
-        "Google users cannot be edited through this API"
+        "Google users cannot be edited through this API. Please manage your profile through Google settings."
       );
     }
 
@@ -164,11 +181,16 @@ router.put("/:id", auth, async (req, res) => {
 
     const userPayload = req.body.user;
     const { error } = validateUserUpdate(userPayload);
-    if (error)
+    if (error) {
       return handleError(res, 400, `Joi Error: ${error.details[0].message}`);
+    }
 
     const normalizedUser = normalizeUser(userPayload);
     const newUser = await updateUser(userId, normalizedUser);
+
+    if (!newUser) {
+      return handleError(res, 404, "User not found");
+    }
 
     return res.send(newUser);
   } catch (error) {

@@ -34,8 +34,8 @@ const EditUserInfo = () => {
   const { editUserFunction } = useHandleUsersFunctions();
 
   const isGoogleUser = Boolean(
-    user?.uid || 
-    (user?.providerData && user.providerData[0]?.providerId === "google.com")
+    user?.uid ||
+      (user?.providerData && user.providerData[0]?.providerId === "google.com")
   );
 
   useEffect(() => {
