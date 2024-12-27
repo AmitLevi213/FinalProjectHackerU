@@ -16,20 +16,8 @@ const EditCardForm = ({
   const formattedData = {
     ...data,
     releaseYear: data.releaseYear ? formatDate(data.releaseYear) : "",
-    lyrics: Array.isArray(data.lyrics) ? data.lyrics.join("\n") : "",
   };
-  const handleLyricsChange = (event) => {
-    const { value } = event.target;
-    const lyricsArray = value
-      ? value.split("\n").map((line) => line.trim())
-      : [];
-    onInputChange({
-      target: {
-        name: "lyrics",
-        value: lyricsArray,
-      },
-    });
-  };
+  
 
   return (
     <FormComponent
@@ -128,8 +116,8 @@ const EditCardForm = ({
         name="lyrics"
         label="lyrics"
         error={errors.lyrics}
-        handleChange={handleLyricsChange}
-        data={formattedData}
+        handleChange={onInputChange}
+        data={data}
         sm={6}
         required={false}
         multiline={true}

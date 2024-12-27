@@ -32,7 +32,6 @@ const CardForm = ({
     ...data,
     releaseYear: data.releaseYear ? formatDate(data.releaseYear) : "",
     genre: Array.isArray(data.genre) ? data.genre.join(", ") : "",
-    lyrics: Array.isArray(data.lyrics) ? data.lyrics.join(", ") : "\n",
   };
 
   const handleGenreChange = (event) => {
@@ -45,15 +44,7 @@ const CardForm = ({
     });
   };
 
-  const handleLyricsChange = (event) => {
-    const { value } = event.target;
-    onInputChange({
-      target: {
-        name: "lyrics",
-        value: value.split(",").map((line) => line.trim()),
-      },
-    });
-  };
+
 
   return (
     <FormComponent
@@ -161,9 +152,9 @@ const CardForm = ({
         name="lyrics"
         label="Lyrics"
         error={errors.lyrics}
-        handleChange={handleLyricsChange}
-        data={formattedData}
-        required={true}
+        handleChange={onInputChange}
+        data={data}
+        required={false}
         sm={6}
         multiline={true}
         rows="3"
