@@ -21,6 +21,7 @@ const FormComponent = ({
   spacing,
   styles,
   children,
+  showGoogleButton = true,
 }) => {
   const navigate = useNavigate();
   const { setUser, setToken } = useUser();
@@ -107,13 +108,15 @@ const FormComponent = ({
             size="large"
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <FormButton
-            node={<GoogleIcon />}
-            onClick={handleGoogleLogin}
-            size="large"
-          />
-        </Grid>
+        {showGoogleButton && (
+          <Grid item xs={12} sm={6}>
+            <FormButton
+              node={<GoogleIcon />}
+              onClick={handleGoogleLogin}
+              size="large"
+            />
+          </Grid>
+        )}
       </Grid>
     </Box>
   );

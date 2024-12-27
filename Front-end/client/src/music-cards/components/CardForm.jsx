@@ -54,6 +54,7 @@ const CardForm = ({
       title={title}
       styles={{ maxWidth: "800px" }}
       to={ROUTES.MUSIC}
+      showGoogleButton={false}
     >
       <InputComponent
         name="songTitle"

@@ -15,6 +15,7 @@ import ROUTES from "../../routes/routesModel";
 
 const EditUserInfo = () => {
   const [initialForm, setInitForm] = useState(initialEditForm);
+  const [error, setError] = useState(null);
   const { user } = useUser();
   const navigate = useNavigate();
 
@@ -22,11 +23,12 @@ const EditUserInfo = () => {
     initialEditForm,
     updateUserSchema,
     () => {
+      if (!user?._id) return;
       editUserFunction(
         {
           ...normalizeUser(value.formData),
         },
-        user?._id
+        user._id
       );
     }
   );
@@ -39,32 +41,47 @@ const EditUserInfo = () => {
   );
 
   useEffect(() => {
-    if (isGoogleUser) {
-      setTimeout(() => {
-        navigate(ROUTES.ROOT);
-      }, 3000);
+    if (!user) {
+      navigate(ROUTES.ROOT);
+      return;
     }
 
-    if (user?._id) {
+    if (isGoogleUser) {
+      setTimeout(() => {
+        navigate(ROUTES.MUSIC);
+      }, 5000);
+      return;
+    }
+
+    if (user?._id && !user?.uid) {
       getUser(user._id)
         .then((data) => {
           if (!data) {
-            console.error("No user data found");
-            navigate(ROUTES.ROOT);
+            setError("No user data found");
+            setTimeout(() => navigate(ROUTES.MUSIC), 5000);
             return;
           }
           const modeledUser = mapEditUserToModel(data);
           setInitForm(modeledUser);
           rest.setFormData(modeledUser);
         })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-          navigate(ROUTES.ROOT);
+        .catch((err) => {
+          if (err.response?.status === 403) {
+            setError("This user profile is managed through Google");
+            setTimeout(() => navigate(ROUTES.MUSIC), 5000);
+          } else {
+            setError(
+              err.message || "This user profile is managed through Google"
+            );
+            setTimeout(() => navigate(ROUTES.MUSIC), 5000);
+          }
         });
     }
   }, [user, isGoogleUser, navigate]);
 
-  if (isGoogleUser) {
+  if (!user) return null;
+
+  if (error || isGoogleUser) {
     return (
       <Container>
         <PageHeader
@@ -73,11 +90,11 @@ const EditUserInfo = () => {
         />
         <Box sx={{ textAlign: "center", mt: 4 }}>
           <Typography variant="h6" color="error" gutterBottom>
-            Google account details cannot be edited. These are managed through
-            your Google account settings.
+            {error ||
+              "Google account details cannot be edited. These are managed through your Google account settings."}
           </Typography>
           <Typography variant="body1" color="textSecondary">
-            Redirecting to home page...
+            Redirecting to music page in 5 seconds...
           </Typography>
         </Box>
       </Container>
