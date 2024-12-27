@@ -11,7 +11,7 @@ const cardSchema = {
   genre: Joi.array().items(Joi.string()).required(),
   duration: Joi.string().min(2).max(50).required(),
   releaseYear: Joi.date().required(),
-  lyrics: Joi.string().min(2).max(2555).allow(""),
+  lyrics: Joi.string().min(2).max(10000).allow(""),
   trackNumber: Joi.number().min(1).max(250).required(),
   webUrl: Joi.string()
     .ruleset.regex(urlRegex)
@@ -30,7 +30,7 @@ export const editCardSchema = {
   description: Joi.string().min(2).max(2560).required(),
   duration: Joi.string().min(2).max(50).required(),
   releaseYear: Joi.date().required(),
-  lyrics: Joi.string().min(2).max(2555).allow(""),
+  lyrics: Joi.string().min(2).max(10000).allow(""),
   trackNumber: Joi.number().required(),
   webUrl: Joi.string()
     .ruleset.regex(urlRegex)
