@@ -20,6 +20,9 @@ const MusicPlayer = ({ card }) => {
   const audioRef = useRef(new Audio(audio));
   const myColor = isDark ? "#e3f2fd" : "#1a0033";
 
+  // Convert lyrics string to array by splitting on newlines
+  const lyricsArray = lyrics ? lyrics.split("\n") : [];
+
   const audioRefCurrent = audioRef.current;
 
   useEffect(() => {
@@ -165,7 +168,7 @@ const MusicPlayer = ({ card }) => {
         </Grid>
       </Box>
       <div className="lyrics-container">
-        {lyrics.map((line, index) => (
+        {lyricsArray.map((line, index) => (
           <Typography
             key={index}
             variant="body1"
