@@ -10,7 +10,7 @@ const cardType = shape({
   trackNumber: number.isRequired,
   duration: string.isRequired,
   releaseYear: string.isRequired,
-  lyrics: arrayOf(string).isRequired,
+  lyrics: oneOfType([string, arrayOf(string)]).isRequired,
   likes: arrayOf(string).isRequired,
   web: oneOfType([string]).isRequired,
   genre: arrayOf(string).isRequired,

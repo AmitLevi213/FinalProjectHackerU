@@ -10,7 +10,7 @@ import { makeFirstLetterCapital } from "../../forms/utils/upperCaseMethod";
 import "./musicPlayer.css";
 
 const MusicPlayer = ({ card }) => {
-  const { songTitle, artist, audio, lyrics } = card;
+  const { songTitle = "", artist = "", audio = "", lyrics = "" } = card || {};
   const { isDark } = useTheme();
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(75);
@@ -20,8 +20,13 @@ const MusicPlayer = ({ card }) => {
   const audioRef = useRef(new Audio(audio));
   const myColor = isDark ? "#e3f2fd" : "#1a0033";
 
-  // Convert lyrics string to array by splitting on newlines
-  const lyricsArray = lyrics ? lyrics.split("\n") : [];
+  // Handle both string and array types for lyrics
+  const lyricsArray =
+    typeof lyrics === "string"
+      ? lyrics.split("\n")
+      : Array.isArray(lyrics)
+      ? lyrics
+      : [];
 
   const audioRefCurrent = audioRef.current;
 
@@ -67,11 +72,11 @@ const MusicPlayer = ({ card }) => {
     if (isMuted) {
       setIsMuted(false);
       audioRef.current.muted = false;
-      setVolume(75); // Restore previous volume level or a default volume level
+      setVolume(75);
     } else {
       setIsMuted(true);
       audioRef.current.muted = true;
-      setVolume(0); // Set volume to 0 when muted
+      setVolume(0);
     }
   };
 
